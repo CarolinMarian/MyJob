@@ -18,7 +18,7 @@ public class ClientsideSettings extends CommonSettings {
 		      verwaltung = GWT.create(Administration.class);
 		    }
 
-		    // So, nun brauchen wir die BankAdministration nur noch zurückzugeben.
+		    // So, nun brauchen wir die BankAdministration nur noch zurückzugeben
 		    return verwaltung;
 		  }
 
