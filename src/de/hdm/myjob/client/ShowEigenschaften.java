@@ -1,7 +1,5 @@
 package de.hdm.myjob.client;
 
-import java.util.Vector;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.myjob.shared.AdministrationAsync;
