@@ -14,11 +14,11 @@ public class ClientsideSettings extends CommonSettings {
 	public static AdministrationAsync getVerwaltung() {
 		    // Gab es bislang noch keine BankAdministration-Instanz, dann...
 		    if (verwaltung == null) {
-		      // Zunächst instantiieren wir BankAdministration
+		      // Zunï¿½chst instantiieren wir BankAdministration
 		      verwaltung = GWT.create(Administration.class);
 		    }
 
-		    // So, nun brauchen wir die BankAdministration nur noch zurückzugeben.
+		    // So, nun brauchen wir die BankAdministration nur noch zurï¿½ckzugeben.
 		    return verwaltung;
 		  }
 
