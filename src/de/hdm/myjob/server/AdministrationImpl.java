@@ -39,6 +39,9 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	  
 	}
 	
+	/**
+	 * Ausgeben eines Strings zu Testzwecken of die VErbindung zur DB funktioniert
+	 */
 	public String getTestString() throws IllegalArgumentException {
 		
 		String test = this.eigenschaftMapper.findByKey(1);
@@ -46,9 +49,21 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		
 	}
 	
+	/**
+	 * Alle Inhalte eines Profils ausgeben
+	 */
 	public Vector<Inhalt> getInhaltFor(Profil p) throws IllegalArgumentException {
 		
 		return this.inhaltMapper.findByProfil(p);
+		
+	}
+	
+	/**
+	 * Ausgeben eines Profils aufgrund der Id
+	 */
+	public Profil getProfilFor(int id) throws IllegalArgumentException {
+		
+		return this.profilMapper.getProfilById(id);
 		
 	}
 

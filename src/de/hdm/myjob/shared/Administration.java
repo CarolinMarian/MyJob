@@ -16,5 +16,7 @@ public interface Administration extends RemoteService{
 	public String getTestString() throws IllegalArgumentException;
 	
 	public Vector<Inhalt> getInhaltFor(Profil p) throws IllegalArgumentException;
+	
+	public Profil getProfilFor(int id) throws IllegalArgumentException;
 
 }

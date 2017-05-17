@@ -14,5 +14,7 @@ public interface AdministrationAsync {
 	void getTestString (AsyncCallback<String> callback);
 	
 	void getInhaltFor (Profil p, AsyncCallback<Vector<Inhalt>> callback);
+	
+	void getProfilFor (int id, AsyncCallback<Profil> callback);
 
 }
