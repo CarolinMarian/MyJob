@@ -18,6 +18,8 @@ public class ShowEigenschaften extends ShowDefinition {
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 		
 		verwaltung.getTestString(new TestCallback(this));
+		
+		
 
 	}
 	
