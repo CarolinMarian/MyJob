@@ -1,5 +1,7 @@
 package de.hdm.myjob.server;
 
+import java.util.Vector;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.myjob.server.db.BenutzerMapper;
@@ -9,6 +11,8 @@ import de.hdm.myjob.server.db.InhaltMapper;
 import de.hdm.myjob.server.db.ProfilMapper;
 import de.hdm.myjob.server.db.StellenausschreibungMapper;
 import de.hdm.myjob.shared.Administration;
+import de.hdm.myjob.shared.bo.Inhalt;
+import de.hdm.myjob.shared.bo.Profil;
 
 @SuppressWarnings("serial")
 public class AdministrationImpl extends RemoteServiceServlet implements Administration{
@@ -39,6 +43,12 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		
 		String test = this.eigenschaftMapper.findByKey(1);
 		return test;
+		
+	}
+	
+	public Vector<Inhalt> getInhaltFor(Profil p) throws IllegalArgumentException {
+		
+		return this.inhaltMapper.findByProfil(p);
 		
 	}
 
