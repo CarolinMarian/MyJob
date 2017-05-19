@@ -80,10 +80,9 @@ public class Inhalt extends BusinessObject {
 	   * der Superklasse erzeugt wird, ergänzt durch den Vor- und Nachnamen des 
 	   * jeweiligen Kontakts.
 	   */
-	  @Override
 	public String toString() {
-//	    return super.toString() + "  " + this.lastName + " " + this.emailadresse + " " + this.telefonnummer;
-	  return "noch anpassen";
+	  return super.toString() + "  " + this.eigenschaftsId + " " + this.profilId + " " + this.angabe;
+//	  return "noch anpassen";
 	  }
 	  
 

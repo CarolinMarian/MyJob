@@ -1,8 +1,11 @@
 package de.hdm.myjob.client;
 
+import java.util.Vector;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.myjob.shared.AdministrationAsync;
+import de.hdm.myjob.shared.bo.Inhalt;
 import de.hdm.myjob.shared.bo.Profil;
 
 public class ShowEigenschaften extends ShowDefinition {
@@ -79,15 +82,58 @@ public class ShowEigenschaften extends ShowDefinition {
 		@Override
 		public void onSuccess(Profil result) {
 			
+			AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
+			
 			this.showdef.append("TEST Profil:");
 			
 			this.showdef.append(result.toString());
+			
+			verwaltung.getInhaltFor(result, new InhalteCallback(this.showdef, result));
 
 			
 		}
 
 		
 	}
+	
+	
+	
+	
+	
+	class InhalteCallback implements AsyncCallback<Vector<Inhalt>> {
+		
+		private ShowDefinition showdef = null;
+		private Profil profil = null;
+		
+		
+		public InhalteCallback (ShowDefinition s, Profil p){
+			this.showdef = s;
+			this.profil = p;
+		}
+		
+			
+		@Override
+		public void onFailure(Throwable caught) {
+			
+			 this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
+			
+		}
+
+		@Override
+		public void onSuccess(Vector<Inhalt> result) {
+			
+			this.showdef.append("TEST Inhalt:");
+			for (Inhalt i : result){
+				this.showdef.append(i.toString());
+			}
+			
+
+			
+		}
+		
+	}
+	
+	
 	
 	
 
