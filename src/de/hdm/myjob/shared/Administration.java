@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.myjob.shared.bo.Benutzer;
+import de.hdm.myjob.shared.bo.Eigenschaft;
 import de.hdm.myjob.shared.bo.Inhalt;
 import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
@@ -16,13 +17,13 @@ public interface Administration extends RemoteService {
 
 	public void init() throws IllegalArgumentException;
 
-	public String getTestString() throws IllegalArgumentException;
-
 	public Vector<Inhalt> getInhaltFor(Profil p) throws IllegalArgumentException;
 
 	public Profil getProfilFor(int id) throws IllegalArgumentException;
 
 	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung,
 			Date frist, Benutzer nutzerid, Profil profilid) throws IllegalArgumentException;
+	
+	public Eigenschaft getEigenschaftById(int id) throws IllegalArgumentException;
 
 }

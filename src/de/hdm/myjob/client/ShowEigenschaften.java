@@ -5,6 +5,7 @@ import java.util.Vector;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.myjob.shared.AdministrationAsync;
+import de.hdm.myjob.shared.bo.Eigenschaft;
 import de.hdm.myjob.shared.bo.Inhalt;
 import de.hdm.myjob.shared.bo.Profil;
 
@@ -21,44 +22,11 @@ public class ShowEigenschaften extends ShowDefinition {
 		
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 		
-		verwaltung.getTestString(new TestCallback(this));
-		
 		verwaltung.getProfilFor(1, new ProfilCallback(this));
 		
 		
 
 	}
-	
-	
-	class TestCallback implements AsyncCallback<String> {
-		
-		private ShowDefinition showdef = null;
-		
-		
-		public TestCallback (ShowDefinition s){
-			this.showdef = s;
-		}
-		
-			
-		@Override
-		public void onFailure(Throwable caught) {
-			
-			 this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
-			
-		}
-
-		@Override
-		public void onSuccess(String result) {
-			
-			this.showdef.append("TEST");
-			
-			this.showdef.append(result);
-
-			
-		}
-		
-	}
-	
 	
 	
 	
@@ -83,10 +51,6 @@ public class ShowEigenschaften extends ShowDefinition {
 		public void onSuccess(Profil result) {
 			
 			AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-			
-			this.showdef.append("TEST Profil:");
-			
-			this.showdef.append(result.toString());
 			
 			verwaltung.getInhaltFor(result, new InhalteCallback(this.showdef, result));
 
@@ -122,9 +86,12 @@ public class ShowEigenschaften extends ShowDefinition {
 		@Override
 		public void onSuccess(Vector<Inhalt> result) {
 			
-			this.showdef.append("TEST Inhalt:");
+			AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
+			
 			for (Inhalt i : result){
-				this.showdef.append(i.toString());
+				
+				verwaltung.getEigenschaftById(i.getEigenschaftsId(), new EigenschaftCallback(this.showdef, i));
+
 			}
 			
 
@@ -136,5 +103,37 @@ public class ShowEigenschaften extends ShowDefinition {
 	
 	
 	
+
+	
+	class EigenschaftCallback implements AsyncCallback<Eigenschaft> {
+		
+		private ShowDefinition showdef = null;
+		private Inhalt inhalt = null;
+		
+		
+		public EigenschaftCallback (ShowDefinition s, Inhalt i){
+			this.showdef = s;
+			this.inhalt = i;
+		}
+		
+			
+		@Override
+		public void onFailure(Throwable caught) {
+			
+			 this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
+			
+		}
+
+		@Override
+		public void onSuccess(Eigenschaft result) {
+
+			this.showdef.append(result.getBezeichnung() + ": " + inhalt.getAngabe());		
+
+		}
+		
+	}
+
+
+
 
 }

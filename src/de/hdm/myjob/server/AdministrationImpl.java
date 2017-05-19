@@ -13,6 +13,7 @@ import de.hdm.myjob.server.db.ProfilMapper;
 import de.hdm.myjob.server.db.StellenausschreibungMapper;
 import de.hdm.myjob.shared.Administration;
 import de.hdm.myjob.shared.bo.Benutzer;
+import de.hdm.myjob.shared.bo.Eigenschaft;
 import de.hdm.myjob.shared.bo.Inhalt;
 import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
@@ -43,16 +44,6 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	}
 	
 	/**
-	 * Ausgeben eines Strings zu Testzwecken of die VErbindung zur DB funktioniert
-	 */
-	public String getTestString() throws IllegalArgumentException {
-		
-		String test = this.eigenschaftMapper.findByKey(1);
-		return test;
-		
-	}
-	
-	/**
 	 * Alle Inhalte eines Profils ausgeben
 	 */
 	public Vector<Inhalt> getInhaltFor(Profil p) throws IllegalArgumentException {
@@ -69,7 +60,11 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		return this.profilMapper.getProfilById(id);
 		
 	}
-
+	
+	
+	/**
+	 * Erstellen einer Stellenbeschreibung
+	 */
 	@Override
 	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung,
 			Date frist, Benutzer nutzerid, Profil profilid) throws IllegalArgumentException {
@@ -80,5 +75,15 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		
 		return this.stellenausschreibungMapper.insertStellenausschreibung(s, nutzerid, profilid);
 	}
+	
+	/**
+	 * Ausgeben einer EIgenschaft anhand der Id
+	 */
+	
+	public Eigenschaft getEigenschaftById(int id) throws IllegalArgumentException {
+		return this.eigenschaftMapper.findByKey(id);
+		
+	}
+	
 
 }

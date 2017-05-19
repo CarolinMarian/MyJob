@@ -6,6 +6,7 @@ import java.util.Vector;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.myjob.shared.bo.Benutzer;
+import de.hdm.myjob.shared.bo.Eigenschaft;
 import de.hdm.myjob.shared.bo.Inhalt;
 import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
@@ -14,13 +15,13 @@ public interface AdministrationAsync {
 
 	void init(AsyncCallback<Void> callback);
 
-	void getTestString(AsyncCallback<String> callback);
-
 	void getInhaltFor(Profil p, AsyncCallback<Vector<Inhalt>> callback);
 
 	void getProfilFor(int id, AsyncCallback<Profil> callback);
 
 	void createStellenausschreibung(String bezeichnung, String beschreibung, Date frist, Benutzer nutzerid, Profil profilid,
 			AsyncCallback<Stellenausschreibung> callback);
+	
+	void getEigenschaftById(int id, AsyncCallback<Eigenschaft> callback);
 
 }
