@@ -1,5 +1,7 @@
 package de.hdm.myjob.server;
 
+import java.util.Vector;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.myjob.server.db.BenutzerMapper;
@@ -9,6 +11,8 @@ import de.hdm.myjob.server.db.InhaltMapper;
 import de.hdm.myjob.server.db.ProfilMapper;
 import de.hdm.myjob.server.db.StellenausschreibungMapper;
 import de.hdm.myjob.shared.Administration;
+import de.hdm.myjob.shared.bo.Inhalt;
+import de.hdm.myjob.shared.bo.Profil;
 
 @SuppressWarnings("serial")
 public class AdministrationImpl extends RemoteServiceServlet implements Administration{
@@ -35,10 +39,31 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	  
 	}
 	
+	/**
+	 * Ausgeben eines Strings zu Testzwecken of die VErbindung zur DB funktioniert
+	 */
 	public String getTestString() throws IllegalArgumentException {
 		
 		String test = this.eigenschaftMapper.findByKey(1);
 		return test;
+		
+	}
+	
+	/**
+	 * Alle Inhalte eines Profils ausgeben
+	 */
+	public Vector<Inhalt> getInhaltFor(Profil p) throws IllegalArgumentException {
+		
+		return this.inhaltMapper.findByProfil(p);
+		
+	}
+	
+	/**
+	 * Ausgeben eines Profils aufgrund der Id
+	 */
+	public Profil getProfilFor(int id) throws IllegalArgumentException {
+		
+		return this.profilMapper.getProfilById(id);
 		
 	}
 
