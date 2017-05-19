@@ -1,5 +1,6 @@
 package de.hdm.myjob.server;
 
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -11,8 +12,10 @@ import de.hdm.myjob.server.db.InhaltMapper;
 import de.hdm.myjob.server.db.ProfilMapper;
 import de.hdm.myjob.server.db.StellenausschreibungMapper;
 import de.hdm.myjob.shared.Administration;
+import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Inhalt;
 import de.hdm.myjob.shared.bo.Profil;
+import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 @SuppressWarnings("serial")
 public class AdministrationImpl extends RemoteServiceServlet implements Administration{
@@ -35,7 +38,7 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	    this.eigenschaftMapper = EigenschaftMapper.eigenschaftMapper();
 	    this.inhaltMapper = InhaltMapper.inhaltMapper();
 	    this.profilMapper = ProfilMapper.profilMapper();
-	    this.stellenausschreibungMapper = StellenausschreibungMapper.stellenbeschreibungMapper();
+	    this.stellenausschreibungMapper = StellenausschreibungMapper.stellenausschreibungMapper();
 	  
 	}
 	
@@ -65,6 +68,17 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		
 		return this.profilMapper.getProfilById(id);
 		
+	}
+
+	@Override
+	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung,
+			Date frist, Benutzer nutzerid, Profil profilid) throws IllegalArgumentException {
+		Stellenausschreibung s = new Stellenausschreibung();
+		s.setBezeichnug(bezeichnung);
+		s.setBeschreibungstext(beschreibung);
+		s.setFrist(frist);
+		
+		return this.stellenausschreibungMapper.insertStellenausschreibung(s, nutzerid, profilid);
 	}
 
 }

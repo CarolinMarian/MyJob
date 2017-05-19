@@ -35,6 +35,20 @@ protected void run(){
 			
 	});
 	
+	Button stellenausschreibungenErstellenButton = new Button("Stellenausschreibung erstellen");
+	stellenausschreibungenErstellenButton.setStylePrimaryName("myjob-menubutton");
+
+	stellenausschreibungenErstellenButton.addClickHandler(new ClickHandler() {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			CreateStellenausschreibung stelle = new CreateStellenausschreibung();
+			RootPanel.get("Details").clear();
+			RootPanel.get("Details").add(stelle);
+		}
+
+	});
+	
 	Button stellenbeschreibungenAnzeigenButton = new Button("Jobs");
 	stellenbeschreibungenAnzeigenButton.setStylePrimaryName("myjob-menubutton");
 	
@@ -62,6 +76,7 @@ protected void run(){
 	});
 	
 	navPanel.add(profilAnzeigenButton);
+	navPanel.add(stellenausschreibungenErstellenButton);
 	navPanel.add(stellenbeschreibungenAnzeigenButton);
 	navPanel.add(bewerbungenAnzeigenButton);
 	
