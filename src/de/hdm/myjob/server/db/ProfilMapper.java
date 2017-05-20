@@ -107,5 +107,41 @@ public class ProfilMapper {
 	  
 	  
 	  
+	  /** 
+	   * Einfügen eines Profils
+	   */
+	  public Profil insert(Profil p) {
+	    Connection con = DBConnection.connection();
+
+	    try {
+	      Statement stmt = con.createStatement();
+
+	      /*
+	       * Zunächst schauen wir nach, welches der momentan höchste
+	       * Primärschlüsselwert ist.
+	       */
+	      ResultSet rs = stmt.executeQuery("SELECT MAX(profilid) AS maxid "
+	          + "FROM profil ");
+
+	      // Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+	      if (rs.next()) {
+
+	        p.setId(rs.getInt("maxid") + 1);
+
+	        stmt = con.createStatement();
+
+	        stmt.executeUpdate("INSERT INTO profil (profilid, benutzerid) "
+	            + "VALUES (" + p.getId() + ", "+ p.getBenutzerId() + ")");
+	      }
+	    }
+	    catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+
+	    return p;
+	  }
+
+	  
+	  
 	  
 }

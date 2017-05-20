@@ -30,4 +30,6 @@ public interface Administration extends RemoteService {
 			throws IllegalArgumentException;
 	
 	public void deleteProfil(Profil p) throws IllegalArgumentException;
+	
+	public void createProfil() throws IllegalArgumentException;
 }

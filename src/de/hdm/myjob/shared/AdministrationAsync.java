@@ -27,5 +27,6 @@ public interface AdministrationAsync {
 	void showStellenausschreibung(int benutzerid, int profilid, AsyncCallback<Vector<Stellenausschreibung>> callback);
 	
 	void deleteProfil(Profil p, AsyncCallback<Void> callback);
-
+	
+	void createProfil(AsyncCallback<Void> callback);
 }

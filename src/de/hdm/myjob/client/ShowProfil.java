@@ -42,8 +42,7 @@ public class ShowProfil extends ShowDefinition{
 			
 		@Override
 		public void onFailure(Throwable caught) {
-			this.showdef.append("Kein Profil vorhanden");
-			 this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
+			this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
 			
 		}
 

@@ -98,5 +98,14 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	public void deleteProfil(Profil p) throws IllegalArgumentException {
 		this.profilMapper.delete(p);
 	}
+	
+	/**
+	 * Anlegen eines Profils
+	 */
+	public void createProfil() throws IllegalArgumentException {
+		Profil p = new Profil();
+		p.setBenutzerId(1);
+		this.profilMapper.insert(p);
+	}
 
 }
