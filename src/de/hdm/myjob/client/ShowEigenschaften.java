@@ -6,6 +6,7 @@ import java.util.Vector;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.view.client.ListDataProvider;
 
 import de.hdm.myjob.shared.AdministrationAsync;
@@ -92,59 +93,62 @@ public class ShowEigenschaften extends ShowDefinition {
 			
 			AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 			
-			
-			
-			
-			
-			//Celltable --> Wie hlassen sich die Eigenschaftsbezeichnungen hier einfügen?
-			
-			List<Inhalt> INHALTE = result;
-			
-			
-			CellTable<Inhalt> table = new CellTable<Inhalt>();
-			
-			TextColumn<Inhalt> eigColumn = new TextColumn<Inhalt>() {
 
-				@Override
-				public String getValue(Inhalt inhalt) {
-					String s = String.valueOf(inhalt.getEigenschaftsId());
-					return s;
-				}
-				
-			};
-			
-			
-			TextColumn<Inhalt> inColumn = new TextColumn<Inhalt>() {
-
-				@Override
-				public String getValue(Inhalt inhalt) {
-					return inhalt.getAngabe();
-				}
-				
-			};
-			this.showdef.add(table);
-		    table.addColumn(eigColumn, "Eigenschaft");
-		    table.addColumn(inColumn, "Angabe");
-			
-		    ListDataProvider<Inhalt> dataProvider = new ListDataProvider<Inhalt>();
-		    dataProvider.addDataDisplay(table);
-		    
-		    List<Inhalt> list = dataProvider.getList();
-		    for (Inhalt i : INHALTE) {
-		      list.add(i);
-		    }
-			
-			
+//			//Celltable --> Wie hlassen sich die Eigenschaftsbezeichnungen hier einfügen?
+//			
+//			List<Inhalt> INHALTE = result;
+//			
+//			
+//			CellTable<Inhalt> table = new CellTable<Inhalt>();
+//			
+//			TextColumn<Inhalt> eigColumn = new TextColumn<Inhalt>() {
+//
+//				@Override
+//				public String getValue(Inhalt inhalt) {
+//					String s = String.valueOf(inhalt.getEigenschaftsId());
+//					return s;
+//				}
+//				
+//			};
+//			
+//			
+//			TextColumn<Inhalt> inColumn = new TextColumn<Inhalt>() {
+//
+//				@Override
+//				public String getValue(Inhalt inhalt) {
+//					return inhalt.getAngabe();
+//				}
+//				
+//			};
+//			this.showdef.add(table);
+//		    table.addColumn(eigColumn, "Eigenschaft");
+//		    table.addColumn(inColumn, "Angabe");
+//			
+//		    ListDataProvider<Inhalt> dataProvider = new ListDataProvider<Inhalt>();
+//		    dataProvider.addDataDisplay(table);
+//		    
+//		    List<Inhalt> list = dataProvider.getList();
+//		    for (Inhalt i : INHALTE) {
+//		      list.add(i);
+//		    }
+//			
+//			
 			
 		
+			//  Flextable zur Anzeige der Eigenschaftten
+		    FlexTable t = new FlexTable();
 			
+			t.setText(0, 0, "Eigenschaft");
+			t.setText(0, 1, "Angabe");
 			
+			this.showdef.add(t);
 			
-			
+			int tCount = 1;
 			for (Inhalt i : result){
 				
-				verwaltung.getEigenschaftById(i.getEigenschaftsId(), new EigenschaftCallback(this.showdef, i));
-
+				verwaltung.getEigenschaftById(i.getEigenschaftsId(), new EigenschaftCallback(this.showdef, i, t, tCount));
+				
+				tCount = tCount +1;
 			}
 			
 
@@ -162,11 +166,16 @@ public class ShowEigenschaften extends ShowDefinition {
 		
 		private ShowDefinition showdef = null;
 		private Inhalt inhalt = null;
+		private FlexTable table = null;
+		private int count = 0;
 		
 		
-		public EigenschaftCallback (ShowDefinition s, Inhalt i){
+		public EigenschaftCallback (ShowDefinition s, Inhalt i, FlexTable t, int tCount){
 			this.showdef = s;
 			this.inhalt = i;
+			this.table = t;
+			this.count = tCount;
+			
 		}
 		
 			
@@ -180,12 +189,13 @@ public class ShowEigenschaften extends ShowDefinition {
 		@Override
 		public void onSuccess(Eigenschaft eigenschaft) {
 
-			this.showdef.append(eigenschaft.getBezeichnung() + ": " + inhalt.getAngabe());	
+			//this.showdef.append(eigenschaft.getBezeichnung() + ": " + inhalt.getAngabe());	
 			
+			//Flextable
 			
+			table.setText(count, 0, eigenschaft.getBezeichnung());
+			table.setText(count, 1, inhalt.getAngabe());
 
-			
-	
 		}
 		
 	}
