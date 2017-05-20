@@ -52,7 +52,7 @@ war/WEB-INF/classes/
 .svn/
 /.settings
 /.gwt
-/ .gwt.rpc
+/.gwt.rpc
 
 ################################################################################
 # MAC-Spezifika 
