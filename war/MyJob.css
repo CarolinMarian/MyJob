@@ -118,3 +118,9 @@ Ab hier kann eventuell alles gelöscht werden, wenn es nicht Verwendung findet
 #closeButton {
   margin: 15px 6px 6px;
 }
+
+.FlexTableShow {
+	width: 500px;
+	border-collapse: collapse;
+	padding: 2px;
+}

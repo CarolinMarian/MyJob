@@ -137,6 +137,8 @@ public class ShowEigenschaften extends ShowDefinition {
 		
 			//  Flextable zur Anzeige der Eigenschaftten
 		    FlexTable t = new FlexTable();
+		    
+		    t.addStyleName("FlexTableShow");
 			
 			t.setText(0, 0, "Eigenschaft");
 			t.setText(0, 1, "Angabe");
