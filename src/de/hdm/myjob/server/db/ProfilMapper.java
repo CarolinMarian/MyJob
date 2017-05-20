@@ -82,4 +82,30 @@ public class ProfilMapper {
 		return null;
 	  }
 
+	  
+	  
+	  /**
+	   * Löschen der Daten eines Profil-Objekts aus der Datenbank.
+	   * 
+	   * @param a das aus der DB zu löschende "Objekt"
+	   */
+	  public void delete(Profil p) {
+	    Connection con = DBConnection.connection();
+
+	    try {
+	      Statement stmt = con.createStatement();
+
+	      stmt.executeUpdate("DELETE FROM inhalt " + "WHERE profilid=" + p.getId());
+	      stmt.executeUpdate("DELETE FROM stellenausschreibung " + "WHERE profilid=" + p.getId());
+	      stmt.executeUpdate("DELETE FROM profil " + "WHERE profilid=" + p.getId());
+
+	    }
+	    catch (SQLException e2) {
+	      e2.printStackTrace();
+	    }
+	  }
+	  
+	  
+	  
+	  
 }

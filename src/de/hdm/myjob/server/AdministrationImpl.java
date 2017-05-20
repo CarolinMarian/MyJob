@@ -92,4 +92,11 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		return this.stellenausschreibungMapper.getStellenbeschreibungById(benutzerid, profilid);
 	}
 
+	/**
+	 * Löschen eines Profils
+	 */
+	public void deleteProfil(Profil p) throws IllegalArgumentException {
+		this.profilMapper.delete(p);
+	}
+
 }

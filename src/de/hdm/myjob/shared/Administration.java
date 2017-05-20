@@ -28,4 +28,6 @@ public interface Administration extends RemoteService {
 
 	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid, int profilid)
 			throws IllegalArgumentException;
+	
+	public void deleteProfil(Profil p) throws IllegalArgumentException;
 }

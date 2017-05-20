@@ -24,7 +24,7 @@ public abstract class ShowDefinition extends VerticalPanel {
 	 */
 	protected HTML createHeadline(String headlineText) {
 	    HTML content = new HTML(headlineText);
-	    content.setStylePrimaryName(".myjob-headline");
+	    content.setStylePrimaryName("myjob-headline");
 	    return content;
 	}
 	
@@ -34,7 +34,7 @@ public abstract class ShowDefinition extends VerticalPanel {
 	 */
 	protected void append(String text) {
 		HTML content = new HTML(text);
-		content.setStylePrimaryName(".myjob-simpletext"); 
+		content.setStylePrimaryName("myjob-simpletext"); 
 		this.add(content);
 	}
 

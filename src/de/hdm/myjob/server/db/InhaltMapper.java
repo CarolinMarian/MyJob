@@ -54,7 +54,7 @@ public class InhaltMapper {
 	        Statement stmt = con.createStatement();
 
 	        ResultSet rs = stmt.executeQuery("SELECT profilid, eigenschaftid, angabe FROM inhalt "
-	            + "WHERE profilid=" + id + " ORDER BY eigenschaftid");
+	            + "WHERE profilid=" + id);
 
 	        while (rs.next()) {
 	        	Inhalt i = new Inhalt();

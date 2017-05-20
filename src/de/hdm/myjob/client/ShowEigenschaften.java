@@ -1,13 +1,9 @@
 package de.hdm.myjob.client;
 
-import java.util.List;
 import java.util.Vector;
 
-import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.view.client.ListDataProvider;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Eigenschaft;
@@ -29,8 +25,6 @@ public class ShowEigenschaften extends ShowDefinition {
 		
 		verwaltung.getProfilFor(1, new ProfilCallback(this));
 		
-		
-
 	}
 	
 	
@@ -47,7 +41,7 @@ public class ShowEigenschaften extends ShowDefinition {
 			
 		@Override
 		public void onFailure(Throwable caught) {
-			
+			this.showdef.append("Kein Profil vorhanden");
 			 this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
 			
 		}
@@ -55,9 +49,16 @@ public class ShowEigenschaften extends ShowDefinition {
 		@Override
 		public void onSuccess(Profil result) {
 			
-			AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
+			if (result == null){
+				this.showdef.append("No Profil");
+			}
+			else {
+				AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
+				
+				verwaltung.getInhaltFor(result, new InhalteCallback(this.showdef));
+			}
 			
-			verwaltung.getInhaltFor(result, new InhalteCallback(this.showdef, result));
+			
 
 			
 		}
@@ -72,12 +73,10 @@ public class ShowEigenschaften extends ShowDefinition {
 	class InhalteCallback implements AsyncCallback<Vector<Inhalt>> {
 		
 		private ShowDefinition showdef = null;
-		private Profil profil = null;
 		
 		
-		public InhalteCallback (ShowDefinition s, Profil p){
+		public InhalteCallback (ShowDefinition s){
 			this.showdef = s;
-			this.profil = p;
 		}
 		
 			

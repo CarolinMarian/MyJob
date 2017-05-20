@@ -4,11 +4,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Navigator extends ShowDefinition {
-
-	VerticalPanel navPanel = new VerticalPanel();
 
 	@Override
 	protected String getHeadlineText() {
@@ -17,8 +14,6 @@ public class Navigator extends ShowDefinition {
 
 	@Override
 	protected void run() {
-
-		this.add(navPanel);
 
 		Button profilAnzeigenButton = new Button("Mein Profil");
 		profilAnzeigenButton.setStylePrimaryName("myjob-menubutton");
@@ -89,10 +84,10 @@ public class Navigator extends ShowDefinition {
 
 		});
 
-		navPanel.add(profilAnzeigenButton);
-		navPanel.add(stellenausschreibungenErstellenButton);
-		navPanel.add(stellenausschreibungenAnsehenButton);
-		navPanel.add(bewerbungenAnzeigenButton);
+		this.add(profilAnzeigenButton);
+		this.add(stellenausschreibungenErstellenButton);
+		this.add(stellenausschreibungenAnsehenButton);
+		this.add(bewerbungenAnzeigenButton);
 
 	}
 
