@@ -19,9 +19,11 @@ public interface AdministrationAsync {
 
 	void getProfilFor(int id, AsyncCallback<Profil> callback);
 
-	void createStellenausschreibung(String bezeichnung, String beschreibung, Date frist, Benutzer nutzerid, Profil profilid,
-			AsyncCallback<Stellenausschreibung> callback);
-	
+	void createStellenausschreibung(String bezeichnung, String beschreibung, Date frist, Benutzer nutzerid,
+			Profil profilid, AsyncCallback<Stellenausschreibung> callback);
+
 	void getEigenschaftById(int id, AsyncCallback<Eigenschaft> callback);
+
+	void showStellenausschreibung(int benutzerid, int profilid, AsyncCallback<Vector<Stellenausschreibung>> callback);
 
 }
