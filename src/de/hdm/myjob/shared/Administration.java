@@ -21,9 +21,11 @@ public interface Administration extends RemoteService {
 
 	public Profil getProfilFor(int id) throws IllegalArgumentException;
 
-	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung,
-			Date frist, Benutzer nutzerid, Profil profilid) throws IllegalArgumentException;
-	
+	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
+			Benutzer nutzerid, Profil profilid) throws IllegalArgumentException;
+
 	public Eigenschaft getEigenschaftById(int id) throws IllegalArgumentException;
 
+	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid, int profilid)
+			throws IllegalArgumentException;
 }

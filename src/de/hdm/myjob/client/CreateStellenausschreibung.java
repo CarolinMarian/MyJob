@@ -37,7 +37,6 @@ public class CreateStellenausschreibung extends ShowDefinition {
 	// Button definieren
 	private Button createStellenausschreibungButton = new Button("Stellenausschreibung anlegen");
 	// Klasseninstanzen definieren
-	Stellenausschreibung s = new Stellenausschreibung();
 	Benutzer b = new Benutzer();
 	Profil p = new Profil();
 
@@ -82,6 +81,7 @@ public class CreateStellenausschreibung extends ShowDefinition {
 			}
 		});
 
+		// verPanel.add(celltable);
 		horPanel.add(createStellenausschreibungButton);
 		verPanel.add(createStellenausschreibungFlexTable);
 		verPanel.add(horPanel);

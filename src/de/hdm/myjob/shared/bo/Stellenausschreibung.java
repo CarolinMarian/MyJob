@@ -9,7 +9,7 @@ public class Stellenausschreibung extends BusinessObject {
 	private static final long serialVersionUID = 1L;
 
 	// Attribute einer Stellenausschreibung
-	private int stellenId = 0;
+	private int stellenId=0;
 	private String bezeichnung = null;
 	private String beschreibungstext = null;
 	private Date frist = null;
