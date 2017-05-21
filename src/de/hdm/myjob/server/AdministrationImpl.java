@@ -130,4 +130,9 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	public Stellenausschreibung showStellenausschreibungByStellenId(int stellenid) throws IllegalArgumentException {
 		return this.stellenausschreibungMapper.getStellenbeschreibungByStellenId(stellenid);
 	}
+
+	@Override
+	public void deleteStellenausschreibung(Stellenausschreibung stelle) throws IllegalArgumentException {
+		this.stellenausschreibungMapper.deleteStellenausschreibung(stelle);
+	}
 }

@@ -69,7 +69,8 @@ public class StellenausschreibungMapper {
 	}
 
 	// Bestehende Stellenausschreibung verändern
-	public Stellenausschreibung updateStellenausschreibung(Stellenausschreibung stellenausschreibung, int nutzerid, int profilid) {
+	public Stellenausschreibung updateStellenausschreibung(Stellenausschreibung stellenausschreibung, int nutzerid,
+			int profilid) {
 
 		Connection con = DBConnection.connection();
 
@@ -88,24 +89,22 @@ public class StellenausschreibungMapper {
 		return stellenausschreibung;
 	}
 
-	// // Bestehende Stellenausschreibung löschen
-	// public void loeschenStellenbeschreibung(Stellenausschreibung
-	// stellenausschreibung) {
-	// Connection con = DBConnection.connection();
-	//
-	// try {
-	//
-	// Statement stmt = con.createStatement();
-	//
-	// stmt.executeUpdate(
-	// "DELETE FROM stellenausschreibung " + "WHERE stellenid=" +
-	// stellenausschreibung.getStellenId());
-	// }
-	//
-	// catch (SQLException e2) {
-	// e2.printStackTrace();
-	// }
-	// }
+	// Bestehende Stellenausschreibung löschen
+	public void deleteStellenausschreibung(Stellenausschreibung stellenausschreibung) {
+		Connection con = DBConnection.connection();
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			stmt.executeUpdate(
+					"DELETE FROM stellenausschreibung WHERE stellenid=" + stellenausschreibung.getStellenId());
+		}
+
+		catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+	}
 
 	// Ausgabe aller Stellenbeschreibungen zu einer bestimmten Id (Kombi aus
 	// ProfilId und BenutzerId)

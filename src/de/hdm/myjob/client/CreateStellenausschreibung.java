@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
@@ -97,6 +98,9 @@ public class CreateStellenausschreibung extends ShowDefinition {
 
 		@Override
 		public void onSuccess(Stellenausschreibung result) {
+			ShowDefinition stelle = new ShowStellenausschreibung();
+			RootPanel.get("Details").clear();
+			RootPanel.get("Details").add(stelle);
 		}
 
 	}

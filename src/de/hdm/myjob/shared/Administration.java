@@ -38,4 +38,7 @@ public interface Administration extends RemoteService {
 			int nutzerid, int profilid, int stellenid) throws IllegalArgumentException;
 
 	public Stellenausschreibung showStellenausschreibungByStellenId(int stellenId) throws IllegalArgumentException;
+
+	public void deleteStellenausschreibung(Stellenausschreibung stelle) throws IllegalArgumentException;
+
 }

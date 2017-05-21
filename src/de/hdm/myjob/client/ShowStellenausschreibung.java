@@ -28,6 +28,7 @@ public class ShowStellenausschreibung extends ShowDefinition {
 	private VerticalPanel verPanel = new VerticalPanel();
 	// Tabelle definieren
 	FlexTable showStellenausschreibungFlexTable = new FlexTable();
+	// Button definieren
 
 	@Override
 	protected String getHeadlineText() {
@@ -38,11 +39,15 @@ public class ShowStellenausschreibung extends ShowDefinition {
 	@Override
 	protected void run() {
 
+		// Style festlegen
+
+		// ProfilId & BenutzerId hardcoden
 		profil.setId(1);
 		benutzer.setId(1);
 
 		this.add(verPanel);
 
+		// alle für den Nutzer vorhandenen Stellenausschreibungen ausgeben
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 		verwaltung.showStellenausschreibung(benutzer.getId(), profil.getId(), new ShowStelle());
 
@@ -65,6 +70,7 @@ public class ShowStellenausschreibung extends ShowDefinition {
 			showStellenausschreibungFlexTable.setText(0, 2, "Ausschreibungstext");
 			showStellenausschreibungFlexTable.setText(0, 3, "Frist");
 			showStellenausschreibungFlexTable.setText(0, 4, "");
+			showStellenausschreibungFlexTable.setText(0, 5, "");
 
 			int row = 0;
 			for (final Stellenausschreibung s : result) {
@@ -79,9 +85,9 @@ public class ShowStellenausschreibung extends ShowDefinition {
 				// Button erstellen um Update durchzuführen - wird der Button
 				// ausgelöst wird man zu dem entsprechenden Profil
 				// weitergeleitet, um dieses bearbeiten zu können
+
 				Button stelleBearbeitenButton = new Button("Stellenausschreibung berbeiten");
 				stelleBearbeitenButton.setStylePrimaryName("myjob-menubutton");
-
 				stelleBearbeitenButton.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
@@ -89,9 +95,21 @@ public class ShowStellenausschreibung extends ShowDefinition {
 						RootPanel.get("Details").clear();
 						RootPanel.get("Details").add(stelle);
 					}
-
 				});
+
+				Button stelleLoeschenButton = new Button("Stellenausschreibung loeschen");
+				stelleLoeschenButton.setStylePrimaryName("myjob-menubutton");
+				stelleLoeschenButton.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						ShowDefinition stelle = new DeleteStellenausschreibung(s.getStellenId());
+						RootPanel.get("Details").clear();
+						RootPanel.get("Details").add(stelle);
+					}
+				});
+
 				showStellenausschreibungFlexTable.setWidget(row, 4, stelleBearbeitenButton);
+				showStellenausschreibungFlexTable.setWidget(row, 5, stelleLoeschenButton);
 			}
 		}
 
