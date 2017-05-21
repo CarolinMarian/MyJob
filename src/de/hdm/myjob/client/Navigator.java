@@ -51,7 +51,7 @@ public class Navigator extends ShowDefinition {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				ShowDefinition stelle = new ShowStellenausschreibung();
+				ShowDefinition stelle = new ShowAllStellenausschreibung();
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(stelle);
 			}

@@ -98,7 +98,7 @@ public class CreateStellenausschreibung extends ShowDefinition {
 
 		@Override
 		public void onSuccess(Stellenausschreibung result) {
-			ShowDefinition stelle = new ShowStellenausschreibung();
+			ShowDefinition stelle = new ShowAllStellenausschreibung();
 			RootPanel.get("Details").clear();
 			RootPanel.get("Details").add(stelle);
 		}

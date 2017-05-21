@@ -19,7 +19,7 @@ import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
-public class ShowStellenausschreibung extends ShowDefinition {
+public class ShowAllStellenausschreibung extends ShowDefinition {
 	Benutzer benutzer = new Benutzer();
 	Profil profil = new Profil();
 
@@ -71,6 +71,7 @@ public class ShowStellenausschreibung extends ShowDefinition {
 			showStellenausschreibungFlexTable.setText(0, 3, "Frist");
 			showStellenausschreibungFlexTable.setText(0, 4, "");
 			showStellenausschreibungFlexTable.setText(0, 5, "");
+			showStellenausschreibungFlexTable.setText(0, 6, "");
 
 			int row = 0;
 			for (final Stellenausschreibung s : result) {
@@ -83,33 +84,49 @@ public class ShowStellenausschreibung extends ShowDefinition {
 				showStellenausschreibungFlexTable.setText(row, 3, fristString);
 
 				// Button erstellen um Update durchzuführen - wird der Button
-				// ausgelöst wird man zu dem entsprechenden Profil
+				// ausgelöst wird man zu der entsprechenden Ausschreibung
 				// weitergeleitet, um dieses bearbeiten zu können
-
-				Button stelleBearbeitenButton = new Button("Stellenausschreibung berbeiten");
-				stelleBearbeitenButton.setStylePrimaryName("myjob-menubutton");
-				stelleBearbeitenButton.addClickHandler(new ClickHandler() {
+				Button stelleAnzeigenButton = new Button("Details ansehen");
+				stelleAnzeigenButton.setStylePrimaryName("myjob-menubutton");
+				stelleAnzeigenButton.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						ShowDefinition stelle = new EditStellenausschreibung(s.getStellenId());
+						ShowDefinition stelle = new ShowOneStellenausschreibung(s.getStellenId());
 						RootPanel.get("Details").clear();
 						RootPanel.get("Details").add(stelle);
 					}
 				});
 
-				Button stelleLoeschenButton = new Button("Stellenausschreibung loeschen");
-				stelleLoeschenButton.setStylePrimaryName("myjob-menubutton");
-				stelleLoeschenButton.addClickHandler(new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						ShowDefinition stelle = new DeleteStellenausschreibung(s.getStellenId());
-						RootPanel.get("Details").clear();
-						RootPanel.get("Details").add(stelle);
-					}
-				});
+//				// Button erstellen um Update durchzuführen - wird der Button
+//				// ausgelöst wird man zu der entsprechenden Ausschreibung
+//				// weitergeleitet, um dieses bearbeiten zu können
+//				Button stelleBearbeitenButton = new Button("Stellenausschreibung berbeiten");
+//				stelleBearbeitenButton.setStylePrimaryName("myjob-menubutton");
+//				stelleBearbeitenButton.addClickHandler(new ClickHandler() {
+//					@Override
+//					public void onClick(ClickEvent event) {
+//						ShowDefinition stelle = new EditStellenausschreibung(s.getStellenId());
+//						RootPanel.get("Details").clear();
+//						RootPanel.get("Details").add(stelle);
+//					}
+//				});
 
-				showStellenausschreibungFlexTable.setWidget(row, 4, stelleBearbeitenButton);
-				showStellenausschreibungFlexTable.setWidget(row, 5, stelleLoeschenButton);
+//				// Button erstellen um Delete durchzuführen - wird der Button
+//				// ausgelöst wird die entsprechende Ausschreibung gelöscht
+//				Button stelleLoeschenButton = new Button("Stellenausschreibung loeschen");
+//				stelleLoeschenButton.setStylePrimaryName("myjob-menubutton");
+//				stelleLoeschenButton.addClickHandler(new ClickHandler() {
+//					@Override
+//					public void onClick(ClickEvent event) {
+//						ShowDefinition stelle = new DeleteStellenausschreibung(s.getStellenId());
+//						RootPanel.get("Details").clear();
+//						RootPanel.get("Details").add(stelle);
+//					}
+//				});
+
+//				showStellenausschreibungFlexTable.setWidget(row, 4, stelleBearbeitenButton);
+//				showStellenausschreibungFlexTable.setWidget(row, 5, stelleLoeschenButton);
+				showStellenausschreibungFlexTable.setWidget(row, 4, stelleAnzeigenButton);
 			}
 		}
 

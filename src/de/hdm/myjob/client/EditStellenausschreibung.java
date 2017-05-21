@@ -129,7 +129,7 @@ public class EditStellenausschreibung extends ShowDefinition {
 
 		@Override
 		public void onSuccess(Stellenausschreibung result) {
-			ShowDefinition stelle = new ShowStellenausschreibung();
+			ShowDefinition stelle = new ShowOneStellenausschreibung(result.getStellenId());
 			RootPanel.get("Details").clear();
 			RootPanel.get("Details").add(stelle);
 		}
