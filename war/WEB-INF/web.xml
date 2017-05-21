@@ -15,9 +15,10 @@
   <servlet-mapping>
     <servlet-name>administration</servlet-name>
     <url-pattern>/myjob/admin</url-pattern>
+    <url-pattern>/myjobreport/admin</url-pattern>
   </servlet-mapping>
   
-  <!-- 
+  
   <servlet>
     <servlet-name>reportadministration</servlet-name>
     <servlet-class>de.hdm.myjob.server.report.ReportAdministrationImpl</servlet-class>
@@ -25,10 +26,10 @@
   
    <servlet-mapping>
     <servlet-name>reportadministration</servlet-name>
-    <url-pattern>/myjob/admin</url-pattern>
+    <url-pattern>/myjob/reportadmin</url-pattern>
     <url-pattern>/myjobreport/reportadmin</url-pattern>
   </servlet-mapping>
-  -->
+  
   
   <!-- Default page to serve -->
   <welcome-file-list>
