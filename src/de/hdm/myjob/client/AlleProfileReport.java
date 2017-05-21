@@ -12,6 +12,8 @@ public class AlleProfileReport extends ShowDefinition {
 	protected void run() {
 		// TODO Auto-generated method stub
 		
+		this.append("Zu erledigen :)");
+		
 	}
 
 }

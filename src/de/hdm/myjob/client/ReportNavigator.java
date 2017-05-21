@@ -38,6 +38,17 @@ public class ReportNavigator extends ShowDefinition {
 		allProfileReport.setStylePrimaryName("myjob-menubutton");
 		this.add(allProfileReport);
 		
+		allProfileReport.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				ShowDefinition showdef = new AlleProfileReport();
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(showdef);
+			}
+
+		});
 	}
 
 }
