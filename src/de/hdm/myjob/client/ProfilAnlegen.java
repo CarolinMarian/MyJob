@@ -1,12 +1,8 @@
 package de.hdm.myjob.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
 
-import de.hdm.myjob.client.ShowEigenschaften.InhalteCallback;
-import de.hdm.myjob.client.ShowEigenschaften.ProfilCallback;
 import de.hdm.myjob.shared.AdministrationAsync;
-import de.hdm.myjob.shared.bo.Profil;
 
 public class ProfilAnlegen extends ShowDefinition {
 

@@ -16,5 +16,21 @@ package de.hdm.myjob.shared.report;
  * @author Thies
  */
 public abstract class ReportWriter {
+	
+	  /**
+	   * Übersetzen eines <code>AllInhalteOfProfilReport</code> in das
+	   * Zielformat.
+	   * 
+	   * @param r der zu übersetzende Report
+	   */
+	  public abstract void process(AllInhalteOfProfilReport r);
+	  
+	   /** 
+	    * Übersetzen eines <code>AllInhalteOfProfilReport</code> in das
+	   * Zielformat.
+	   * 
+	   * @param r der zu übersetzende Report
+	   */
+	  public abstract void process(AllInhalteOfAllProfileReport r);
 }
 
