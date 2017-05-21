@@ -97,8 +97,6 @@ public class CreateStellenausschreibung extends ShowDefinition {
 
 		@Override
 		public void onSuccess(Stellenausschreibung result) {
-			Label successLabel = new Label("onSuccess wurde betreten");
-			verPanel.add(successLabel);
 		}
 
 	}

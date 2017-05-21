@@ -69,7 +69,7 @@ public class StellenausschreibungMapper {
 	}
 
 	// Bestehende Stellenausschreibung verändern
-	public Stellenausschreibung updateStellenausschreibung(Stellenausschreibung stellenausschreibung) {
+	public Stellenausschreibung updateStellenausschreibung(Stellenausschreibung stellenausschreibung, int nutzerid, int profilid) {
 
 		Connection con = DBConnection.connection();
 

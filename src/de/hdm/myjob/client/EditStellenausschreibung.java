@@ -1,7 +1,6 @@
 package de.hdm.myjob.client;
 
 import java.util.Date;
-import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -18,8 +17,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-import de.hdm.myjob.client.CreateStellenausschreibung.CreateStelle;
-import de.hdm.myjob.client.ShowStellenausschreibung.ShowStelle;
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Profil;
@@ -27,15 +24,12 @@ import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public class EditStellenausschreibung extends ShowDefinition {
 
+	//
 	AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-
+	// Klassenobjekte erzeugen
 	Stellenausschreibung stelle = new Stellenausschreibung();
 	Benutzer benutzer = new Benutzer();
 	Profil profil = new Profil();
-	int profilid;
-	int benutzerid;
-	int stellenid;
-
 	// Panels definieren
 	private HorizontalPanel horPanel = new HorizontalPanel();
 	private VerticalPanel verPanel = new VerticalPanel();
@@ -48,25 +42,27 @@ public class EditStellenausschreibung extends ShowDefinition {
 	private DateTimeFormat fristFormat = DateTimeFormat.getFormat("dd.MM.yyyy");
 	private Label fristInhalt = new Label();
 	// Button definieren
-	private Button editStellenausschreibungButton = new Button("Stellenausschreibung anlegen");
+	private Button editStellenausschreibungButton = new Button("Stellenausschreibung ändern");
 
-	// // Konstruktor erstellen
-	// public EditStellenausschreibung(final int benutzerid, final int profilid)
-	// {
-	// this.profilid = profilid;
-	// this.benutzerid = benutzerid;
-	// run();
-	// }
+	// Konstruktor erstellen der die übergebene ID in das Klassenobjekt
+	// abspeichert
+	public EditStellenausschreibung(int stellenid) {
+		this.stelle.setStellenId(stellenid);
+		run();
+	}
 
+	// Headline festlegen
 	@Override
 	protected String getHeadlineText() {
 		String headline = "Stellenausschreibung bearbeiten";
 		return headline;
 	}
 
+	// Run-Methode
 	@Override
 	protected void run() {
 
+		// ProfilId & BenutzerId hardcoded
 		profil.setId(1);
 		benutzer.setId(1);
 
@@ -90,43 +86,21 @@ public class EditStellenausschreibung extends ShowDefinition {
 		});
 		editStellenausschreibungFlexTable.setWidget(2, 2, dateBoxFrist);
 
+		// Stelle in UpdateFenster befüllen
 		verwaltung.showStellenausschreibungByStellenId(stelle.getStellenId(), new ShowStelle());
 
+		// Button der auslöst, dass die Änderung in die DB geschrieben wird
 		editStellenausschreibungButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				verwaltung.editStellenausschreibung(valueBoxBezeichnung.getText(), valueBoxBeschreibung.getText(),
-						getFrist(), benutzer, profil, new UpdateStelle());
+						getFrist(), benutzer.getId(), profil.getBenutzerId(), stelle.getStellenId(),
+						new UpdateStelle());
 			}
 		});
 
 		verPanel.add(editStellenausschreibungFlexTable);
 		verPanel.add(horPanel);
 		verPanel.add(editStellenausschreibungButton);
-	}
-
-	class UpdateStelle implements AsyncCallback<Stellenausschreibung> {
-
-		@Override
-		public void onFailure(Throwable caught) {
-			Label failLabel = new Label("onFailure wurde betreten");
-			verPanel.add(failLabel);
-		}
-
-		@Override
-		public void onSuccess(Stellenausschreibung result) {
-			Label successLabel = new Label("onSuccess wurde betreten");
-			verPanel.add(successLabel);
-		}
-
-	}
-
-	// Methode um das aktuell formatierte Datum des addValueChangeHandler für
-	// die DB erneut zu formattieren (dazu Zugriff auf befülltes Label in der
-	// addValueChangeHandler)
-	Date getFrist() {
-		Date frist = fristFormat.parse(fristInhalt.getText());
-		java.sql.Date sqlDate = new java.sql.Date(frist.getTime());
-		return sqlDate;
 	}
 
 	class ShowStelle implements AsyncCallback<Stellenausschreibung> {
@@ -139,14 +113,36 @@ public class EditStellenausschreibung extends ShowDefinition {
 
 		@Override
 		public void onSuccess(Stellenausschreibung result) {
-			Label successLabel = new Label("onSuccess wurde betreten");
-			verPanel.add(successLabel);
-
-			stelle.setStellenId(result.getStellenId());
 			valueBoxBezeichnung.setText(result.getBezeichnung());
 			valueBoxBeschreibung.setText(result.getBeschreibungstext());
 			dateBoxFrist.setValue(result.getFrist());
 		}
+	}
+
+	class UpdateStelle implements AsyncCallback<Stellenausschreibung> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			Label failLabel = new Label("onFailure wurde betreten");
+			verPanel.add(failLabel);
+		}
+
+		@Override
+		public void onSuccess(Stellenausschreibung result) {
+			ShowDefinition stelle = new ShowStellenausschreibung();
+			RootPanel.get("Details").clear();
+			RootPanel.get("Details").add(stelle);
+		}
+
+	}
+
+	// Methode um das aktuell formatierte Datum des addValueChangeHandler für
+	// die DB erneut zu formattieren (dazu Zugriff auf befülltes Label in der
+	// addValueChangeHandler)
+	Date getFrist() {
+		Date frist = fristFormat.parse(fristInhalt.getText());
+		java.sql.Date sqlDate = new java.sql.Date(frist.getTime());
+		return sqlDate;
 	}
 
 }

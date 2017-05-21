@@ -35,7 +35,7 @@ public interface Administration extends RemoteService {
 	public void createProfil() throws IllegalArgumentException;
 
 	public Stellenausschreibung editStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
-			Benutzer nutzerid, Profil profilid) throws IllegalArgumentException;
+			int nutzerid, int profilid, int stellenid) throws IllegalArgumentException;
 
 	public Stellenausschreibung showStellenausschreibungByStellenId(int stellenId) throws IllegalArgumentException;
 }

@@ -45,7 +45,7 @@ public class ShowStellenausschreibung extends ShowDefinition {
 
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 		verwaltung.showStellenausschreibung(benutzer.getId(), profil.getId(), new ShowStelle());
-		
+
 		verPanel.add(showStellenausschreibungFlexTable);
 		verPanel.add(horPanel);
 	}
@@ -60,9 +60,6 @@ public class ShowStellenausschreibung extends ShowDefinition {
 
 		@Override
 		public void onSuccess(Vector<Stellenausschreibung> result) {
-			Label successLabel = new Label("onSuccess wurde betreten");
-			verPanel.add(successLabel);
-
 			showStellenausschreibungFlexTable.setText(0, 0, "StellenId");
 			showStellenausschreibungFlexTable.setText(0, 1, "Bezeichnung");
 			showStellenausschreibungFlexTable.setText(0, 2, "Ausschreibungstext");
@@ -70,7 +67,7 @@ public class ShowStellenausschreibung extends ShowDefinition {
 			showStellenausschreibungFlexTable.setText(0, 4, "");
 
 			int row = 0;
-			for (Stellenausschreibung s : result) {
+			for (final Stellenausschreibung s : result) {
 				row++;
 				showStellenausschreibungFlexTable.setText(row, 0, String.valueOf(s.getStellenId()));
 				showStellenausschreibungFlexTable.setText(row, 1, s.getBezeichnung());
@@ -78,21 +75,23 @@ public class ShowStellenausschreibung extends ShowDefinition {
 				Date frist = s.getFrist();
 				String fristString = DateTimeFormat.getFormat("dd.MM.yyyy").format(frist);
 				showStellenausschreibungFlexTable.setText(row, 3, fristString);
-				
+
+				// Button erstellen um Update durchzuführen - wird der Button
+				// ausgelöst wird man zu dem entsprechenden Profil
+				// weitergeleitet, um dieses bearbeiten zu können
 				Button stelleBearbeitenButton = new Button("Stellenausschreibung berbeiten");
 				stelleBearbeitenButton.setStylePrimaryName("myjob-menubutton");
 
 				stelleBearbeitenButton.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						ShowDefinition stelle = new EditStellenausschreibung();
+						ShowDefinition stelle = new EditStellenausschreibung(s.getStellenId());
 						RootPanel.get("Details").clear();
 						RootPanel.get("Details").add(stelle);
 					}
 
 				});
-				showStellenausschreibungFlexTable.setWidget(row,  4,  stelleBearbeitenButton);
-				
+				showStellenausschreibungFlexTable.setWidget(row, 4, stelleBearbeitenButton);
 			}
 		}
 
