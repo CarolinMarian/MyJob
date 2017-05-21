@@ -37,36 +37,37 @@ public class Navigator extends ShowDefinition {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				CreateStellenausschreibung stelle = new CreateStellenausschreibung();
+				ShowDefinition stelle = new CreateStellenausschreibung();
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(stelle);
 			}
 
 		});
 
-		Button stellenausschreibungenAnsehenButton = new Button("Meine Stellenausschreibungen ansehen");
+		Button stellenausschreibungenAnsehenButton = new Button("Stellenausschreibungen meines Profils ansehen");
 		stellenausschreibungenAnsehenButton.setStylePrimaryName("myjob-menubutton");
 
 		stellenausschreibungenAnsehenButton.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				ShowStellenausschreibung stelle = new ShowStellenausschreibung();
+				ShowDefinition stelle = new ShowAllStellenausschreibungenId();
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(stelle);
 			}
 
 		});
 
-		Button stellenbeschreibungenAnzeigenButton = new Button("Jobs");
-		stellenbeschreibungenAnzeigenButton.setStylePrimaryName("myjob-menubutton");
+		Button allStellenausschreibungenAnsehenButton = new Button("Alle vorhandenen Stellenausschreibungen ansehen");
+		allStellenausschreibungenAnsehenButton.setStylePrimaryName("myjob-menubutton");
 
-		stellenbeschreibungenAnzeigenButton.addClickHandler(new ClickHandler() {
+		allStellenausschreibungenAnsehenButton.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-
+				ShowDefinition stelle = new ShowAllStellenausschreibungen();
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(stelle);
 			}
 
 		});
@@ -78,8 +79,9 @@ public class Navigator extends ShowDefinition {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-
+				ShowDefinition bewerbung = new ShowBewerbungen();
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(bewerbung);
 			}
 
 		});
@@ -87,6 +89,7 @@ public class Navigator extends ShowDefinition {
 		this.add(profilAnzeigenButton);
 		this.add(stellenausschreibungenErstellenButton);
 		this.add(stellenausschreibungenAnsehenButton);
+		this.add(allStellenausschreibungenAnsehenButton);
 		this.add(bewerbungenAnzeigenButton);
 
 	}

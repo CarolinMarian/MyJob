@@ -22,13 +22,19 @@ import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
-public class CreateStellenausschreibung extends ShowDefinition {
+public class EditStellenausschreibung extends ShowDefinition {
 
+	// Kommunikation mit der Datenbank
+	AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
+	// Klassenobjekte erzeugen
+	Stellenausschreibung stelle = new Stellenausschreibung();
+	Benutzer benutzer = new Benutzer();
+	Profil profil = new Profil();
 	// Panels definieren
 	private HorizontalPanel horPanel = new HorizontalPanel();
 	private VerticalPanel verPanel = new VerticalPanel();
 	// Tabelle + Textboxen definieren
-	FlexTable createStellenausschreibungFlexTable = new FlexTable();
+	FlexTable editStellenausschreibungFlexTable = new FlexTable();
 	private TextBox valueBoxBezeichnung = new TextBox();
 	private TextBox valueBoxBeschreibung = new TextBox();
 	private DateBox dateBoxFrist = new DateBox();
@@ -36,15 +42,19 @@ public class CreateStellenausschreibung extends ShowDefinition {
 	private DateTimeFormat fristFormat = DateTimeFormat.getFormat("dd.MM.yyyy");
 	private Label fristInhalt = new Label();
 	// Button definieren
-	private Button createStellenausschreibungButton = new Button("Stellenausschreibung anlegen");
-	// Klasseninstanzen definieren
-	Benutzer b = new Benutzer();
-	Profil p = new Profil();
+	private Button editStellenausschreibungButton = new Button("Stellenausschreibung bearbeiten");
 
-	// Überschrift festlegen
+	// Konstruktor erstellen der die übergebene ID in das Klassenobjekt
+	// abspeichert
+	public EditStellenausschreibung(int stellenid) {
+		this.stelle.setStellenId(stellenid);
+		run();
+	}
+
+	// Headline festlegen
 	@Override
 	protected String getHeadlineText() {
-		String headline = "Bitte erstellen Sie Ihre Stellenausschreibung";
+		String headline = "Stellenausschreibung bearbeiten";
 		return headline;
 	}
 
@@ -52,15 +62,19 @@ public class CreateStellenausschreibung extends ShowDefinition {
 	@Override
 	protected void run() {
 
+		// ProfilId & BenutzerId hardcoded
+		profil.setId(1);
+		benutzer.setId(1);
+
 		this.add(verPanel);
 
 		// Tabelle befüllen
-		createStellenausschreibungFlexTable.setText(0, 0, "Bezeichnung");
-		createStellenausschreibungFlexTable.setText(1, 0, "Ausschreibungstext");
-		createStellenausschreibungFlexTable.setText(2, 0, "Frist");
+		editStellenausschreibungFlexTable.setText(0, 0, "Bezeichnung");
+		editStellenausschreibungFlexTable.setText(1, 0, "Ausschreibungstext");
+		editStellenausschreibungFlexTable.setText(2, 0, "Frist");
 
-		createStellenausschreibungFlexTable.setWidget(0, 2, valueBoxBezeichnung);
-		createStellenausschreibungFlexTable.setWidget(1, 2, valueBoxBeschreibung);
+		editStellenausschreibungFlexTable.setWidget(0, 2, valueBoxBezeichnung);
+		editStellenausschreibungFlexTable.setWidget(1, 2, valueBoxBeschreibung);
 
 		// Format ändern des Datums
 		dateBoxFrist.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -70,28 +84,26 @@ public class CreateStellenausschreibung extends ShowDefinition {
 				fristInhalt.setText(fristString);
 			}
 		});
-		createStellenausschreibungFlexTable.setWidget(2, 2, dateBoxFrist);
+		editStellenausschreibungFlexTable.setWidget(2, 2, dateBoxFrist);
 
-		// IDs Hardcoden bis Klassen vollständig
-		b.setId(1);
-		p.setId(1);
+		// Stelle in UpdateFenster befüllen
+		verwaltung.showStellenausschreibungByStellenId(stelle.getStellenId(), new ShowStelle());
 
-		createStellenausschreibungButton.addClickHandler(new ClickHandler() {
+		// Button der auslöst, dass die Änderung in die DB geschrieben wird
+		editStellenausschreibungButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				// Kommunikation mit der Datenbank
-				AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-				verwaltung.createStellenausschreibung(valueBoxBezeichnung.getText(), valueBoxBeschreibung.getText(),
-						getFrist(), b, p, new CreateStelle());
+				verwaltung.editStellenausschreibung(valueBoxBezeichnung.getText(), valueBoxBeschreibung.getText(),
+						getFrist(), benutzer.getId(), profil.getBenutzerId(), stelle.getStellenId(),
+						new UpdateStelle());
 			}
 		});
 
-		// verPanel.add(celltable);
-		horPanel.add(createStellenausschreibungButton);
-		verPanel.add(createStellenausschreibungFlexTable);
+		verPanel.add(editStellenausschreibungFlexTable);
 		verPanel.add(horPanel);
+		verPanel.add(editStellenausschreibungButton);
 	}
 
-	class CreateStelle implements AsyncCallback<Stellenausschreibung> {
+	class ShowStelle implements AsyncCallback<Stellenausschreibung> {
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -101,7 +113,23 @@ public class CreateStellenausschreibung extends ShowDefinition {
 
 		@Override
 		public void onSuccess(Stellenausschreibung result) {
-			ShowDefinition stelle = new ShowAllStellenausschreibungenId();
+			valueBoxBezeichnung.setText(result.getBezeichnung());
+			valueBoxBeschreibung.setText(result.getBeschreibungstext());
+			dateBoxFrist.setValue(result.getFrist());
+		}
+	}
+
+	class UpdateStelle implements AsyncCallback<Stellenausschreibung> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			Label failLabel = new Label("onFailure wurde betreten");
+			verPanel.add(failLabel);
+		}
+
+		@Override
+		public void onSuccess(Stellenausschreibung result) {
+			ShowDefinition stelle = new ShowOneStellenausschreibung(result.getStellenId());
 			RootPanel.get("Details").clear();
 			RootPanel.get("Details").add(stelle);
 		}
