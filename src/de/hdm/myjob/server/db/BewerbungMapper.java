@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public class BewerbungMapper {

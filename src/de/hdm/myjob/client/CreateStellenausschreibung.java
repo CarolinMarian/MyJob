@@ -41,12 +41,14 @@ public class CreateStellenausschreibung extends ShowDefinition {
 	Benutzer b = new Benutzer();
 	Profil p = new Profil();
 
+	// Überschrift festlegen
 	@Override
 	protected String getHeadlineText() {
-		String headline = "Erstelle deine Stellenausschreibung";
+		String headline = "Bitte erstellen Sie Ihre Stellenausschreibung";
 		return headline;
 	}
 
+	// Run-Methode
 	@Override
 	protected void run() {
 
@@ -76,6 +78,7 @@ public class CreateStellenausschreibung extends ShowDefinition {
 
 		createStellenausschreibungButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+				// Kommunikation mit der Datenbank
 				AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 				verwaltung.createStellenausschreibung(valueBoxBezeichnung.getText(), valueBoxBeschreibung.getText(),
 						getFrist(), b, p, new CreateStelle());

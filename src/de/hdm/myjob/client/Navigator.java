@@ -44,7 +44,7 @@ public class Navigator extends ShowDefinition {
 
 		});
 
-		Button stellenausschreibungenAnsehenButton = new Button("Meine Stellenausschreibungen ansehen");
+		Button stellenausschreibungenAnsehenButton = new Button("Stellenausschreibungen meines Profils ansehen");
 		stellenausschreibungenAnsehenButton.setStylePrimaryName("myjob-menubutton");
 
 		stellenausschreibungenAnsehenButton.addClickHandler(new ClickHandler() {

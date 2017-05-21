@@ -14,14 +14,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.myjob.client.ShowAllStellenausschreibungenId.ShowStelle;
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Bewerbung;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public class ShowBewerbungen extends ShowDefinition {
 
+	// Klasseninstanzen definieren
 	Benutzer nutzer = new Benutzer();
 	// Panels definieren
 	private HorizontalPanel horPanel = new HorizontalPanel();
@@ -29,12 +28,14 @@ public class ShowBewerbungen extends ShowDefinition {
 	// Tabelle definieren
 	FlexTable showBewerbungFlexTable = new FlexTable();
 
+	// Überschrift definieren
 	@Override
 	protected String getHeadlineText() {
-		String headline = "Dies sind all Ihre Bewerbungen:";
+		String headline = "Dies sind alle Ihre Bewerbungen:";
 		return headline;
 	}
 
+	// Run-Methode
 	@Override
 	protected void run() {
 

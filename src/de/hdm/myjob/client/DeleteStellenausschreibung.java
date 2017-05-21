@@ -18,14 +18,16 @@ public class DeleteStellenausschreibung extends ShowDefinition {
 		run();
 	}
 
+	// Überschrift festlegen
 	@Override
 	protected String getHeadlineText() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	// Run-Methode
 	@Override
 	protected void run() {
+		// Kommunikation mit der Datenbank
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 		verwaltung.deleteStellenausschreibung(stelle, new DeleteStelle());
 	}

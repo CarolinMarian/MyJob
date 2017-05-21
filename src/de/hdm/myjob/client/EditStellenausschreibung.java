@@ -24,7 +24,7 @@ import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public class EditStellenausschreibung extends ShowDefinition {
 
-	//
+	// Kommunikation mit der Datenbank
 	AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 	// Klassenobjekte erzeugen
 	Stellenausschreibung stelle = new Stellenausschreibung();
@@ -42,7 +42,7 @@ public class EditStellenausschreibung extends ShowDefinition {
 	private DateTimeFormat fristFormat = DateTimeFormat.getFormat("dd.MM.yyyy");
 	private Label fristInhalt = new Label();
 	// Button definieren
-	private Button editStellenausschreibungButton = new Button("Stellenausschreibung ändern");
+	private Button editStellenausschreibungButton = new Button("Stellenausschreibung bearbeiten");
 
 	// Konstruktor erstellen der die übergebene ID in das Klassenobjekt
 	// abspeichert

@@ -42,6 +42,29 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 
 	}
 
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- PROFIL
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+
+	/**
+	 * Anlegen eines Profils
+	 */
+	public void createProfil() throws IllegalArgumentException {
+		Profil p = new Profil();
+		p.setBenutzerId(1);
+		this.profilMapper.insert(p);
+	}
+
+	/**
+	 * L�schen eines Profils
+	 */
+	public void deleteProfil(Profil p) throws IllegalArgumentException {
+		this.profilMapper.delete(p);
+	}
+
 	/**
 	 * Alle Inhalte eines Profils ausgeben
 	 */
@@ -60,6 +83,29 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 
 	}
 
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- EIGENSCHAFT
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+
+	/**
+	 * Ausgeben einer Eigenschaft anhand der Id
+	 */
+
+	public Eigenschaft getEigenschaftById(int id) throws IllegalArgumentException {
+		return this.eigenschaftMapper.findByKey(id);
+
+	}
+
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- STELLENAUSSCHREIBUNG
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+
 	/**
 	 * Erstellen einer Stellenbeschreibung
 	 */
@@ -72,40 +118,6 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		s.setFrist(frist);
 
 		return this.stellenausschreibungMapper.insertStellenausschreibung(s, nutzerid, profilid);
-	}
-
-	/**
-	 * Ausgeben einer EIgenschaft anhand der Id
-	 */
-
-	public Eigenschaft getEigenschaftById(int id) throws IllegalArgumentException {
-		return this.eigenschaftMapper.findByKey(id);
-
-	}
-
-	/**
-	 * Ausgabe der Stellenbeschreibungen eines Nutzers
-	 */
-	@Override
-	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid, int profilid)
-			throws IllegalArgumentException {
-		return this.stellenausschreibungMapper.getStellenbeschreibungById(benutzerid, profilid);
-	}
-
-	/**
-	 * L�schen eines Profils
-	 */
-	public void deleteProfil(Profil p) throws IllegalArgumentException {
-		this.profilMapper.delete(p);
-	}
-
-	/**
-	 * Anlegen eines Profils
-	 */
-	public void createProfil() throws IllegalArgumentException {
-		Profil p = new Profil();
-		p.setBenutzerId(1);
-		this.profilMapper.insert(p);
 	}
 
 	/**
@@ -124,6 +136,23 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	}
 
 	/**
+	 * Stellenausschreibung löschen
+	 */
+	@Override
+	public void deleteStellenausschreibung(Stellenausschreibung stelle) throws IllegalArgumentException {
+		this.stellenausschreibungMapper.deleteStellenausschreibung(stelle);
+	}
+
+	/**
+	 * Ausgabe der Stellenbeschreibungen eines Nutzers
+	 */
+	@Override
+	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid, int profilid)
+			throws IllegalArgumentException {
+		return this.stellenausschreibungMapper.getStellenbeschreibungById(benutzerid, profilid);
+	}
+
+	/**
 	 * Ausgabe einer Stellenbeschreibungen mit bestimmter StellenId
 	 */
 	@Override
@@ -131,28 +160,42 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		return this.stellenausschreibungMapper.getStellenbeschreibungByStellenId(stellenid);
 	}
 
-	@Override
-	public void deleteStellenausschreibung(Stellenausschreibung stelle) throws IllegalArgumentException {
-		this.stellenausschreibungMapper.deleteStellenausschreibung(stelle);
-	}
-
+	/**
+	 * Alle Stellenausschreibungen anzeigen
+	 */
 	@Override
 	public Vector<Stellenausschreibung> showAllStellenausschreibungen() throws IllegalArgumentException {
 		return this.stellenausschreibungMapper.getAllStellenausschreibungen();
 	}
 
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- BEWERBUNG
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+
+	/**
+	 * Bewerbung anlegen
+	 */
 	@Override
 	public void createBewerbung(int stellenid, int nutzerid) throws IllegalArgumentException {
 		this.bewerbungMapper.insertBewerbung(stellenid, nutzerid);
 	}
 
+	/**
+	 * Alle Bewerbungen eines Profils ansehen
+	 */
 	@Override
 	public Vector<Stellenausschreibung> showBewerbungen(int nutzerid) throws IllegalArgumentException {
 		return this.bewerbungMapper.getBewerbungById(nutzerid);
 	}
 
+	/**
+	 * Bewerbung entfernen
+	 */
 	@Override
 	public void deleteBewerbung(int stellenid) throws IllegalArgumentException {
-		this.bewerbungMapper.deleteBewerbung(stellenid);		
+		this.bewerbungMapper.deleteBewerbung(stellenid);
 	}
 }

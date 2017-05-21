@@ -15,29 +15,55 @@ public interface AdministrationAsync {
 
 	void init(AsyncCallback<Void> callback);
 
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- PROFIL
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
 	void getInhaltFor(Profil p, AsyncCallback<Vector<Inhalt>> callback);
 
 	void getProfilFor(int id, AsyncCallback<Profil> callback);
-
-	void createStellenausschreibung(String bezeichnung, String beschreibung, Date frist, Benutzer nutzerid,
-			Profil profilid, AsyncCallback<Stellenausschreibung> callback);
-
-	void getEigenschaftById(int id, AsyncCallback<Eigenschaft> callback);
-
-	void showStellenausschreibung(int benutzerid, int profilid, AsyncCallback<Vector<Stellenausschreibung>> callback);
 
 	void deleteProfil(Profil p, AsyncCallback<Void> callback);
 
 	void createProfil(AsyncCallback<Void> callback);
 
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- EIGENSCHAFT
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+
+	void getEigenschaftById(int id, AsyncCallback<Eigenschaft> callback);
+
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- STELLENAUSSCHREIBUNG
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+	void createStellenausschreibung(String bezeichnung, String beschreibung, Date frist, Benutzer nutzerid,
+			Profil profilid, AsyncCallback<Stellenausschreibung> callback);
+
 	void editStellenausschreibung(String bezeichnung, String beschreibung, Date frist, int nutzerid, int profilid,
 			int stellenid, AsyncCallback<Stellenausschreibung> callback);
 
-	void showStellenausschreibungByStellenId(int stellenId, AsyncCallback<Stellenausschreibung> callback);
-
 	void deleteStellenausschreibung(Stellenausschreibung stelle, AsyncCallback<Void> callback);
 
+	void showStellenausschreibung(int benutzerid, int profilid, AsyncCallback<Vector<Stellenausschreibung>> callback);
+
+	void showStellenausschreibungByStellenId(int stellenId, AsyncCallback<Stellenausschreibung> callback);
+
 	void showAllStellenausschreibungen(AsyncCallback<Vector<Stellenausschreibung>> callback);
+
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- BEWERBUNG
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
 
 	void createBewerbung(int stellenid, int nutzerid, AsyncCallback<Void> callback);
 

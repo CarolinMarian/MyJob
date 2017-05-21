@@ -14,7 +14,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.myjob.client.ShowAllStellenausschreibungenId.ShowStelle;
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
@@ -26,17 +25,20 @@ public class ShowAllStellenausschreibungen extends ShowDefinition {
 	// Tabelle definieren
 	FlexTable showStellenausschreibungFlexTable = new FlexTable();
 
+	// Überschrift definieren
 	@Override
 	protected String getHeadlineText() {
 		String headline = "Eine Übersicht über alle vorhandenen Stellenausschreibungen:";
 		return headline;
 	}
 
+	// Run-Methode
 	@Override
 	protected void run() {
 		this.add(verPanel);
 
-		// alle für den Nutzer vorhandenen Stellenausschreibungen ausgeben
+		// alle für den Nutzer vorhandenen Stellenausschreibungen ausgeben -
+		// Verknüpfung zur DB
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 		verwaltung.showAllStellenausschreibungen(new ShowStelle());
 
