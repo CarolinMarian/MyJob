@@ -39,4 +39,10 @@ public interface AdministrationAsync {
 
 	void showAllStellenausschreibungen(AsyncCallback<Vector<Stellenausschreibung>> callback);
 
+	void createBewerbung(int stellenid, int nutzerid, AsyncCallback<Void> callback);
+
+	void showBewerbungen(int id, AsyncCallback<Vector<Stellenausschreibung>> callback);
+
+	void deleteBewerbung(int stellenid, AsyncCallback<Void> callback);
+
 }

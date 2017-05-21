@@ -40,7 +40,12 @@ public interface Administration extends RemoteService {
 	public Stellenausschreibung showStellenausschreibungByStellenId(int stellenId) throws IllegalArgumentException;
 
 	public void deleteStellenausschreibung(Stellenausschreibung stelle) throws IllegalArgumentException;
-	
-	public Vector<Stellenausschreibung> showAllStellenausschreibungen() throws IllegalArgumentException;;
 
+	public Vector<Stellenausschreibung> showAllStellenausschreibungen() throws IllegalArgumentException;
+
+	public void createBewerbung(int stellenid, int nutzerid) throws IllegalArgumentException;
+
+	public Vector<Stellenausschreibung> showBewerbungen(int id) throws IllegalArgumentException;
+
+	public void deleteBewerbung(int stellenid) throws IllegalArgumentException;
 }

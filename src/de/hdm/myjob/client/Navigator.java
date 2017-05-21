@@ -72,19 +72,6 @@ public class Navigator extends ShowDefinition {
 
 		});
 
-		Button stellenbeschreibungenAnzeigenButton = new Button("Jobs");
-		stellenbeschreibungenAnzeigenButton.setStylePrimaryName("myjob-menubutton");
-
-		stellenbeschreibungenAnzeigenButton.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-
-			}
-
-		});
-
 		Button bewerbungenAnzeigenButton = new Button("Meine Bewerbungen");
 		bewerbungenAnzeigenButton.setStylePrimaryName("myjob-menubutton");
 
@@ -92,8 +79,9 @@ public class Navigator extends ShowDefinition {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-
+				ShowDefinition bewerbung = new ShowBewerbungen();
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(bewerbung);
 			}
 
 		});

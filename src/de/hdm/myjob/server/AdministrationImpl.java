@@ -140,4 +140,19 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	public Vector<Stellenausschreibung> showAllStellenausschreibungen() throws IllegalArgumentException {
 		return this.stellenausschreibungMapper.getAllStellenausschreibungen();
 	}
+
+	@Override
+	public void createBewerbung(int stellenid, int nutzerid) throws IllegalArgumentException {
+		this.bewerbungMapper.insertBewerbung(stellenid, nutzerid);
+	}
+
+	@Override
+	public Vector<Stellenausschreibung> showBewerbungen(int nutzerid) throws IllegalArgumentException {
+		return this.bewerbungMapper.getBewerbungById(nutzerid);
+	}
+
+	@Override
+	public void deleteBewerbung(int stellenid) throws IllegalArgumentException {
+		this.bewerbungMapper.deleteBewerbung(stellenid);		
+	}
 }

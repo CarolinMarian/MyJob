@@ -37,8 +37,9 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 	private DateTimeFormat fristFormat = DateTimeFormat.getFormat("dd.MM.yyyy");
 	private Label fristInhalt = new Label();
 	// Button hinzufügen
-	Button stelleBearbeitenButton = new Button("Stellenausschreibung berbeiten");
+	Button stelleBearbeitenButton = new Button("Stellenausschreibung bearbeiten");
 	Button stelleLoeschenButton = new Button("Stellenausschreibung loeschen");
+	Button bewerbenButton = new Button("Bewerben");
 
 	// Konstruktor erstellen der die übergebene ID in das Klassenobjekt
 	// abspeichert
@@ -57,7 +58,7 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 	protected void run() {
 
 		this.add(verPanel);
-		
+
 		nutzer.setId(1);
 		profil.setBenutzerId(1);
 
@@ -72,6 +73,7 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 
 		showOneStellenausschreibungFlexTable.setWidget(4, 0, stelleBearbeitenButton);
 		showOneStellenausschreibungFlexTable.setWidget(4, 1, stelleLoeschenButton);
+		showOneStellenausschreibungFlexTable.setWidget(4, 2, bewerbenButton);
 
 		// Stellenausschreibung anhand der ID anzeigen
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
@@ -125,6 +127,19 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 					ShowDefinition stelle = new DeleteStellenausschreibung(result.getStellenId());
 					RootPanel.get("Details").clear();
 					RootPanel.get("Details").add(stelle);
+				}
+			});
+
+			// Button erstellen um Bewerbung durchzuführen - wird der Button
+			// ausgelöst wird die entsprechende Ausschreibung gelöscht
+			bewerbenButton.setStylePrimaryName("myjob-menubutton");
+			bewerbenButton.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					ShowDefinition bewerben = new CreateBewerbung(result.getStellenId());
+					RootPanel.get("Details").clear();
+					ShowDefinition bewerbunganzeigen = new ShowBewerbungen();
+					RootPanel.get("Details").add(bewerbunganzeigen);
 				}
 			});
 		}
