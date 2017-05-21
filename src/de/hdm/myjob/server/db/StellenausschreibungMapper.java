@@ -158,34 +158,34 @@ public class StellenausschreibungMapper {
 		return null;
 	}
 
-	// // Ausgabe aller Stellenbeschreibungen
-	// public Vector<Stellenausschreibung> getAllStellenbeschreibungen() {
-	//
-	// Connection con = DBConnection.connection();
-	//
-	// Vector<Stellenausschreibung> result = new Vector<Stellenausschreibung>();
-	//
-	// try {
-	// Statement stmt = con.createStatement();
-	//
-	// ResultSet rs = stmt.executeQuery("SELECT * FROM stellenausschreibung");
-	//
-	// while (rs.next()) {
-	// Stellenausschreibung stellenausschreibung = new Stellenausschreibung();
-	//
-	// stellenausschreibung.setStellenId(rs.getInt("stellenid"));
-	// stellenausschreibung.setBezeichnug(rs.getString("bezeichnung"));
-	// stellenausschreibung.setBeschreibungstext(rs.getString("beschreibung"));
-	// stellenausschreibung.setFrist(rs.getDate("frist"));
-	//
-	// result.add(stellenausschreibung);
-	// }
-	//
-	// } catch (SQLException e2) {
-	// e2.printStackTrace();
-	// return null;
-	// }
-	// return result;
-	// }
+	// Ausgabe aller Stellenbeschreibungen
+	public Vector<Stellenausschreibung> getAllStellenausschreibungen() {
+
+		Connection con = DBConnection.connection();
+
+		Vector<Stellenausschreibung> result = new Vector<Stellenausschreibung>();
+
+		try {
+			Statement stmt = con.createStatement();
+
+			ResultSet rs = stmt.executeQuery("SELECT * FROM stellenausschreibung");
+
+			while (rs.next()) {
+				Stellenausschreibung stellenausschreibung = new Stellenausschreibung();
+
+				stellenausschreibung.setStellenId(rs.getInt("stellenid"));
+				stellenausschreibung.setBezeichnug(rs.getString("bezeichnung"));
+				stellenausschreibung.setBeschreibungstext(rs.getString("beschreibung"));
+				stellenausschreibung.setFrist(rs.getDate("frist"));
+
+				result.add(stellenausschreibung);
+			}
+
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+			return null;
+		}
+		return result;
+	}
 
 }

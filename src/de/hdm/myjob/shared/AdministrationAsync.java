@@ -37,4 +37,6 @@ public interface AdministrationAsync {
 
 	void deleteStellenausschreibung(Stellenausschreibung stelle, AsyncCallback<Void> callback);
 
+	void showAllStellenausschreibungen(AsyncCallback<Vector<Stellenausschreibung>> callback);
+
 }

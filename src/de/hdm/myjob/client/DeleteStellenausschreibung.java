@@ -38,7 +38,7 @@ public class DeleteStellenausschreibung extends ShowDefinition {
 
 		@Override
 		public void onSuccess(Void result) {
-			ShowDefinition stelle = new ShowAllStellenausschreibung();
+			ShowDefinition stelle = new ShowAllStellenausschreibungenId();
 			RootPanel.get("Details").clear();
 			RootPanel.get("Details").add(stelle);
 		}

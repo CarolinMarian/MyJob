@@ -51,7 +51,21 @@ public class Navigator extends ShowDefinition {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				ShowDefinition stelle = new ShowAllStellenausschreibung();
+				ShowDefinition stelle = new ShowAllStellenausschreibungenId();
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(stelle);
+			}
+
+		});
+
+		Button allStellenausschreibungenAnsehenButton = new Button("Alle vorhandenen Stellenausschreibungen ansehen");
+		allStellenausschreibungenAnsehenButton.setStylePrimaryName("myjob-menubutton");
+
+		allStellenausschreibungenAnsehenButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				ShowDefinition stelle = new ShowAllStellenausschreibungen();
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(stelle);
 			}
@@ -87,6 +101,7 @@ public class Navigator extends ShowDefinition {
 		this.add(profilAnzeigenButton);
 		this.add(stellenausschreibungenErstellenButton);
 		this.add(stellenausschreibungenAnsehenButton);
+		this.add(allStellenausschreibungenAnsehenButton);
 		this.add(bewerbungenAnzeigenButton);
 
 	}
