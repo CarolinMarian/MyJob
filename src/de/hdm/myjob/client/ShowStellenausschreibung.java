@@ -3,11 +3,15 @@ package de.hdm.myjob.client;
 import java.util.Date;
 import java.util.Vector;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.myjob.shared.AdministrationAsync;
@@ -22,7 +26,7 @@ public class ShowStellenausschreibung extends ShowDefinition {
 	// Panels definieren
 	private HorizontalPanel horPanel = new HorizontalPanel();
 	private VerticalPanel verPanel = new VerticalPanel();
-	// Tabelle + Textboxen definieren
+	// Tabelle definieren
 	FlexTable showStellenausschreibungFlexTable = new FlexTable();
 
 	@Override
@@ -39,14 +43,9 @@ public class ShowStellenausschreibung extends ShowDefinition {
 
 		this.add(verPanel);
 
-		showStellenausschreibungFlexTable.setText(0, 0, "StellenId");
-		showStellenausschreibungFlexTable.setText(0, 1, "Bezeichnung");
-		showStellenausschreibungFlexTable.setText(0, 2, "Ausschreibungstext");
-		showStellenausschreibungFlexTable.setText(0, 3, "Frist");
-
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 		verwaltung.showStellenausschreibung(benutzer.getId(), profil.getId(), new ShowStelle());
-
+		
 		verPanel.add(showStellenausschreibungFlexTable);
 		verPanel.add(horPanel);
 	}
@@ -64,6 +63,12 @@ public class ShowStellenausschreibung extends ShowDefinition {
 			Label successLabel = new Label("onSuccess wurde betreten");
 			verPanel.add(successLabel);
 
+			showStellenausschreibungFlexTable.setText(0, 0, "StellenId");
+			showStellenausschreibungFlexTable.setText(0, 1, "Bezeichnung");
+			showStellenausschreibungFlexTable.setText(0, 2, "Ausschreibungstext");
+			showStellenausschreibungFlexTable.setText(0, 3, "Frist");
+			showStellenausschreibungFlexTable.setText(0, 4, "");
+
 			int row = 0;
 			for (Stellenausschreibung s : result) {
 				row++;
@@ -73,6 +78,21 @@ public class ShowStellenausschreibung extends ShowDefinition {
 				Date frist = s.getFrist();
 				String fristString = DateTimeFormat.getFormat("dd.MM.yyyy").format(frist);
 				showStellenausschreibungFlexTable.setText(row, 3, fristString);
+				
+				Button stelleBearbeitenButton = new Button("Stellenausschreibung berbeiten");
+				stelleBearbeitenButton.setStylePrimaryName("myjob-menubutton");
+
+				stelleBearbeitenButton.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						ShowDefinition stelle = new EditStellenausschreibung();
+						RootPanel.get("Details").clear();
+						RootPanel.get("Details").add(stelle);
+					}
+
+				});
+				showStellenausschreibungFlexTable.setWidget(row,  4,  stelleBearbeitenButton);
+				
 			}
 		}
 

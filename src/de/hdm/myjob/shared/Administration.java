@@ -3,6 +3,7 @@ package de.hdm.myjob.shared;
 import java.util.Date;
 import java.util.Vector;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -28,8 +29,13 @@ public interface Administration extends RemoteService {
 
 	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid, int profilid)
 			throws IllegalArgumentException;
-	
+
 	public void deleteProfil(Profil p) throws IllegalArgumentException;
-	
+
 	public void createProfil() throws IllegalArgumentException;
+
+	public Stellenausschreibung editStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
+			Benutzer nutzerid, Profil profilid) throws IllegalArgumentException;
+
+	public Stellenausschreibung showStellenausschreibungByStellenId(int stellenId) throws IllegalArgumentException;
 }

@@ -37,7 +37,7 @@ public class Navigator extends ShowDefinition {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				CreateStellenausschreibung stelle = new CreateStellenausschreibung();
+				ShowDefinition stelle = new CreateStellenausschreibung();
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(stelle);
 			}
@@ -51,7 +51,7 @@ public class Navigator extends ShowDefinition {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				ShowStellenausschreibung stelle = new ShowStellenausschreibung();
+				ShowDefinition stelle = new ShowStellenausschreibung();
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(stelle);
 			}

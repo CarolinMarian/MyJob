@@ -93,7 +93,7 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	}
 
 	/**
-	 * Löschen eines Profils
+	 * Lï¿½schen eines Profils
 	 */
 	public void deleteProfil(Profil p) throws IllegalArgumentException {
 		this.profilMapper.delete(p);
@@ -107,5 +107,27 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		p.setBenutzerId(1);
 		this.profilMapper.insert(p);
 	}
+	
+	/**
+	 * Update einer Stellenbeschreibung
+	 */
+	@Override
+	public Stellenausschreibung editStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
+			Benutzer nutzerid, Profil profilid) throws IllegalArgumentException {
+		Stellenausschreibung s = new Stellenausschreibung();
+		s.setBezeichnug(bezeichnung);
+		s.setBeschreibungstext(beschreibung);
+		s.setFrist(frist);
 
+		return this.stellenausschreibungMapper.updateStellenausschreibung(s);
+	}
+
+	/**
+	 * Ausgabe einer Stellenbeschreibungen mit bestimmter StellenId
+	 */
+	@Override
+	public Stellenausschreibung showStellenausschreibungByStellenId(int stellenid)
+			throws IllegalArgumentException {
+		return this.stellenausschreibungMapper.getStellenbeschreibungByStellenId(stellenid);
+	}
 }

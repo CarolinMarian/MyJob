@@ -38,8 +38,6 @@ public class StellenausschreibungMapper {
 	public Stellenausschreibung insertStellenausschreibung(Stellenausschreibung s, Benutzer nutzerid, Profil profilid) {
 		Connection con = DBConnection.connection();
 
-		System.out.println("MAPPER STELLEN BETRETEN !!!!");
-
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT MAX(stellenid) AS maxid " + "FROM stellenausschreibung");
@@ -70,32 +68,26 @@ public class StellenausschreibungMapper {
 		return s;
 	}
 
-	// // Bestehende Stellenausschreibung verändern
-	// public Stellenausschreibung
-	// updateStellenbeschreibung(Stellenausschreibung stellenausschreibung) {
-	//
-	// Connection con = DBConnection.connection();
-	//
-	// try {
-	// Statement stmt = con.createStatement();
-	//
-	// stmt.executeUpdate(
-	// "UPDATE stellenausschreibung " + "SET bezeichnung\"" +
-	// stellenausschreibung.getBezeichnung()
-	// + "\", " + " beschreibung=\"" +
-	// stellenausschreibung.getBeschreibungstext() + "\", "
-	// + " frist=\"" + stellenausschreibung.getFrist() + "\" " + "WHERE
-	// stellenid="
-	// + stellenausschreibung.getStellenId());
-	// }
-	//
-	// catch (SQLException e2) {
-	// e2.printStackTrace();
-	// }
-	//
-	// return stellenausschreibung;
-	// }
-	//
+	// Bestehende Stellenausschreibung verändern
+	public Stellenausschreibung updateStellenausschreibung(Stellenausschreibung stellenausschreibung) {
+
+		Connection con = DBConnection.connection();
+
+		try {
+			Statement stmt = con.createStatement();
+
+			stmt.executeUpdate("UPDATE stellenausschreibung SET bezeichnung=\"" + stellenausschreibung.getBezeichnung()
+					+ "\", " + " beschreibung=\"" + stellenausschreibung.getBeschreibungstext() + "\", " + " frist=\""
+					+ stellenausschreibung.getFrist() + "\" WHERE stellenid=" + stellenausschreibung.getStellenId());
+		}
+
+		catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+
+		return stellenausschreibung;
+	}
+
 	// // Bestehende Stellenausschreibung löschen
 	// public void loeschenStellenbeschreibung(Stellenausschreibung
 	// stellenausschreibung) {
@@ -129,7 +121,6 @@ public class StellenausschreibungMapper {
 
 			while (rs.next()) {
 				Stellenausschreibung stellenausschreibung = new Stellenausschreibung();
-				System.out.println(stellenausschreibung.getId());
 				stellenausschreibung.setStellenId(rs.getInt("stellenid"));
 				stellenausschreibung.setBezeichnug(rs.getString("bezeichnung"));
 				stellenausschreibung.setBeschreibungstext(rs.getString("beschreibung"));
@@ -142,6 +133,30 @@ public class StellenausschreibungMapper {
 			e2.printStackTrace();
 		}
 		return result;
+	}
+
+	// Ausgabe aller Stellenbeschreibungen zu einer bestimmten StellenId
+	public Stellenausschreibung getStellenbeschreibungByStellenId(int stellenid) {
+		Connection con = DBConnection.connection();
+
+		try {
+			Statement stmt = con.createStatement();
+
+			ResultSet rs = stmt.executeQuery("SELECT * FROM stellenausschreibung WHERE stellenid= " + stellenid);
+
+			if (rs.next()) {
+				Stellenausschreibung stellenausschreibung = new Stellenausschreibung();
+				stellenausschreibung.setStellenId(rs.getInt("stellenid"));
+				stellenausschreibung.setBezeichnug(rs.getString("bezeichnung"));
+				stellenausschreibung.setBeschreibungstext(rs.getString("beschreibung"));
+				stellenausschreibung.setFrist(rs.getDate("frist"));
+
+				return stellenausschreibung;
+			}
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+		return null;
 	}
 
 	// // Ausgabe aller Stellenbeschreibungen

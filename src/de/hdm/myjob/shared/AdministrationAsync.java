@@ -25,8 +25,13 @@ public interface AdministrationAsync {
 	void getEigenschaftById(int id, AsyncCallback<Eigenschaft> callback);
 
 	void showStellenausschreibung(int benutzerid, int profilid, AsyncCallback<Vector<Stellenausschreibung>> callback);
-	
+
 	void deleteProfil(Profil p, AsyncCallback<Void> callback);
-	
+
 	void createProfil(AsyncCallback<Void> callback);
+
+	void editStellenausschreibung(String bezeichnung, String beschreibung, Date frist, Benutzer nutzerid,
+			Profil profilid, AsyncCallback<Stellenausschreibung> callback);
+
+	void showStellenausschreibungByStellenId(int stellenId, AsyncCallback<Stellenausschreibung> callback);
 }
