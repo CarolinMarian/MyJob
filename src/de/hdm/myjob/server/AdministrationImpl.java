@@ -98,6 +98,10 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		return this.eigenschaftMapper.findByKey(id);
 
 	}
+	
+	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException {
+		return this.eigenschaftMapper.getAllEigenschaften();
+	}
 
 	/*
 	 * -------------------------------------------------------------------------

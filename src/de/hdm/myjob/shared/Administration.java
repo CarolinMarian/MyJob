@@ -41,6 +41,7 @@ public interface Administration extends RemoteService {
 	 */
 
 	public Eigenschaft getEigenschaftById(int id) throws IllegalArgumentException;
+	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException;
 
 	/*
 	 * -------------------------------------------------------------------------

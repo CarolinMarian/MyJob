@@ -37,6 +37,7 @@ public interface AdministrationAsync {
 	 */
 
 	void getEigenschaftById(int id, AsyncCallback<Eigenschaft> callback);
+	void getAllEigenschaften(AsyncCallback<Vector<Eigenschaft>> callback);
 
 	/*
 	 * -------------------------------------------------------------------------

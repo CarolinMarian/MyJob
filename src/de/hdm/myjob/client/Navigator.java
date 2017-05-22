@@ -85,7 +85,25 @@ public class Navigator extends ShowDefinition {
 			}
 
 		});
+		
+		Button profilAnlegenButton = new Button("Profil anlegen");
+		profilAnlegenButton.setStylePrimaryName("myjob-menubutton");
+		
+		profilAnlegenButton.addClickHandler(new ClickHandler(){
 
+			@Override
+			public void onClick(ClickEvent event) {
+				ShowDefinition profil = new CreateEigenschaft();
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(profil);
+				
+			}
+			
+			
+		});
+		
+		
+		this.add(profilAnlegenButton);
 		this.add(profilAnzeigenButton);
 		this.add(stellenausschreibungenErstellenButton);
 		this.add(stellenausschreibungenAnsehenButton);
