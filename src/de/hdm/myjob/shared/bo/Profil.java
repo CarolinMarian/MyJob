@@ -4,6 +4,30 @@ public class Profil extends BusinessObject {
 	
 	 private static final long serialVersionUID = 1L;
 	
+	 /**
+	  * Benutzerid (Fremdschlüssel)
+	  */
+	 private int benutzerId = 0;
+	 
+	 /**
+	  * Auslesen der BenutzerId
+	  */
+	public int getBenutzerId() {
+		return this.benutzerId;
+	}
+	
+	/**
+	 * Setzen der BenutzerId
+	 * @param benutzerId
+	 */
+
+	public void setBenutzerId(int benutzerId) {
+		this.benutzerId = benutzerId;
+		
+	}
+	 
+	 
+	 
 	  /**
 	   * No-Argument Konstuktor
 	   */
@@ -17,11 +41,11 @@ public class Profil extends BusinessObject {
 	   * der Superklasse erzeugt wird, ergänzt durch den Vor- und Nachnamen des 
 	   * jeweiligen Kontakts.
 	   */
-	  @Override
-	public String toString() {
+//	  @Override
+//	public String toString() {
 //	    return super.toString() + "  " + this.lastName + " " + this.emailadresse + " " + this.telefonnummer;
-	  return "noch anpassen";
-	  }
+//	  return "noch anpassen";
+//	  }
 	  
 
 	  /**

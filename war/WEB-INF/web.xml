@@ -6,16 +6,7 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>de.hdm.myjob.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/myjob/greet</url-pattern>
-  </servlet-mapping>
-  
+
   <servlet>
     <servlet-name>administration</servlet-name>
     <servlet-class>de.hdm.myjob.server.AdministrationImpl</servlet-class>
@@ -24,11 +15,26 @@
   <servlet-mapping>
     <servlet-name>administration</servlet-name>
     <url-pattern>/myjob/admin</url-pattern>
+    <url-pattern>/myjobreport/admin</url-pattern>
   </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>reportadministration</servlet-name>
+    <servlet-class>de.hdm.myjob.server.report.ReportAdministrationImpl</servlet-class>
+  </servlet>
+  
+   <servlet-mapping>
+    <servlet-name>reportadministration</servlet-name>
+    <url-pattern>/myjob/reportadmin</url-pattern>
+    <url-pattern>/myjobreport/reportadmin</url-pattern>
+  </servlet-mapping>
+  
   
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>MyJob.html</welcome-file>
+    <welcome-file>MyJobReport.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

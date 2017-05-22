@@ -3,7 +3,7 @@ package de.hdm.myjob.shared.bo;
 public class Benutzer extends BusinessObject {
 	
 	 private static final long serialVersionUID = 1L;
-	
+	 
 	  /**
 	   * No-Argument Konstuktor
 	   */

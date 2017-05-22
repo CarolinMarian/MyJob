@@ -27,7 +27,7 @@ public class EigenschaftMapper {
 	  /**
 	   * Reine Testzwecke
 	   */
-	  public String findByKey(int id) {
+	  public Eigenschaft findByKey(int id) {
 	    // DB-Verbindung holen
 	    Connection con = DBConnection.connection();
 
@@ -51,7 +51,7 @@ public class EigenschaftMapper {
 	   	        eig.setBezeichnung(rs.getString("bezeichnung"));	   	        
 
 	   	        	
-	   	        return eig.getBezeichnung();
+	   	        return eig;
 	   	      }
 	    		}
 	    	else{
