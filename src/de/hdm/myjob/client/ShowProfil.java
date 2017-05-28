@@ -35,6 +35,7 @@ public class ShowProfil extends ShowDefinition{
 		private ShowDefinition showdef = null;
 		
 		
+		
 		public ProfilCallback (ShowDefinition s){
 			this.showdef = s;
 		}

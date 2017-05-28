@@ -7,9 +7,12 @@ import java.util.Vector;
 import com.google.gwt.cell.client.TextInputCell;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.DataGrid;
+import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Eigenschaft;
@@ -39,7 +42,7 @@ public class CreateEigenschaft extends ShowDefinition {
 		
 		private ShowDefinition showDef = null;
 		
-		public CreateEigenschaften(ShowDefinition d){
+	public CreateEigenschaften(ShowDefinition d){
 			this.showDef=d;
 			
 		}
@@ -57,7 +60,9 @@ public class CreateEigenschaft extends ShowDefinition {
 			
 			if(result != null){
 				
-				CellTable<Eigenschaft> cellTable = new CellTable();
+				CellTable<Eigenschaft> cellTable = new CellTable<Eigenschaft>();
+				cellTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
 				TextColumn<Eigenschaft> bezeichnungColumn = new TextColumn<Eigenschaft>(){
 				
 					@Override
@@ -85,7 +90,7 @@ public class CreateEigenschaft extends ShowDefinition {
 				
 				
 				List<Eigenschaft> list = result;
-				
+				cellTable.setRowCount(list.size(), true);
 				cellTable.setRowData(0, list);
 				horPanel.add(cellTable);
 				
