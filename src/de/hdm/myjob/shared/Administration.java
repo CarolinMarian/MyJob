@@ -42,6 +42,7 @@ public interface Administration extends RemoteService {
 
 	public Eigenschaft getEigenschaftById(int id) throws IllegalArgumentException;
 	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException;
+	public Eigenschaft anlegenEigenschaft(int referenzId, String bezeichnung, String type, String angabe) throws IllegalArgumentException;
 
 	/*
 	 * -------------------------------------------------------------------------

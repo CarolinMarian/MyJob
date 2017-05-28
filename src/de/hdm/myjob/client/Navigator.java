@@ -93,9 +93,8 @@ public class Navigator extends ShowDefinition {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				ShowDefinition profil = new CreateEigenschaft();
-				RootPanel.get("Details").clear();
-				RootPanel.get("Details").add(profil);
+				CreateEigenschaft profil = new CreateEigenschaft();
+				profil.show();
 				
 			}
 			

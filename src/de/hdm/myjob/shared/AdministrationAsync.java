@@ -38,6 +38,7 @@ public interface AdministrationAsync {
 
 	void getEigenschaftById(int id, AsyncCallback<Eigenschaft> callback);
 	void getAllEigenschaften(AsyncCallback<Vector<Eigenschaft>> callback);
+	void anlegenEigenschaft(int referenzId, String bezeichnung, String type, String angabe, AsyncCallback<Eigenschaft> callback);
 
 	/*
 	 * -------------------------------------------------------------------------

@@ -64,9 +64,9 @@ public class ShowProfil extends ShowDefinition{
 					@Override
 					public void onClick(ClickEvent event) {
 						// TODO Auto-generated method stub
-						ShowDefinition showdef = new ProfilAnlegen();
-						RootPanel.get("Details").clear();
-						RootPanel.get("Details").add(showdef);
+						CreateEigenschaft showdef = new CreateEigenschaft();
+						showdef.show();
+						
 					}
 
 				});

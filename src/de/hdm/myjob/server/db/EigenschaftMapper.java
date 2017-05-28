@@ -71,12 +71,12 @@ public class EigenschaftMapper {
 	    return null;
 	  }
 	  
-	  public Eigenschaft anlegenEigenschaft(Eigenschaft eigenschaft){
+	  public Eigenschaft anlegenEigenschaft(Eigenschaft eigenschaft, int referenzId){
 			Connection con= DBConnection.connection();
 			
 			try{
 				Statement stmt= con.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
+				ResultSet rs = stmt.executeQuery("SELECT MAX(eigenschaftid) AS maxid "
 				          + "FROM eigenschaft ");
 				
 				if(rs.next()){
@@ -91,8 +91,8 @@ public class EigenschaftMapper {
 					/*
 					 * Einfügeoperation
 					 */
-					stmt.executeUpdate("INSERT INTO eigenschaft (eigenschaftId,bezeichnung) " + "VALUES ("
-							+ eigenschaft.getId() + "," + eigenschaft.getBezeichnung() + ")");
+					stmt.executeUpdate("INSERT INTO eigenschaft (eigenschaftid,referenzrid,eigenschaftsbezeichnung,angabe,referenztyp) "
+					 + "VALUES (" + eigenschaft.getId() + "," + referenzId + ",'" + eigenschaft.getBezeichnung() + "','" + eigenschaft.getAngabe() + "','" + eigenschaft.getType() + "')");
 					
 				}
 			}

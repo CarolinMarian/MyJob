@@ -102,6 +102,20 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException {
 		return this.eigenschaftMapper.getAllEigenschaften();
 	}
+	
+	@Override
+	public Eigenschaft anlegenEigenschaft(int referenzId, String bezeichnung, String type,
+			String angabe) throws IllegalArgumentException {
+		
+		Eigenschaft eigenschaft = new Eigenschaft();
+		eigenschaft.setBezeichnung(bezeichnung);
+		eigenschaft.setAngabe(angabe);
+		eigenschaft.setType(type);
+		
+		return this.eigenschaftMapper.anlegenEigenschaft(eigenschaft, referenzId);
+	}
+	
+	
 
 	/*
 	 * -------------------------------------------------------------------------
@@ -202,4 +216,6 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	public void deleteBewerbung(int stellenid) throws IllegalArgumentException {
 		this.bewerbungMapper.deleteBewerbung(stellenid);
 	}
+
+	
 }
