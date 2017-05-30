@@ -39,7 +39,6 @@ public class CreateStellenausschreibung extends ShowDefinition {
 	private Button createStellenausschreibungButton = new Button("Stellenausschreibung anlegen");
 	// Klasseninstanzen definieren
 	Benutzer b = new Benutzer();
-	Profil p = new Profil();
 
 	// Überschrift festlegen
 	@Override
@@ -74,14 +73,13 @@ public class CreateStellenausschreibung extends ShowDefinition {
 
 		// IDs Hardcoden bis Klassen vollständig
 		b.setId(1);
-		p.setId(1);
 
 		createStellenausschreibungButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				// Kommunikation mit der Datenbank
 				AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 				verwaltung.createStellenausschreibung(valueBoxBezeichnung.getText(), valueBoxBeschreibung.getText(),
-						getFrist(), b, p, new CreateStelle());
+						getFrist(), b, new CreateStelle());
 			}
 		});
 

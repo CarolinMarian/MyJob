@@ -45,14 +45,14 @@ public interface AdministrationAsync {
 	 * -------------------------
 	 */
 	void createStellenausschreibung(String bezeichnung, String beschreibung, Date frist, Benutzer nutzerid,
-			Profil profilid, AsyncCallback<Stellenausschreibung> callback);
+			AsyncCallback<Stellenausschreibung> callback);
 
-	void editStellenausschreibung(String bezeichnung, String beschreibung, Date frist, int nutzerid, int profilid,
+	void editStellenausschreibung(String bezeichnung, String beschreibung, Date frist, int nutzerid,
 			int stellenid, AsyncCallback<Stellenausschreibung> callback);
 
 	void deleteStellenausschreibung(Stellenausschreibung stelle, AsyncCallback<Void> callback);
 
-	void showStellenausschreibung(int benutzerid, int profilid, AsyncCallback<Vector<Stellenausschreibung>> callback);
+	void showStellenausschreibung(int benutzerid, AsyncCallback<Vector<Stellenausschreibung>> callback);
 
 	void showStellenausschreibungByStellenId(int stellenId, AsyncCallback<Stellenausschreibung> callback);
 

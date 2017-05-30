@@ -50,14 +50,14 @@ public interface Administration extends RemoteService {
 	 */
 
 	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
-			Benutzer nutzerid, Profil profilid) throws IllegalArgumentException;
+			Benutzer nutzerid) throws IllegalArgumentException;
 
 	public Stellenausschreibung editStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
-			int nutzerid, int profilid, int stellenid) throws IllegalArgumentException;
+			int nutzerid, int stellenid) throws IllegalArgumentException;
 
 	public void deleteStellenausschreibung(Stellenausschreibung stelle) throws IllegalArgumentException;
 
-	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid, int profilid)
+	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid)
 			throws IllegalArgumentException;
 
 	public Stellenausschreibung showStellenausschreibungByStellenId(int stellenId) throws IllegalArgumentException;

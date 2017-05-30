@@ -29,7 +29,6 @@ public class EditStellenausschreibung extends ShowDefinition {
 	// Klassenobjekte erzeugen
 	Stellenausschreibung stelle = new Stellenausschreibung();
 	Benutzer benutzer = new Benutzer();
-	Profil profil = new Profil();
 	// Panels definieren
 	private HorizontalPanel horPanel = new HorizontalPanel();
 	private VerticalPanel verPanel = new VerticalPanel();
@@ -63,7 +62,6 @@ public class EditStellenausschreibung extends ShowDefinition {
 	protected void run() {
 
 		// ProfilId & BenutzerId hardcoded
-		profil.setId(1);
 		benutzer.setId(1);
 
 		this.add(verPanel);
@@ -93,7 +91,7 @@ public class EditStellenausschreibung extends ShowDefinition {
 		editStellenausschreibungButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				verwaltung.editStellenausschreibung(valueBoxBezeichnung.getText(), valueBoxBeschreibung.getText(),
-						getFrist(), benutzer.getId(), profil.getBenutzerId(), stelle.getStellenId(),
+						getFrist(), benutzer.getId(), stelle.getStellenId(),
 						new UpdateStelle());
 			}
 		});

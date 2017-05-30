@@ -111,13 +111,13 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	 */
 	@Override
 	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
-			Benutzer nutzerid, Profil profilid) throws IllegalArgumentException {
+			Benutzer nutzerid) throws IllegalArgumentException {
 		Stellenausschreibung s = new Stellenausschreibung();
 		s.setBezeichnug(bezeichnung);
 		s.setBeschreibungstext(beschreibung);
 		s.setFrist(frist);
 
-		return this.stellenausschreibungMapper.insertStellenausschreibung(s, nutzerid, profilid);
+		return this.stellenausschreibungMapper.insertStellenausschreibung(s, nutzerid);
 	}
 
 	/**
@@ -125,14 +125,14 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	 */
 	@Override
 	public Stellenausschreibung editStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
-			int nutzerid, int profilid, int stellenid) throws IllegalArgumentException {
+			int nutzerid, int stellenid) throws IllegalArgumentException {
 		Stellenausschreibung s = new Stellenausschreibung();
 		s.setStellenId(stellenid);
 		s.setBezeichnug(bezeichnung);
 		s.setBeschreibungstext(beschreibung);
 		s.setFrist(frist);
 
-		return this.stellenausschreibungMapper.updateStellenausschreibung(s, nutzerid, profilid);
+		return this.stellenausschreibungMapper.updateStellenausschreibung(s, nutzerid);
 	}
 
 	/**
@@ -147,9 +147,9 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	 * Ausgabe der Stellenbeschreibungen eines Nutzers
 	 */
 	@Override
-	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid, int profilid)
+	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid)
 			throws IllegalArgumentException {
-		return this.stellenausschreibungMapper.getStellenbeschreibungById(benutzerid, profilid);
+		return this.stellenausschreibungMapper.getStellenbeschreibungById(benutzerid);
 	}
 
 	/**

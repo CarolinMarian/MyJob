@@ -35,7 +35,7 @@ public class StellenausschreibungMapper {
 	}
 
 	// Neue Stellenausschreibung erstellen
-	public Stellenausschreibung insertStellenausschreibung(Stellenausschreibung s, Benutzer nutzerid, Profil profilid) {
+	public Stellenausschreibung insertStellenausschreibung(Stellenausschreibung s, Benutzer nutzerid) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -56,8 +56,8 @@ public class StellenausschreibungMapper {
 				 * Einfuegeoperation
 				 */
 				stmt.executeUpdate(
-						"INSERT INTO stellenausschreibung (stellenid,benutzerid,profilid,bezeichnung,beschreibung,frist) "
-								+ "VALUES (" + s.getStellenId() + "," + nutzerid.getId() + "," + profilid.getId() + ",'"
+						"INSERT INTO stellenausschreibung (stellenid,benutzerid,bezeichnung,beschreibung,frist) "
+								+ "VALUES (" + s.getStellenId() + "," + nutzerid.getId() + ",'"
 								+ s.getBezeichnung() + "','" + s.getBeschreibungstext() + "','" + s.getFrist() + "')");
 			}
 		}
@@ -69,8 +69,7 @@ public class StellenausschreibungMapper {
 	}
 
 	// Bestehende Stellenausschreibung verändern
-	public Stellenausschreibung updateStellenausschreibung(Stellenausschreibung stellenausschreibung, int nutzerid,
-			int profilid) {
+	public Stellenausschreibung updateStellenausschreibung(Stellenausschreibung stellenausschreibung, int nutzerid) {
 
 		Connection con = DBConnection.connection();
 
@@ -108,15 +107,14 @@ public class StellenausschreibungMapper {
 
 	// Ausgabe aller Stellenbeschreibungen zu einer bestimmten Id (Kombi aus
 	// ProfilId und BenutzerId)
-	public Vector<Stellenausschreibung> getStellenbeschreibungById(int profilid, int benutzerid) {
+	public Vector<Stellenausschreibung> getStellenbeschreibungById(int benutzerid) {
 		Connection con = DBConnection.connection();
 		Vector<Stellenausschreibung> result = new Vector<Stellenausschreibung>();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM stellenausschreibung WHERE benutzerid= " + benutzerid
-					+ " AND profilid= " + profilid);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM stellenausschreibung WHERE benutzerid= " + benutzerid);
 
 			while (rs.next()) {
 				Stellenausschreibung stellenausschreibung = new Stellenausschreibung();
