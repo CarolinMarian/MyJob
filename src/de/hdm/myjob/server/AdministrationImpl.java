@@ -6,7 +6,6 @@ import java.util.Vector;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.myjob.server.db.BenutzerMapper;
-import de.hdm.myjob.server.db.BewerbungMapper;
 import de.hdm.myjob.server.db.EigenschaftMapper;
 import de.hdm.myjob.server.db.InhaltMapper;
 import de.hdm.myjob.server.db.ProfilMapper;
@@ -22,7 +21,6 @@ import de.hdm.myjob.shared.bo.Stellenausschreibung;
 public class AdministrationImpl extends RemoteServiceServlet implements Administration {
 
 	private BenutzerMapper benutzerMapper = null;
-	private BewerbungMapper bewerbungMapper = null;
 	private EigenschaftMapper eigenschaftMapper = null;
 	private InhaltMapper inhaltMapper = null;
 	private ProfilMapper profilMapper = null;
@@ -34,7 +32,6 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	public void init() throws IllegalArgumentException {
 
 		this.benutzerMapper = BenutzerMapper.benutzerMapper();
-		this.bewerbungMapper = BewerbungMapper.bewerbungMapper();
 		this.eigenschaftMapper = EigenschaftMapper.eigenschaftMapper();
 		this.inhaltMapper = InhaltMapper.inhaltMapper();
 		this.profilMapper = ProfilMapper.profilMapper();
@@ -147,8 +144,7 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	 * Ausgabe der Stellenbeschreibungen eines Nutzers
 	 */
 	@Override
-	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid)
-			throws IllegalArgumentException {
+	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid) throws IllegalArgumentException {
 		return this.stellenausschreibungMapper.getStellenbeschreibungById(benutzerid);
 	}
 
@@ -180,7 +176,7 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	 */
 	@Override
 	public void createBewerbung(int stellenid, int nutzerid) throws IllegalArgumentException {
-		this.bewerbungMapper.insertBewerbung(stellenid, nutzerid);
+		this.stellenausschreibungMapper.insertBewerbung(stellenid, nutzerid);
 	}
 
 	/**
@@ -188,7 +184,7 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	 */
 	@Override
 	public Vector<Stellenausschreibung> showBewerbungen(int nutzerid) throws IllegalArgumentException {
-		return this.bewerbungMapper.getBewerbungById(nutzerid);
+		return this.stellenausschreibungMapper.getBewerbungById(nutzerid);
 	}
 
 	/**
@@ -196,6 +192,6 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	 */
 	@Override
 	public void deleteBewerbung(int stellenid) throws IllegalArgumentException {
-		this.bewerbungMapper.deleteBewerbung(stellenid);
+		this.stellenausschreibungMapper.deleteBewerbung(stellenid);
 	}
 }
