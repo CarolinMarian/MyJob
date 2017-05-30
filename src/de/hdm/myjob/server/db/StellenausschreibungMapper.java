@@ -105,8 +105,7 @@ public class StellenausschreibungMapper {
 		}
 	}
 
-	// Ausgabe aller Stellenbeschreibungen zu einer bestimmten Id (Kombi aus
-	// ProfilId und BenutzerId)
+	// Ausgabe aller Stellenbeschreibungen zu einer bestimmten Id (BenutzerId)
 	public Vector<Stellenausschreibung> getStellenbeschreibungById(int benutzerid) {
 		Connection con = DBConnection.connection();
 		Vector<Stellenausschreibung> result = new Vector<Stellenausschreibung>();

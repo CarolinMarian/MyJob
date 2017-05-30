@@ -23,7 +23,6 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 	// Klassenobjekte erzeugen
 	// Inhalt inhalt = new Inhalt();
 	Stellenausschreibung stelle = new Stellenausschreibung();
-	Profil profil = new Profil();
 	Benutzer nutzer = new Benutzer();
 	// Panels definieren
 	private HorizontalPanel horPanel = new HorizontalPanel();
@@ -61,7 +60,6 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 		this.add(verPanel);
 
 		nutzer.setId(1);
-		profil.setBenutzerId(1);
 
 		// Tabelle befüllen
 		showOneStellenausschreibungFlexTable.setText(0, 0, "Bezeichnung");
