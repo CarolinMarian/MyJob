@@ -21,13 +21,7 @@ public interface AdministrationAsync {
 	 * -------------------------------------------------------------------------
 	 * -------------------------
 	 */
-	void getInhaltFor(Profil p, AsyncCallback<Vector<Inhalt>> callback);
 
-	void getProfilFor(int id, AsyncCallback<Profil> callback);
-
-	void deleteProfil(Profil p, AsyncCallback<Void> callback);
-
-	void createProfil(AsyncCallback<Void> callback);
 
 	/*
 	 * -------------------------------------------------------------------------
@@ -39,7 +33,7 @@ public interface AdministrationAsync {
 	void getEigenschaftById(int id, AsyncCallback<Eigenschaft> callback);
 	void getAllEigenschaften(AsyncCallback<Vector<Eigenschaft>> callback);
 	void anlegenEigenschaft(int referenzId, String bezeichnung, String type, String angabe, AsyncCallback<Eigenschaft> callback);
-
+	void findByBenutzer(int id, AsyncCallback<Vector<Eigenschaft>> callback);
 	/*
 	 * -------------------------------------------------------------------------
 	 * ------------------------- STELLENAUSSCHREIBUNG

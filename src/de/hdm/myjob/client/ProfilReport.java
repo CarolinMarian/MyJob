@@ -20,7 +20,7 @@ public class ProfilReport extends ShowDefinition {
 
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 
-		verwaltung.getProfilFor(1, new ProfilCallback(this));
+	//	verwaltung.getProfilFor(1, new ProfilCallback(this));
 
 	}
 

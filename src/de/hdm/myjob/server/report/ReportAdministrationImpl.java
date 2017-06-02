@@ -44,7 +44,7 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 		
 		AllInhalteOfProfilReport report = new AllInhalteOfProfilReport();
 		
-//		report.setTitle("Alle Ihalte Ihres Profils");
+		report.setTitle("Alle Ihalte Ihres Profils");
 		
 		//ADD IMPRINT?
 		
@@ -61,11 +61,12 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 	    /*
 	     * Ab hier erfolgt ein zeilenweises Hinzufügen von Konto-Informationen.
 	     */
+	  
 	    
 	    /*
 	     * Zunächst legen wir eine Kopfzeile für die Konto-Tabelle an.
 	     */
-	    Row headline = new Row();
+//	    Row headline = new Row();
 
 	    /*
 	     * Wir wollen Zeilen mit 2 Spalten in der Tabelle erzeugen. In die erste
@@ -73,19 +74,19 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 	     * aktuellen Kontostand. In der Kopfzeile legen wir also entsprechende
 	     * Überschriften ab.
 	     */
-	    headline.addColumn(new Column("Eigenschaft"));
-	    headline.addColumn(new Column("Angabe"));
+/**	    headline.addColumn(new Column("Eigenschaft"));
+	    headline.addColumn(new Column("Angabe")); **/
 
 	    // Hinzufügen der Kopfzeile
-	    report.addRow(headline);
+	//    report.addRow(headline);
 
 	    /*
 	     * Nun werden sämtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
 	     * Kontostand sukzessive in die Tabelle eingetragen.
 	     */
-	    Vector<Inhalt> inhalte = this.administration.getInhaltFor(p);
+	//   Vector<Inhalt> inhalte = this.administration.getInhaltFor(p);
 
-	    for (Inhalt i : inhalte) {
+/**	    for (Inhalt i : inhalte) {
 	      // Eine leere Zeile anlegen.
 	      Row inhalteRow = new Row();
 
@@ -100,7 +101,7 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 
 	      // und schließlich die Zeile dem Report hinzufügen.
 	      report.addRow(inhalteRow);
-	    }
+	    } **/
 
 	    /*
 	     * Zum Schluss müssen wir noch den fertigen Report zurückgeben.
@@ -116,4 +117,4 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 	}
 	  
 
-}
+} 

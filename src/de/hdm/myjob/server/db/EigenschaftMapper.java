@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import de.hdm.myjob.server.db.DBConnection;
 import de.hdm.myjob.shared.bo.Eigenschaft;
+import de.hdm.myjob.shared.bo.Inhalt;
 
 public class EigenschaftMapper {
 	
@@ -131,6 +132,37 @@ public class EigenschaftMapper {
 				return null;
 			}
 			
+			return result;
+		}
+	  
+	  public Vector<Eigenschaft> findByBenutzer(int id) {
+			
+			Connection con = DBConnection.connection();
+		    Vector<Eigenschaft> result = new Vector<Eigenschaft>();
+		    
+		    try {
+		        Statement stmt = con.createStatement();
+		        
+		        String type="b";
+
+		        ResultSet rs = stmt.executeQuery("SELECT * FROM eigenschaft "
+		            + "WHERE referenzrid=" + id);
+
+		        while (rs.next()) {
+		        	Eigenschaft e = new Eigenschaft();
+		          e.setId(rs.getInt("referenzrid"));
+		          e.setBezeichnung(rs.getString("eigenschaftsbezeichnung"));
+		          e.setAngabe(rs.getString("angabe"));
+		          e.setType(rs.getString("referenztyp"));
+
+		          // Hinzufügen des neuen Objekts zum Ergebnisvektor
+		          result.addElement(e);
+		        }
+		      }
+		      catch (SQLException e2) {
+		        e2.printStackTrace();
+		      }
+
 			return result;
 		}
 

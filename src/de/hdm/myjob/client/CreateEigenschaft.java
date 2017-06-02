@@ -43,16 +43,18 @@ public class CreateEigenschaft  extends DialogBox{
 	Label label2 = new Label();
 	Label label3 = new Label();
 	Button speicherButton = new Button("Speichern");
+	Button abbrechenButton = new Button("Abbrechen");
 	
 
-	int referenzId = 1;
-	String type = "b";
+	int referenzId = 2;
+	String type ="";
 	String angabe= "";
 	String bezeichnung = "";
 	
 	
 
-public CreateEigenschaft(){
+public CreateEigenschaft(String type){ 
+	this.type = type;
 	run();
 	
 	
@@ -109,30 +111,24 @@ public CreateEigenschaft(){
 				if(value == "Wohnort"){
 					
 					verPanel2.clear();
+					textBox.setText("");
 				
-					label.setText("Strasse");
+					label.setText("Stadt");
 					verPanel2.add(label);
 					verPanel2.add(textBox);
-					label2.setText("PLZ");
-					verPanel2.add(label2);
-					verPanel2.add(textBox2);
-					label3.setText("Stadt");
-					verPanel2.add(label3);
-					verPanel2.add(textBox3);
 					
 					
 				}
 				
-				else if(value == "Name"){
+				else if(value == "Bildungsabschluss (z.B. Bachelor of ..)"){
 					
 					verPanel2.clear();
+					textBox.setText("");
 					
-					label.setText("Vorname");
+					label.setText("Bildungsabschluss");
 					verPanel2.add(label);
 					verPanel2.add(textBox);
-					label2.setText("Nachname");
-					verPanel2.add(label2);
-					verPanel2.add(textBox2);
+					
 					
 					
 					
@@ -141,10 +137,11 @@ public CreateEigenschaft(){
 				else if(value == "Geburtsdatum"){
 					
 					verPanel2.clear();
+					textBox.setText("");
 					
 					label.setText("Geburtsdatum");
 					verPanel2.add(label);
-					verPanel2.add(dateBox);
+					verPanel2.add(textBox);
 				
 					
 				}
@@ -152,6 +149,8 @@ public CreateEigenschaft(){
 				else if(value == "Berufserfahrung in Jahren"){
 					
 					verPanel2.clear();
+					textBox.setText("");
+					
 					label.setText("Berufserfahrung");
 					verPanel2.add(label);
 					verPanel.add(textBox);
@@ -171,39 +170,25 @@ public CreateEigenschaft(){
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				String value =	listBox.getSelectedItemText();
-				
-				if(value == "Wohnort"){	
 					
 					
 					bezeichnung = label.getText();
 					angabe = textBox.getText();
 								
 					anlegen();
-				
-				
-					bezeichnung = label2.getText();
-					angabe = textBox2.getText();
 					
-					anlegen();
 				
-	
-					bezeichnung = label3.getText();
-					angabe = textBox3.getText();
-					
-					anlegen();
+				
 
 				
 				}
-				else if(value == "Name"){
-					
-				}
+	
 				
 		
 				
 			
 				
-			}
+			
 			
 			
 			
