@@ -24,6 +24,8 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 	// Inhalt inhalt = new Inhalt();
 	Stellenausschreibung stelle = new Stellenausschreibung();
 	Benutzer nutzer = new Benutzer();
+	// Attribute festlegen
+	// boolean visible = true;
 	// Panels definieren
 	private HorizontalPanel horPanel = new HorizontalPanel();
 	private VerticalPanel verPanel = new VerticalPanel();
@@ -129,6 +131,7 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 				}
 			});
 
+			// if (visible == true) {
 			// Button erstellen um Bewerbung durchzuführen - wird der Button
 			// ausgelöst wird die entsprechende Ausschreibung gelöscht
 			bewerbenButton.setStylePrimaryName("myjob-menubutton");
@@ -136,13 +139,17 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 				@Override
 				public void onClick(ClickEvent event) {
 					ShowDefinition bewerben = new CreateBewerbung(result.getStellenId());
+					// bewerbenButton.setVisible(false);
+					// visible = false;
 					RootPanel.get("Details").clear();
 					ShowDefinition bewerbunganzeigen = new ShowBewerbungen();
 					RootPanel.get("Details").add(bewerbunganzeigen);
+
 				}
 			});
 		}
 	}
+	// }
 
 	// Methode um das aktuell formatierte Datum des addValueChangeHandler für
 	// die DB erneut zu formattieren (dazu Zugriff auf befülltes Label in der
