@@ -9,7 +9,7 @@ import de.hdm.myjob.server.AdministrationImpl;
 import de.hdm.myjob.shared.Administration;
 import de.hdm.myjob.shared.ReportAdministration;
 import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Inhalt;
+import de.hdm.myjob.shared.bo.Eigenschaft;
 import de.hdm.myjob.shared.report.AllInhalteOfAllBenutzerReport;
 import de.hdm.myjob.shared.report.AllInhalteOfBenutzerReport;
 import de.hdm.myjob.shared.report.Column;
@@ -52,7 +52,9 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 		CompositeParagraph header = new CompositeParagraph();
 
 	    // Kundennummer aufnehmen
-	    header.addSubParagraph(new SimpleParagraph("Profil-ID.: " + b.getId()));
+	    header.addSubParagraph(new SimpleParagraph("Benutzer ID: " + b.getId()));
+	    header.addSubParagraph(new SimpleParagraph("Name: " + b.getFirstName() + " " + b.getLastName()));
+	    header.addSubParagraph(new SimpleParagraph("Email: " + b.getEmail()));
 
 	    // Hinzufügen der zusammengestellten Kopfdaten zu dem Report
 	    report.setHeaderData(header);
@@ -65,7 +67,7 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 	    /*
 	     * Zunächst legen wir eine Kopfzeile für die Konto-Tabelle an.
 	     */
-//	    Row headline = new Row();
+	    Row headline = new Row();
 
 	    /*
 	     * Wir wollen Zeilen mit 2 Spalten in der Tabelle erzeugen. In die erste
@@ -73,34 +75,31 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 	     * aktuellen Kontostand. In der Kopfzeile legen wir also entsprechende
 	     * Überschriften ab.
 	     */
-/**	    headline.addColumn(new Column("Eigenschaft"));
-	    headline.addColumn(new Column("Angabe")); **/
+	    headline.addColumn(new Column("Eigenschaft"));
+	    headline.addColumn(new Column("Angabe")); 
 
 	    // Hinzufügen der Kopfzeile
-	//    report.addRow(headline);
+	    report.addRow(headline);
 
 	    /*
 	     * Nun werden sämtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
 	     * Kontostand sukzessive in die Tabelle eingetragen.
 	     */
-	//   Vector<Inhalt> inhalte = this.administration.getInhaltFor(p);
+	    Vector<Eigenschaft> eigenschaften = this.administration.findByBenutzer(b.getId());
 
-/**	    for (Inhalt i : inhalte) {
+	    for (Eigenschaft e : eigenschaften) {
 	      // Eine leere Zeile anlegen.
-	      Row inhalteRow = new Row();
+	      Row eigenschaftenRow = new Row();
 
 	      // Erste Spalte: Eigenschaften
-	      inhalteRow.addColumn(new Column(String.valueOf(i.getEigenschaftsId())));
+	      eigenschaftenRow.addColumn(new Column(e.getBezeichnung()));
 	      
-//	      inhalteRow.addColumn(new Column(String.valueOf(this.administration
-//		          .getBalanceOf(a))));
-
 	      // Zweite Spalte: Angaben
-	      inhalteRow.addColumn(new Column(i.getAngabe()));
+	      eigenschaftenRow.addColumn(new Column(e.getAngabe()));
 
 	      // und schließlich die Zeile dem Report hinzufügen.
-	      report.addRow(inhalteRow);
-	    } **/
+	      report.addRow(eigenschaftenRow);
+	    } 
 
 	    /*
 	     * Zum Schluss müssen wir noch den fertigen Report zurückgeben.
