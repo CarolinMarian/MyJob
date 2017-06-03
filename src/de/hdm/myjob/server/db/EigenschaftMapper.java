@@ -1,9 +1,11 @@
 package de.hdm.myjob.server.db;
 
 import java.sql.*;
+import java.util.Vector;
 
 import de.hdm.myjob.server.db.DBConnection;
 import de.hdm.myjob.shared.bo.Eigenschaft;
+import de.hdm.myjob.shared.bo.Inhalt;
 
 public class EigenschaftMapper {
 	
@@ -69,6 +71,100 @@ public class EigenschaftMapper {
 
 	    return null;
 	  }
+	  
+	  public Eigenschaft anlegenEigenschaft(Eigenschaft eigenschaft, int referenzId){
+			Connection con= DBConnection.connection();
+			
+			try{
+				Statement stmt= con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT MAX(eigenschaftid) AS maxid "
+				          + "FROM eigenschaft ");
+				
+				if(rs.next()){
+					
+					/*
+					 * EigenschaftId des Objekts wird gesetzt und dabei um 1 erhöht
+					 */
+					eigenschaft.setId(rs.getInt("maxid")+1);
+					
+					stmt = con.createStatement();
+					
+					/*
+					 * Einfügeoperation
+					 */
+					stmt.executeUpdate("INSERT INTO eigenschaft (eigenschaftid,referenzrid,eigenschaftsbezeichnung,angabe,referenztyp) "
+					 + "VALUES (" + eigenschaft.getId() + "," + referenzId + ",'" + eigenschaft.getBezeichnung() + "','" + eigenschaft.getAngabe() + "','" + eigenschaft.getType() + "')");
+					
+				}
+			}
+			
+			catch (SQLException e2){
+				e2.printStackTrace();
+			}
+			
+			return eigenschaft;
+		}
+	  
+	  public Vector<Eigenschaft> getAllEigenschaften(){
+			Connection con = DBConnection.connection();
+			
+			Vector<Eigenschaft> result = new Vector<Eigenschaft>();
+			
+			try{
+				
+				Statement stmt = con.createStatement();
+				
+				ResultSet rs = stmt.executeQuery("SELECT * FROM eigenschaft");
+				
+				while (rs.next()){
+					Eigenschaft eigenschaft = new Eigenschaft();
+					
+					eigenschaft.setId(rs.getInt("eigenschaftid"));
+					eigenschaft.setBezeichnung(rs.getString("bezeichnung"));
+					
+					result.add(eigenschaft);
+				}
+				
+				
+			}catch(SQLException e2){
+				
+				e2.printStackTrace();
+				return null;
+			}
+			
+			return result;
+		}
+	  
+	  public Vector<Eigenschaft> findByBenutzer(int id) {
+			
+			Connection con = DBConnection.connection();
+		    Vector<Eigenschaft> result = new Vector<Eigenschaft>();
+		    
+		    try {
+		        Statement stmt = con.createStatement();
+		        
+		        String type="b";
+
+		        ResultSet rs = stmt.executeQuery("SELECT * FROM eigenschaft "
+		            + "WHERE referenzrid=" + id);
+
+		        while (rs.next()) {
+		        	Eigenschaft e = new Eigenschaft();
+		          e.setId(rs.getInt("referenzrid"));
+		          e.setBezeichnung(rs.getString("eigenschaftsbezeichnung"));
+		          e.setAngabe(rs.getString("angabe"));
+		          e.setType(rs.getString("referenztyp"));
+
+		          // Hinzufügen des neuen Objekts zum Ergebnisvektor
+		          result.addElement(e);
+		        }
+		      }
+		      catch (SQLException e2) {
+		        e2.printStackTrace();
+		      }
+
+			return result;
+		}
 
 	  
 

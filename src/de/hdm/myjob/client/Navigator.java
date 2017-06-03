@@ -85,6 +85,9 @@ public class Navigator extends ShowDefinition {
 			}
 
 		});
+		
+
+		
 
 		this.add(profilAnzeigenButton);
 		this.add(stellenausschreibungenErstellenButton);

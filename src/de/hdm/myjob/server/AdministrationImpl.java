@@ -8,7 +8,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import de.hdm.myjob.server.db.BenutzerMapper;
 import de.hdm.myjob.server.db.EigenschaftMapper;
 import de.hdm.myjob.server.db.InhaltMapper;
-import de.hdm.myjob.server.db.ProfilMapper;
 import de.hdm.myjob.server.db.StellenausschreibungMapper;
 import de.hdm.myjob.shared.Administration;
 import de.hdm.myjob.shared.bo.Benutzer;
@@ -23,7 +22,6 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	private BenutzerMapper benutzerMapper = null;
 	private EigenschaftMapper eigenschaftMapper = null;
 	private InhaltMapper inhaltMapper = null;
-	private ProfilMapper profilMapper = null;
 	private StellenausschreibungMapper stellenausschreibungMapper = null;
 
 	public AdministrationImpl() throws IllegalArgumentException {
@@ -34,7 +32,6 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		this.benutzerMapper = BenutzerMapper.benutzerMapper();
 		this.eigenschaftMapper = EigenschaftMapper.eigenschaftMapper();
 		this.inhaltMapper = InhaltMapper.inhaltMapper();
-		this.profilMapper = ProfilMapper.profilMapper();
 		this.stellenausschreibungMapper = StellenausschreibungMapper.stellenausschreibungMapper();
 
 	}
@@ -46,21 +43,9 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	 * -------------------------
 	 */
 
-	/**
-	 * Anlegen eines Profils
-	 */
-	public void createProfil() throws IllegalArgumentException {
-		Profil p = new Profil();
-		p.setBenutzerId(1);
-		this.profilMapper.insert(p);
-	}
+	
 
-	/**
-	 * L�schen eines Profils
-	 */
-	public void deleteProfil(Profil p) throws IllegalArgumentException {
-		this.profilMapper.delete(p);
-	}
+
 
 	/**
 	 * Alle Inhalte eines Profils ausgeben
@@ -71,14 +56,7 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 
 	}
 
-	/**
-	 * Ausgeben eines Profils aufgrund der Id
-	 */
-	public Profil getProfilFor(int id) throws IllegalArgumentException {
-
-		return this.profilMapper.getProfilById(id);
-
-	}
+	
 
 	/*
 	 * -------------------------------------------------------------------------
@@ -95,6 +73,27 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		return this.eigenschaftMapper.findByKey(id);
 
 	}
+	
+	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException {
+		return this.eigenschaftMapper.getAllEigenschaften();
+	}
+	
+	@Override
+	public Eigenschaft anlegenEigenschaft(int referenzId, String bezeichnung, String type,
+			String angabe) throws IllegalArgumentException {
+		
+		Eigenschaft eigenschaft = new Eigenschaft();
+		eigenschaft.setBezeichnung(bezeichnung);
+		eigenschaft.setAngabe(angabe);
+		eigenschaft.setType(type);
+		
+		return this.eigenschaftMapper.anlegenEigenschaft(eigenschaft, referenzId);
+	}
+	
+	public Vector<Eigenschaft> findByBenutzer(int id) throws IllegalArgumentException {
+		return this.eigenschaftMapper.findByBenutzer(id);
+	}
+	
 
 	/*
 	 * -------------------------------------------------------------------------
@@ -194,4 +193,6 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	public void deleteBewerbung(int stellenid) throws IllegalArgumentException {
 		this.stellenausschreibungMapper.deleteBewerbung(stellenid);
 	}
+
+	
 }

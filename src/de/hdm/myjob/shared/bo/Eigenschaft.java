@@ -10,6 +10,10 @@ public class Eigenschaft extends BusinessObject {
 	 */
 	private String bezeichnung="";
 	
+	private String angabe="";
+	
+	private String type="";
+	
 
 	/**
 	 * No Argument Constructor
@@ -36,7 +40,25 @@ public class Eigenschaft extends BusinessObject {
 		this.bezeichnung= bezeichnung;
 	}
 	
+	public String getAngabe(){
+		
+		return angabe;
+	}
+	
+	public void setAngabe(String angabe){
+		
+		this.angabe = angabe;
+	}
 
+	public String getType(){
+		
+		return type;
+	}
+	
+	public void setType(String type){
+		
+		this.type = type;
+	}
 	  /**
 	   * Erzeugen einer einfachen textuellen Darstellung der jeweiligen Instanz.
 	   * Diese besteht aus dem Text, der durch die <code>toString()</code>-Methode

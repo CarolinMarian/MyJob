@@ -1,5 +1,7 @@
 package de.hdm.myjob.client;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -8,7 +10,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm.myjob.shared.AdministrationAsync;
-import de.hdm.myjob.shared.bo.Profil;
+import de.hdm.myjob.shared.bo.Eigenschaft;
 
 
 public class ShowProfil extends ShowDefinition{
@@ -24,18 +26,19 @@ public class ShowProfil extends ShowDefinition{
 		
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 		
-		verwaltung.getProfilFor(1, new ProfilCallback(this));
-	
+		
+		verwaltung.findByBenutzer(1,  new EigenschaftenCallback(this));
 		
 		
 	}
 	
-	class ProfilCallback implements AsyncCallback<Profil> {
+	class EigenschaftenCallback implements AsyncCallback<Vector<Eigenschaft>> {
 		
 		private ShowDefinition showdef = null;
 		
 		
-		public ProfilCallback (ShowDefinition s){
+		
+		public EigenschaftenCallback (ShowDefinition s){
 			this.showdef = s;
 		}
 		
@@ -46,15 +49,14 @@ public class ShowProfil extends ShowDefinition{
 			
 		}
 
-		@Override
-		public void onSuccess(Profil result) {
+		public void onSuccess(Vector<Eigenschaft> result) {
 			
 			HorizontalPanel buttonPanel = new HorizontalPanel();
 			this.showdef.add(buttonPanel);
 			
 			if (result == null){
 				
-				Button profilAnlegenButton = new Button("Profil anlegen");
+				Button profilAnlegenButton = new Button("Eigenschaften anlegen");
 				profilAnlegenButton.setStylePrimaryName("myjob-menubutton");
 				buttonPanel.add(profilAnlegenButton);
 
@@ -63,12 +65,15 @@ public class ShowProfil extends ShowDefinition{
 					@Override
 					public void onClick(ClickEvent event) {
 						// TODO Auto-generated method stub
-						ShowDefinition showdef = new ProfilAnlegen();
-						RootPanel.get("Details").clear();
-						RootPanel.get("Details").add(showdef);
+						String type="b";
+						CreateEigenschaft showdef = new CreateEigenschaft(type);
+						showdef.show();
+					
 					}
 
 				});
+				
+				
 				
 				
 			}

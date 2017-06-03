@@ -1,5 +1,10 @@
 package de.hdm.myjob.server.db;
 
+import java.sql.Connection;
+import java.sql.Statement;
+
+import de.hdm.myjob.shared.bo.Benutzer;
+
 public class BenutzerMapper {
 	
 	/**
@@ -19,5 +24,7 @@ public class BenutzerMapper {
 
 	    return benutzerMapper;
 	  }
+	
+
 
 }

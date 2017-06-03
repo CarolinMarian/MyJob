@@ -20,7 +20,7 @@ public class DeleteProfil extends ShowDefinition{
 		
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 
-		verwaltung.getProfilFor(1, new ProfilCallback(this));
+	//	verwaltung.getProfilFor(1, new ProfilCallback(this));
 		
 		
 	}
@@ -45,7 +45,7 @@ public class DeleteProfil extends ShowDefinition{
 		public void onSuccess(Profil p) {
 	      if (p != null) {
 	  		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-	  		verwaltung.deleteProfil(p, new DelProfilCallback(this.showdef));
+	  	//	verwaltung.deleteProfil(p, new DelProfilCallback(this.showdef));
 	      }
 	    }
 

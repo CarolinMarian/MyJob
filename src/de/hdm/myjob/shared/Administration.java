@@ -25,13 +25,7 @@ public interface Administration extends RemoteService {
 	 * -------------------------
 	 */
 
-	public Vector<Inhalt> getInhaltFor(Profil p) throws IllegalArgumentException;
 
-	public Profil getProfilFor(int id) throws IllegalArgumentException;
-
-	public void deleteProfil(Profil p) throws IllegalArgumentException;
-
-	public void createProfil() throws IllegalArgumentException;
 
 	/*
 	 * -------------------------------------------------------------------------
@@ -41,7 +35,9 @@ public interface Administration extends RemoteService {
 	 */
 
 	public Eigenschaft getEigenschaftById(int id) throws IllegalArgumentException;
-
+	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException;
+	public Eigenschaft anlegenEigenschaft(int referenzId, String bezeichnung, String type, String angabe) throws IllegalArgumentException;
+	public Vector<Eigenschaft> findByBenutzer (int id) throws IllegalArgumentException;
 	/*
 	 * -------------------------------------------------------------------------
 	 * ------------------------- STELLENAUSSCHREIBUNG

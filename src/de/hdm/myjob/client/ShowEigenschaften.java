@@ -23,7 +23,7 @@ public class ShowEigenschaften extends ShowDefinition {
 		
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 		
-		verwaltung.getProfilFor(1, new ProfilCallback(this));
+	//	verwaltung.getProfilFor(1, new ProfilCallback(this));
 		
 	}
 	
@@ -55,7 +55,7 @@ public class ShowEigenschaften extends ShowDefinition {
 			else {
 				AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 				
-				verwaltung.getInhaltFor(result, new InhalteCallback(this.showdef));
+		//		verwaltung.getInhaltFor(result, new InhalteCallback(this.showdef));
 			}
 			
 			

@@ -15,14 +15,21 @@ public class ProfilAnlegen extends ShowDefinition {
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
+	/**	AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 		
-		verwaltung.createProfil(new ProfilCallback(this));
+		verwaltung.createProfil(new ProfilCallback(this));**/
+		
+		
 		
 	}
 	
+public void eigenschaftenAnlegen(){
 	
-class ProfilCallback implements AsyncCallback<Void> {
+	
+}
+	
+	
+/**class ProfilCallback implements AsyncCallback<Void> {
 		
 		private ShowDefinition showdef = null;
 		
@@ -47,6 +54,6 @@ class ProfilCallback implements AsyncCallback<Void> {
 			
 		}
 		
- }
+ }**/
 
 }
