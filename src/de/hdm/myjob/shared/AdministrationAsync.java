@@ -7,21 +7,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Eigenschaft;
-import de.hdm.myjob.shared.bo.Inhalt;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public interface AdministrationAsync {
 
 	void init(AsyncCallback<Void> callback);
-
-	/*
-	 * -------------------------------------------------------------------------
-	 * ------------------------- PROFIL
-	 * -------------------------------------------------------------------------
-	 * -------------------------
-	 */
-
 
 	/*
 	 * -------------------------------------------------------------------------
@@ -40,8 +30,8 @@ public interface AdministrationAsync {
 	 * -------------------------------------------------------------------------
 	 * -------------------------
 	 */
-	void createStellenausschreibung(String bezeichnung, String beschreibung, Date frist, Benutzer nutzerid,
-			Profil profilid, AsyncCallback<Stellenausschreibung> callback);
+//	void createStellenausschreibung(String bezeichnung, String beschreibung, Date frist, Benutzer nutzerid,
+//			AsyncCallback<Stellenausschreibung> callback);
 
 	void editStellenausschreibung(String bezeichnung, String beschreibung, Date frist, int nutzerid, int profilid,
 			int stellenid, AsyncCallback<Stellenausschreibung> callback);
@@ -66,5 +56,15 @@ public interface AdministrationAsync {
 	void showBewerbungen(int id, AsyncCallback<Vector<Stellenausschreibung>> callback);
 
 	void deleteBewerbung(int stellenid, AsyncCallback<Void> callback);
+	
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- BENUTZER
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+	
+	void getBenutzerById(int id, AsyncCallback<Benutzer> callback);
+	
 
 }

@@ -4,8 +4,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.ReportAdministrationAsync;
-import de.hdm.myjob.shared.bo.Profil;
-import de.hdm.myjob.shared.report.AllInhalteOfProfilReport;
+import de.hdm.myjob.shared.bo.Benutzer;
+import de.hdm.myjob.shared.report.AllInhalteOfBenutzerReport;
 import de.hdm.myjob.shared.report.HTMLReportWriter;
 
 public class ProfilReport extends ShowDefinition {
@@ -20,17 +20,17 @@ public class ProfilReport extends ShowDefinition {
 
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 
-	//	verwaltung.getProfilFor(1, new ProfilCallback(this));
+		verwaltung.getBenutzerById(1, new BenutzerCallback(this));
 
 	}
 
 
-	class ProfilCallback implements AsyncCallback<Profil> {
+	class BenutzerCallback implements AsyncCallback<Benutzer> {
 
 		private ShowDefinition showdef = null;
 
 
-		public ProfilCallback (ShowDefinition s){
+		public BenutzerCallback (ShowDefinition s){
 			this.showdef = s;
 		}
 
@@ -42,13 +42,13 @@ public class ProfilReport extends ShowDefinition {
 		}
 
 		@Override
-		public void onSuccess(Profil profil) {
+		public void onSuccess(Benutzer b) {
 
-			if (profil != null) {
+			if (b != null) {
 				ReportAdministrationAsync reportVerwaltung = ClientsideSettings.getReportVerwaltung();
 
-				reportVerwaltung.createAllInhalteOfProfilReport(profil,
-						new AllInhalteOfProfilReportCallback(this.showdef));
+				reportVerwaltung.createAllInhalteOfBenutzerReport(b,
+						new AllInhalteOfBenutzerReportCallback(this.showdef));
 			}
 
 		}
@@ -57,11 +57,11 @@ public class ProfilReport extends ShowDefinition {
 	}
 
 
-	class AllInhalteOfProfilReportCallback
-	implements AsyncCallback<AllInhalteOfProfilReport> {
+	class AllInhalteOfBenutzerReportCallback
+	implements AsyncCallback<AllInhalteOfBenutzerReport> {
 		private ShowDefinition showdef = null;
 
-		public AllInhalteOfProfilReportCallback(ShowDefinition s) {
+		public AllInhalteOfBenutzerReportCallback(ShowDefinition s) {
 			this.showdef = s;
 		}
 
@@ -71,7 +71,7 @@ public class ProfilReport extends ShowDefinition {
 		}
 
 		@Override
-		public void onSuccess(AllInhalteOfProfilReport report) {
+		public void onSuccess(AllInhalteOfBenutzerReport report) {
 			if (report != null) {
 				HTMLReportWriter writer = new HTMLReportWriter();
 				writer.process(report);

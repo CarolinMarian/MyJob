@@ -8,10 +8,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import de.hdm.myjob.server.AdministrationImpl;
 import de.hdm.myjob.shared.Administration;
 import de.hdm.myjob.shared.ReportAdministration;
+import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Inhalt;
-import de.hdm.myjob.shared.bo.Profil;
-import de.hdm.myjob.shared.report.AllInhalteOfAllProfileReport;
-import de.hdm.myjob.shared.report.AllInhalteOfProfilReport;
+import de.hdm.myjob.shared.report.AllInhalteOfAllBenutzerReport;
+import de.hdm.myjob.shared.report.AllInhalteOfBenutzerReport;
 import de.hdm.myjob.shared.report.Column;
 import de.hdm.myjob.shared.report.CompositeParagraph;
 import de.hdm.myjob.shared.report.Row;
@@ -37,12 +37,11 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 		  }
 
 	@Override
-	public AllInhalteOfProfilReport createAllInhalteOfProfilReport(Profil p) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+	public AllInhalteOfBenutzerReport createAllInhalteOfBenutzerReport(Benutzer b) throws IllegalArgumentException {
 		if (this.getVerwaltung() == null)
 		      return null;
 		
-		AllInhalteOfProfilReport report = new AllInhalteOfProfilReport();
+		AllInhalteOfBenutzerReport report = new AllInhalteOfBenutzerReport();
 		
 		report.setTitle("Alle Ihalte Ihres Profils");
 		
@@ -53,7 +52,7 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 		CompositeParagraph header = new CompositeParagraph();
 
 	    // Kundennummer aufnehmen
-	    header.addSubParagraph(new SimpleParagraph("Profil-ID.: " + p.getId()));
+	    header.addSubParagraph(new SimpleParagraph("Profil-ID.: " + b.getId()));
 
 	    // Hinzufügen der zusammengestellten Kopfdaten zu dem Report
 	    report.setHeaderData(header);
@@ -111,7 +110,7 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 	}
 
 	@Override
-	public AllInhalteOfAllProfileReport createAllInhalteOfAllProfileReport() throws IllegalArgumentException {
+	public AllInhalteOfAllBenutzerReport createAllInhalteOfAllBenutzerReport() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		return null;
 	}

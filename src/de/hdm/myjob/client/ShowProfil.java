@@ -104,7 +104,7 @@ public class ShowProfil extends ShowDefinition{
 					@Override
 					public void onClick(ClickEvent event) {
 						// TODO Auto-generated method stub
-						ShowDefinition showdef = new DeleteProfil();
+						ShowDefinition showdef = new DeleteBenutzer();
 						RootPanel.get("Details").clear();
 						RootPanel.get("Details").add(showdef);
 						

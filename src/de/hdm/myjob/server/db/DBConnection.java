@@ -45,7 +45,7 @@ public class DBConnection {
      * Software neu komilieren zu müssen.
      */
     private static String googleUrl = "";
-    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/iwork?user=root&password=";
+    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/myjob?user=root&password=";
 
     /**
      * Diese statische Methode kann aufgrufen werden durch

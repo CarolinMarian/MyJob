@@ -14,7 +14,6 @@ import de.hdm.myjob.shared.Administration;
 import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Eigenschaft;
 import de.hdm.myjob.shared.bo.Inhalt;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 @SuppressWarnings("serial")
@@ -39,25 +38,6 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 
 	}
 
-	/*
-	 * -------------------------------------------------------------------------
-	 * ------------------------- PROFIL
-	 * -------------------------------------------------------------------------
-	 * -------------------------
-	 */
-
-	
-
-
-
-	/**
-	 * Alle Inhalte eines Profils ausgeben
-	 */
-	public Vector<Inhalt> getInhaltFor(Profil p) throws IllegalArgumentException {
-
-		return this.inhaltMapper.findByProfil(p);
-
-	}
 
 	
 
@@ -108,16 +88,16 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	/**
 	 * Erstellen einer Stellenbeschreibung
 	 */
-	@Override
-	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
-			Benutzer nutzerid, Profil profilid) throws IllegalArgumentException {
-		Stellenausschreibung s = new Stellenausschreibung();
-		s.setBezeichnug(bezeichnung);
-		s.setBeschreibungstext(beschreibung);
-		s.setFrist(frist);
-
-		return this.stellenausschreibungMapper.insertStellenausschreibung(s, nutzerid, profilid);
-	}
+//	@Override
+//	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
+//			Benutzer nutzerid) throws IllegalArgumentException {
+//		Stellenausschreibung s = new Stellenausschreibung();
+//		s.setBezeichnug(bezeichnung);
+//		s.setBeschreibungstext(beschreibung);
+//		s.setFrist(frist);
+//
+//		return this.stellenausschreibungMapper.insertStellenausschreibung(s, nutzerid, profilid);
+//	}
 
 	/**
 	 * Update einer Stellenbeschreibung
@@ -196,6 +176,33 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	@Override
 	public void deleteBewerbung(int stellenid) throws IllegalArgumentException {
 		this.bewerbungMapper.deleteBewerbung(stellenid);
+	}
+
+	
+	
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- BENUTZER
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+
+	
+
+	/**
+	 * Alle Inhalte eines Benutzers ausgeben
+	 */
+	public Vector<Inhalt> getInhaltFor(Benutzer b) throws IllegalArgumentException {
+
+		return this.inhaltMapper.findByBenutzer(b);
+
+	}
+
+	@Override
+	public Benutzer getBenutzerById(int id) throws IllegalArgumentException {
+
+		return this.benutzerMapper.findByKey(id);
+		
 	}
 
 	

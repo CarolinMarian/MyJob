@@ -16,12 +16,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public class ShowAllStellenausschreibungenId extends ShowDefinition {
 	Benutzer benutzer = new Benutzer();
-	Profil profil = new Profil();
+//	Profil profil = new Profil();
 
 	// Panels definieren
 	private HorizontalPanel horPanel = new HorizontalPanel();
@@ -39,14 +38,14 @@ public class ShowAllStellenausschreibungenId extends ShowDefinition {
 	protected void run() {
 
 		// ProfilId & BenutzerId hardcoden
-		profil.setId(1);
+//		profil.setId(1);
 		benutzer.setId(1);
 
 		this.add(verPanel);
 
 		// alle für den Nutzer vorhandenen Stellenausschreibungen ausgeben
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-		verwaltung.showStellenausschreibung(benutzer.getId(), profil.getId(), new ShowStelle());
+//		verwaltung.showStellenausschreibung(benutzer.getId(), profil.getId(), new ShowStelle());
 
 		verPanel.add(showStellenausschreibungFlexTable);
 		verPanel.add(horPanel);

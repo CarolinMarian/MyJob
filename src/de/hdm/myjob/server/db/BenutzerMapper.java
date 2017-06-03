@@ -1,6 +1,8 @@
 package de.hdm.myjob.server.db;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import de.hdm.myjob.shared.bo.Benutzer;
@@ -23,6 +25,47 @@ public class BenutzerMapper {
 	    }
 
 	    return benutzerMapper;
+	  }
+	
+	
+	/**
+	 * 
+	 * BEnutzer über ID auslesen
+	   */
+	  public Benutzer findByKey(int id) {
+	    // DB-Verbindung holen
+	    Connection con = DBConnection.connection();
+
+	    try {
+	      // Leeres SQL-Statement (JDBC) anlegen
+	      Statement stmt = con.createStatement();
+
+	      // Statement ausfüllen und als Query an die DB schicken
+	      ResultSet rs = stmt
+	          .executeQuery("SELECT * FROM benutzer "
+	              + "WHERE benutzerid=" + id );
+
+	      /*
+	       * Da id Primärschlüssel ist, kann max. nur ein Tupel zurückgegeben
+	       * werden. Prüfe, ob ein Ergebnis vorliegt.
+	       */
+	      if (rs.next()) {
+	        // Ergebnis-Tupel in Objekt umwandeln
+	        Benutzer b = new Benutzer();
+	        b.setId(rs.getInt("benutzerid"));
+	        b.setFirstName(rs.getString("vorname"));
+	        b.setLastName(rs.getString("nachname"));
+	        b.setEmail(rs.getString("email"));
+
+	        return b;
+	      }
+	    }
+	    catch (SQLException e) {
+	      e.printStackTrace();
+	      return null;
+	    }
+
+	    return null;
 	  }
 	
 

@@ -19,7 +19,6 @@ import com.google.gwt.user.datepicker.client.DateBox;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public class EditStellenausschreibung extends ShowDefinition {
@@ -29,7 +28,7 @@ public class EditStellenausschreibung extends ShowDefinition {
 	// Klassenobjekte erzeugen
 	Stellenausschreibung stelle = new Stellenausschreibung();
 	Benutzer benutzer = new Benutzer();
-	Profil profil = new Profil();
+//	Profil profil = new Profil();
 	// Panels definieren
 	private HorizontalPanel horPanel = new HorizontalPanel();
 	private VerticalPanel verPanel = new VerticalPanel();
@@ -63,7 +62,7 @@ public class EditStellenausschreibung extends ShowDefinition {
 	protected void run() {
 
 		// ProfilId & BenutzerId hardcoded
-		profil.setId(1);
+//		profil.setId(1);
 		benutzer.setId(1);
 
 		this.add(verPanel);
@@ -92,9 +91,9 @@ public class EditStellenausschreibung extends ShowDefinition {
 		// Button der auslöst, dass die Änderung in die DB geschrieben wird
 		editStellenausschreibungButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				verwaltung.editStellenausschreibung(valueBoxBezeichnung.getText(), valueBoxBeschreibung.getText(),
-						getFrist(), benutzer.getId(), profil.getBenutzerId(), stelle.getStellenId(),
-						new UpdateStelle());
+//				verwaltung.editStellenausschreibung(valueBoxBezeichnung.getText(), valueBoxBeschreibung.getText(),
+//						getFrist(), benutzer.getId(), profil.getBenutzerId(), stelle.getStellenId(),
+//						new UpdateStelle());
 			}
 		});
 

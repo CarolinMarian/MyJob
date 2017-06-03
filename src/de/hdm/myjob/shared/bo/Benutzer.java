@@ -12,6 +12,72 @@ public class Benutzer extends BusinessObject {
 	  }
 	  
 	  /**
+	   *  Emailadresse
+	   */
+	  private String email = "";
+	  
+	  /**
+	   * Vorname
+	   */
+	  private String firstName = "";
+	  
+	  /**
+	   * Nachname
+	   */
+	  private String lastName = "";
+	  
+	  
+	  /**
+		 * Auslesen der Emil
+		 */
+		
+		public String getEmail(){
+			return email;
+		}
+		
+		/**
+		 * Setzen der Email
+		 */
+
+		public void setEmail(String email){
+			this.email= email;
+		}
+		
+		
+		/**
+		 * Auslesen des Vornamen
+		 */
+		
+		public String getFirstName(){
+			return firstName;
+		}
+		
+		/**
+		 * Setzen der Bezeichnung
+		 */
+
+		public void setFirstName(String name){
+			this.firstName= name;
+		}
+		
+		
+		/**
+		 * Auslesen des Nachnamens
+		 */
+		
+		public String getLastName(){
+			return lastName;
+		}
+		
+		/**
+		 * Setzen der Bezeichnung
+		 */
+
+		public void setLastName(String name){
+			this.lastName= name;
+		}
+	  
+	  /**
 	   * Erzeugen einer einfachen textuellen Darstellung der jeweiligen Instanz.
 	   * Diese besteht aus dem Text, der durch die <code>toString()</code>-Methode
 	   * der Superklasse erzeugt wird, ergänzt durch den Vor- und Nachnamen des 
@@ -19,8 +85,7 @@ public class Benutzer extends BusinessObject {
 	   */
 	  @Override
 	public String toString() {
-//	    return super.toString() + "  " + this.lastName + " " + this.emailadresse + " " + this.telefonnummer;
-	  return "noch anpassen";
+		  return super.toString() + "  " + this.lastName + " " + this.firstName + " " + this.email;
 	  }
 	  
 

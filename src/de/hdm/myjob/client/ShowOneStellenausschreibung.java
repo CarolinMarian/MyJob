@@ -15,7 +15,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public class ShowOneStellenausschreibung extends ShowDefinition {
@@ -23,7 +22,7 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 	// Klassenobjekte erzeugen
 	// Inhalt inhalt = new Inhalt();
 	Stellenausschreibung stelle = new Stellenausschreibung();
-	Profil profil = new Profil();
+//	Profil profil = new Profil();
 	Benutzer nutzer = new Benutzer();
 	// Panels definieren
 	private HorizontalPanel horPanel = new HorizontalPanel();
@@ -61,7 +60,7 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 		this.add(verPanel);
 
 		nutzer.setId(1);
-		profil.setBenutzerId(1);
+//		profil.setBenutzerId(1);
 
 		// Tabelle befüllen
 		showOneStellenausschreibungFlexTable.setText(0, 0, "Bezeichnung");

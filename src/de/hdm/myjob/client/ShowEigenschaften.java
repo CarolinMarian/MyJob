@@ -6,9 +6,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlexTable;
 
 import de.hdm.myjob.shared.AdministrationAsync;
+import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Eigenschaft;
 import de.hdm.myjob.shared.bo.Inhalt;
-import de.hdm.myjob.shared.bo.Profil;
 
 public class ShowEigenschaften extends ShowDefinition {
 
@@ -29,12 +29,12 @@ public class ShowEigenschaften extends ShowDefinition {
 	
 	
 	
-	class ProfilCallback implements AsyncCallback<Profil> {
+	class BenutzerCallback implements AsyncCallback<Benutzer> {
 		
 		private ShowDefinition showdef = null;
 		
 		
-		public ProfilCallback (ShowDefinition s){
+		public BenutzerCallback (ShowDefinition s){
 			this.showdef = s;
 		}
 		
@@ -47,7 +47,7 @@ public class ShowEigenschaften extends ShowDefinition {
 		}
 
 		@Override
-		public void onSuccess(Profil result) {
+		public void onSuccess(Benutzer result) {
 			
 			if (result == null){
 				this.showdef.append("No Profil");

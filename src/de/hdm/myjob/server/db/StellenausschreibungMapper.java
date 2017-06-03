@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 /**
@@ -35,38 +34,38 @@ public class StellenausschreibungMapper {
 	}
 
 	// Neue Stellenausschreibung erstellen
-	public Stellenausschreibung insertStellenausschreibung(Stellenausschreibung s, Benutzer nutzerid, Profil profilid) {
-		Connection con = DBConnection.connection();
-
-		try {
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT MAX(stellenid) AS maxid " + "FROM stellenausschreibung");
-
-			if (rs.next()) {
-
-				/*
-				 * StellenbeschreibungId des Objekts wird gesetzt und dabei um 1
-				 * erhoeht
-				 */
-				s.setStellenId(rs.getInt("maxid") + 1);
-
-				stmt = con.createStatement();
-
-				/*
-				 * Einfuegeoperation
-				 */
-				stmt.executeUpdate(
-						"INSERT INTO stellenausschreibung (stellenid,benutzerid,profilid,bezeichnung,beschreibung,frist) "
-								+ "VALUES (" + s.getStellenId() + "," + nutzerid.getId() + "," + profilid.getId() + ",'"
-								+ s.getBezeichnung() + "','" + s.getBeschreibungstext() + "','" + s.getFrist() + "')");
-			}
-		}
-
-		catch (SQLException e2) {
-			e2.printStackTrace();
-		}
-		return s;
-	}
+//	public Stellenausschreibung insertStellenausschreibung(Stellenausschreibung s, Benutzer nutzerid, Profil profilid) {
+//		Connection con = DBConnection.connection();
+//
+//		try {
+//			Statement stmt = con.createStatement();
+//			ResultSet rs = stmt.executeQuery("SELECT MAX(stellenid) AS maxid " + "FROM stellenausschreibung");
+//
+//			if (rs.next()) {
+//
+//				/*
+//				 * StellenbeschreibungId des Objekts wird gesetzt und dabei um 1
+//				 * erhoeht
+//				 */
+//				s.setStellenId(rs.getInt("maxid") + 1);
+//
+//				stmt = con.createStatement();
+//
+//				/*
+//				 * Einfuegeoperation
+//				 */
+//				stmt.executeUpdate(
+//						"INSERT INTO stellenausschreibung (stellenid,benutzerid,profilid,bezeichnung,beschreibung,frist) "
+//								+ "VALUES (" + s.getStellenId() + "," + nutzerid.getId() + "," + profilid.getId() + ",'"
+//								+ s.getBezeichnung() + "','" + s.getBeschreibungstext() + "','" + s.getFrist() + "')");
+//			}
+//		}
+//
+//		catch (SQLException e2) {
+//			e2.printStackTrace();
+//		}
+//		return s;
+//	}
 
 	// Bestehende Stellenausschreibung verändern
 	public Stellenausschreibung updateStellenausschreibung(Stellenausschreibung stellenausschreibung, int nutzerid,

@@ -4,9 +4,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm.myjob.shared.AdministrationAsync;
-import de.hdm.myjob.shared.bo.Profil;
+import de.hdm.myjob.shared.bo.Benutzer;
 
-public class DeleteProfil extends ShowDefinition{
+public class DeleteBenutzer extends ShowDefinition{
 
 	@Override
 	protected String getHeadlineText() {
@@ -20,7 +20,7 @@ public class DeleteProfil extends ShowDefinition{
 		
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 
-	//	verwaltung.getProfilFor(1, new ProfilCallback(this));
+		verwaltung.getBenutzerById(1, new BenutzerCallback(this));
 		
 		
 	}
@@ -29,10 +29,10 @@ public class DeleteProfil extends ShowDefinition{
 	
 	
 	
-	class ProfilCallback implements AsyncCallback<Profil> {
+	class BenutzerCallback implements AsyncCallback<Benutzer> {
 	    private ShowDefinition showdef = null;
 
-	    public ProfilCallback(ShowDefinition s) {
+	    public BenutzerCallback(ShowDefinition s) {
 	      this.showdef = s;
 	    }
 
@@ -42,8 +42,8 @@ public class DeleteProfil extends ShowDefinition{
 	    }
 
 	    @Override
-		public void onSuccess(Profil p) {
-	      if (p != null) {
+		public void onSuccess(Benutzer b) {
+	      if (b != null) {
 	  		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 	  	//	verwaltung.deleteProfil(p, new DelProfilCallback(this.showdef));
 	      }

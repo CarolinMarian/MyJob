@@ -3,29 +3,17 @@ package de.hdm.myjob.shared;
 import java.util.Date;
 import java.util.Vector;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Eigenschaft;
-import de.hdm.myjob.shared.bo.Inhalt;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 @RemoteServiceRelativePath("admin")
 public interface Administration extends RemoteService {
 
 	public void init() throws IllegalArgumentException;
-
-	/*
-	 * -------------------------------------------------------------------------
-	 * ------------------------- PROFIL
-	 * -------------------------------------------------------------------------
-	 * -------------------------
-	 */
-
-
 
 	/*
 	 * -------------------------------------------------------------------------
@@ -45,8 +33,8 @@ public interface Administration extends RemoteService {
 	 * -------------------------
 	 */
 
-	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
-			Benutzer nutzerid, Profil profilid) throws IllegalArgumentException;
+//	public Stellenausschreibung createStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
+//			Benutzer nutzerid) throws IllegalArgumentException;
 
 	public Stellenausschreibung editStellenausschreibung(String bezeichnung, String beschreibung, Date frist,
 			int nutzerid, int profilid, int stellenid) throws IllegalArgumentException;
@@ -72,4 +60,15 @@ public interface Administration extends RemoteService {
 	public Vector<Stellenausschreibung> showBewerbungen(int id) throws IllegalArgumentException;
 
 	public void deleteBewerbung(int stellenid) throws IllegalArgumentException;
+	
+	
+
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- BENUZER
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+	
+	public Benutzer getBenutzerById(int id) throws IllegalArgumentException;
 }
