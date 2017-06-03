@@ -215,6 +215,10 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		return this.benutzerMapper.insertBenutzer(b);
 		
 	}
+	
+	public void deleteBenutzer(Benutzer b) throws IllegalArgumentException {
+		this.benutzerMapper.delete(b);
+	}
 
 	
 }

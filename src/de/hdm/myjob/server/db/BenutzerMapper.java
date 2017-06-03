@@ -108,6 +108,26 @@ public class BenutzerMapper {
 		    
 		    return b;
 		  }
+	  
+	  /**
+	   * Löschen eines BEnutzers
+	   * @param c
+	   */
+	  public void delete(Benutzer b) {
+		    Connection con = DBConnection.connection();
+
+		    try {
+		      Statement stmt = con.createStatement();
+		      
+		      stmt.executeUpdate("DELETE FROM stellenausschreibung WHERE benutzerid=" + b.getId());
+		      stmt.executeUpdate("DELETE FROM eigenschaft WHERE referenzrid=" + b.getId()+ " AND referenztyp = 'b'");
+		      stmt.executeUpdate("DELETE FROM bewerbung WHERE benutzerid=" + b.getId());
+		      stmt.executeUpdate("DELETE FROM benutzer WHERE benutzerid=" + b.getId());
+		    }
+		    catch (SQLException e) {
+		      e.printStackTrace();
+		    }
+		  }
 
 
 

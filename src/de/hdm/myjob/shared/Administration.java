@@ -73,4 +73,7 @@ public interface Administration extends RemoteService {
 	public Benutzer getBenutzerById(int id) throws IllegalArgumentException;
 	
 	public Benutzer createBenutzer(String mail, String vname, String nname)throws IllegalArgumentException;
+	
+	public void deleteBenutzer(Benutzer b) throws IllegalArgumentException;
+	
 }

@@ -1,19 +1,15 @@
 package de.hdm.myjob.client;
 
-import java.util.Vector;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Eigenschaft;
 
 public class ShowProfil extends ShowDefinition {
 	
@@ -80,7 +76,6 @@ public class ShowProfil extends ShowDefinition {
 
 				@Override
 				public void onClick(ClickEvent event) {
-					// TODO Auto-generated method stub
 					email = mailBox.getText();
 					vorname = vnameBox.getText();
 					nachname = nnameBox.getText();
@@ -90,13 +85,11 @@ public class ShowProfil extends ShowDefinition {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							// TODO Auto-generated method stub
 							
 						}
 
 						@Override
 						public void onSuccess(Benutzer result) {
-							// TODO Auto-generated method stub
 							ShowDefinition showdef = new ShowProfil();
 							RootPanel.get("Details").clear();
 							RootPanel.get("Details").add(showdef);
@@ -109,65 +102,17 @@ public class ShowProfil extends ShowDefinition {
 				}
 				
 			});
-//			profilAnlegenButton.addClickHandler(new AnlegenClickHandler(this.showdef, email, 
-//					vorname, nachname)); 
-	  		
+
 	      }
 	      
 	      else {
 	    	  this.showdef.appendHL("Hallo " + b.getFirstName() + " " + b.getLastName());
+	    	 
 	    	  ShowDefinition showdef = new ShowEigenschaften();
 	    	  RootPanel.get("Details").add(showdef);
 	      }
 	    }
 
 	}
-	
-//	class AnlegenClickHandler implements ClickHandler{
-//		
-//		private ShowDefinition showdef = null;
-//		private String mail = "";
-//		private String vname = "";
-//		private String nname = "";
-//		
-//		private AnlegenClickHandler(ShowDefinition s, String m, String v, String n) {
-//			this.showdef = s;
-//			this.mail = m;
-//			this.vname = v;
-//			this.nname = n;
-//			
-//		}
-//		@Override
-//		public void onClick(ClickEvent event) {
-//			// TODO Auto-generated method stub
-//			AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-//	  		verwaltung.createBenutzer(mail, vname, nname, new CreateBenutzerCallback(this.showdef));
-//		}
-//		
-//	}
-	
-	class CreateBenutzerCallback implements AsyncCallback<Benutzer>{
-		
-		private ShowDefinition showdef = null;
-
-		public CreateBenutzerCallback(ShowDefinition s) {
-			this.showdef = s;
-		}
-		
-		
-		@Override
-		public void onFailure(Throwable caught) {
-			
-		}
-
-		@Override
-		public void onSuccess(Benutzer result) {
-			ShowDefinition showdef = new ShowProfil();
-			RootPanel.get("Details").add(showdef);
-			
-		}
-		
-	}
-
 	
 }
