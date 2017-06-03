@@ -65,6 +65,9 @@ public interface AdministrationAsync {
 	 */
 	
 	void getBenutzerById(int id, AsyncCallback<Benutzer> callback);
+	void createBenutzer(String mail, String vname, String nname, AsyncCallback<Benutzer> callback);
+	
+	
 	
 
 }

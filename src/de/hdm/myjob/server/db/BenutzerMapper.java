@@ -68,6 +68,47 @@ public class BenutzerMapper {
 	    return null;
 	  }
 	
+	  
+	  /**
+	   * BEnutzer einfügen
+	   */
+	  
+	  public Benutzer insertBenutzer(Benutzer b) {
+		    Connection con = DBConnection.connection();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      /*
+		       * Zunächst schauen wir nach, welches der momentan höchste
+		       * Primärschlüsselwert ist.
+		       */
+		      ResultSet rs = stmt.executeQuery("SELECT MAX(benutzerid) AS maxid "
+		          + "FROM benutzer ");
+
+		      // Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+		      if (rs.next()) {
+		        /*
+		         * c erhält den bisher maximalen, nun um 1 inkrementierten
+		         * Primärschlüssel.
+		         */
+		       b.setId(rs.getInt("maxid") + 1);
+
+		        stmt = con.createStatement();
+
+		        // Jetzt erst erfolgt die tatsächliche Einfügeoperation
+		        stmt.executeUpdate("INSERT INTO benutzer (benutzerid, email, vorname, nachname) "
+		            + "VALUES (" + b.getId() + ",'" + b.getEmail() + "','"
+		            + b.getFirstName() + "','" + b.getLastName() + "')");
+		      }
+		    }
+		    catch (SQLException e) {
+		      e.printStackTrace();
+		    }
+		    
+		    return b;
+		  }
+
 
 
 }

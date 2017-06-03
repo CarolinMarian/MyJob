@@ -204,6 +204,17 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		return this.benutzerMapper.findByKey(id);
 		
 	}
+	
+	public Benutzer createBenutzer(String mail, String vname, String nname)throws IllegalArgumentException {
+		
+		Benutzer b = new Benutzer();
+		b.setEmail(mail);
+		b.setFirstName(vname);;
+		b.setLastName(nname); 
+		
+		return this.benutzerMapper.insertBenutzer(b);
+		
+	}
 
 	
 }
