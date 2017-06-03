@@ -7,55 +7,144 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 
 import de.hdm.myjob.shared.AdministrationAsync;
+import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Eigenschaft;
 
+public class ShowProfil extends ShowDefinition {
 
-public class ShowProfil extends ShowDefinition{
-	
 	@Override
 	protected String getHeadlineText() {
-		String headlineText = "Profil"; 
+		String headlineText = null;
 		return headlineText;
 	}
 
 	@Override
 	protected void run() {
-		
+
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-		
-		
-		verwaltung.findByBenutzer(1,  new EigenschaftenCallback(this));
-		
-		
+
+		verwaltung.getBenutzerById(5, new BenutzerCallback(this));
+
 	}
-	
-	class EigenschaftenCallback implements AsyncCallback<Vector<Eigenschaft>> {
-		
+
+	class BenutzerCallback implements AsyncCallback<Benutzer> {
 		private ShowDefinition showdef = null;
-		
-		
-		
-		public EigenschaftenCallback (ShowDefinition s){
+
+		public BenutzerCallback(ShowDefinition s) {
 			this.showdef = s;
 		}
-		
-			
+
 		@Override
 		public void onFailure(Throwable caught) {
 			this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
+		}
+
+		@Override
+		public void onSuccess(Benutzer b) {
+	      if (b == null) {
+	    	  
+	    	this.showdef.appendHL("Profil anlegen");
+	    	Label vname = new Label("Vorname");
+	    	Label nname = new Label("Nachname");
+	    	Label mail = new Label("Emailadresse"); //Später aus login-Daten beziehen
+	    	TextBox vnameBox = new TextBox();
+	    	TextBox nnameBox = new TextBox();
+	    	TextBox mailBox = new TextBox();
+	    	
+	    	
+	    	
+	    	this.showdef.add(vname);
+	    	this.showdef.add(vnameBox);
+	    	this.showdef.add(nname);
+	    	this.showdef.add(nnameBox);
+	    	this.showdef.add(mail);
+	    	this.showdef.add(mailBox);
+	    	
+	    	Button profilAnlegenButton = new Button("Profil erstellen");
+			profilAnlegenButton.setStylePrimaryName("myjob-menubutton");
+			this.showdef.add(profilAnlegenButton);
+
+			profilAnlegenButton.addClickHandler(new AnlegenClickHandler(this.showdef)); 
+	  		
+	      }
+	      
+	      else {
+	    	  this.showdef.appendHL("Hallo " + b.getFirstName() + " " + b.getLastName());
+	    	  ShowDefinition showdef = new ShowEigenschaften();
+	    	  RootPanel.get("Details").add(showdef);
+	      }
+	    }
+
+	}
+	
+	class AnlegenClickHandler implements ClickHandler{
+		
+		private ShowDefinition showdef = null;
+		
+		private AnlegenClickHandler(ShowDefinition s) {
+			this.showdef = s;
+		}
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
+//	  		verwaltung.createBenutzer(mail, vname, nname, new CreateBenutzerCallback(this.showdef));
+		}
+		
+	}
+	
+	class CreateBenutzerCallback implements AsyncCallback<Void>{
+
+		
+		private ShowDefinition showdef = null;
+
+		public CreateBenutzerCallback(ShowDefinition s) {
+			this.showdef = s;
+		}
+		
+		
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
 			
 		}
 
-		public void onSuccess(Vector<Eigenschaft> result) {
+		@Override
+		public void onSuccess(Void result) {
+			ShowDefinition showdef = new ShowProfil();
+			RootPanel.get("Details").clear();
+			RootPanel.get("Details").add(showdef);
 			
+		}
+		
+	}
+
+	class EigenschaftenCallback implements AsyncCallback<Vector<Eigenschaft>> {
+
+		private ShowDefinition showdef = null;
+
+		public EigenschaftenCallback(ShowDefinition s) {
+			this.showdef = s;
+		}
+
+		@Override
+		public void onFailure(Throwable caught) {
+			this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
+
+		}
+
+		public void onSuccess(Vector<Eigenschaft> result) {
+
 			HorizontalPanel buttonPanel = new HorizontalPanel();
 			this.showdef.add(buttonPanel);
-			
-			if (result == null){
-				
+
+			if (result == null) {
+
 				Button profilAnlegenButton = new Button("Eigenschaften anlegen");
 				profilAnlegenButton.setStylePrimaryName("myjob-menubutton");
 				buttonPanel.add(profilAnlegenButton);
@@ -65,21 +154,17 @@ public class ShowProfil extends ShowDefinition{
 					@Override
 					public void onClick(ClickEvent event) {
 						// TODO Auto-generated method stub
-						String type="b";
+						String type = "b";
 						CreateEigenschaft showdef = new CreateEigenschaft(type);
 						showdef.show();
-					
+
 					}
 
 				});
-				
-				
-				
-				
-			}
-			else {
-				
-				Button profilBearbeitenButton = new Button("Profil bearbeiten");
+
+			} else {
+
+				Button profilBearbeitenButton = new Button("Eigenschafen bearbeiten");
 				profilBearbeitenButton.setStylePrimaryName("myjob-menubutton");
 				buttonPanel.add(profilBearbeitenButton);
 
@@ -94,7 +179,7 @@ public class ShowProfil extends ShowDefinition{
 					}
 
 				});
-				
+
 				Button profilLoeschenButton = new Button("Profil loeschen");
 				profilLoeschenButton.setStylePrimaryName("myjob-menubutton");
 				buttonPanel.add(profilLoeschenButton);
@@ -107,11 +192,11 @@ public class ShowProfil extends ShowDefinition{
 						ShowDefinition showdef = new DeleteBenutzer();
 						RootPanel.get("Details").clear();
 						RootPanel.get("Details").add(showdef);
-						
+
 					}
 
 				});
-				
+
 				Button profilAnzeigenButton = new Button("Mein Profil");
 				profilAnzeigenButton.setStylePrimaryName("myjob-menubutton");
 
@@ -126,20 +211,14 @@ public class ShowProfil extends ShowDefinition{
 					}
 
 				});
-				
-				ShowDefinition showsuper = new ShowEigenschaften();
-		        RootPanel.get("Details").add(showsuper);
 
-				
+				ShowDefinition showsuper = new ShowEigenschaften();
+				RootPanel.get("Details").add(showsuper);
+
 			}
-			
+
 		}
 
-		
 	}
-	
-	
-	
-	
 
 }
