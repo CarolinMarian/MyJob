@@ -1,7 +1,6 @@
 package de.hdm.myjob.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
