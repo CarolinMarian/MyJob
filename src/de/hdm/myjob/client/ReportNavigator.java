@@ -49,6 +49,22 @@ public class ReportNavigator extends ShowDefinition {
 			}
 
 		});
+		
+		Button stellenausschreibungReport = new Button("Alle Stellenausschreibung zu einem Benutzer Report");
+		stellenausschreibungReport.setStylePrimaryName("myjob-menubutton");
+		this.add(stellenausschreibungReport);
+		
+		stellenausschreibungReport.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				ShowDefinition showdef = new StellenausschreibungReport();
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(showdef);
+			}
+			
+		});
 	}
 
 }

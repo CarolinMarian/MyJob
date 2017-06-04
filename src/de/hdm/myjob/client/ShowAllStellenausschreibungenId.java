@@ -37,7 +37,7 @@ public class ShowAllStellenausschreibungenId extends ShowDefinition {
 	@Override
 	protected void run() {
 
-		// ProfilId & BenutzerId hardcoden
+		//BenutzerId hardcoden
 		benutzer.setId(1);
 
 		this.add(verPanel);
