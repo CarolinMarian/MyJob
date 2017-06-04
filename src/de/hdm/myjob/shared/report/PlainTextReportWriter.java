@@ -46,7 +46,7 @@ public class PlainTextReportWriter extends ReportWriter {
   }
 
 @Override
-public void process(AllInhalteOfProfilReport r) {
+public void process(AllInhalteOfBenutzerReport r) {
 
     // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.
     this.resetReportText();
@@ -87,7 +87,7 @@ public void process(AllInhalteOfProfilReport r) {
 }
 
 @Override
-public void process(AllInhalteOfAllProfileReport r) {
+public void process(AllInhalteOfAllBenutzerReport r) {
 
     // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.
     this.resetReportText();
@@ -121,7 +121,7 @@ public void process(AllInhalteOfAllProfileReport r) {
        * Sollte dies in einer erweiterten Form des Projekts nicht mehr gelten,
        * so müsste hier eine detailliertere Implementierung erfolgen.
        */
-      AllInhalteOfProfilReport subReport = (AllInhalteOfProfilReport) r
+      AllInhalteOfBenutzerReport subReport = (AllInhalteOfBenutzerReport) r
           .getSubReportAt(i);
 
       this.process(subReport);

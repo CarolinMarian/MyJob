@@ -3,14 +3,11 @@ package de.hdm.myjob.shared;
 import java.util.Date;
 import java.util.Vector;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Eigenschaft;
-import de.hdm.myjob.shared.bo.Inhalt;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 @RemoteServiceRelativePath("admin")
@@ -20,24 +17,19 @@ public interface Administration extends RemoteService {
 
 	/*
 	 * -------------------------------------------------------------------------
-	 * ------------------------- PROFIL
-	 * -------------------------------------------------------------------------
-	 * -------------------------
-	 */
-
-
-
-	/*
-	 * -------------------------------------------------------------------------
 	 * ------------------------- EIGENSCHAFT
 	 * -------------------------------------------------------------------------
 	 * -------------------------
 	 */
 
 	public Eigenschaft getEigenschaftById(int id) throws IllegalArgumentException;
+
 	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException;
-	public Eigenschaft anlegenEigenschaft(int referenzId, String bezeichnung, String type, String angabe) throws IllegalArgumentException;
-	public Vector<Eigenschaft> findByBenutzer (int id) throws IllegalArgumentException;
+
+	public Eigenschaft anlegenEigenschaft(int referenzId, String bezeichnung, String type, String angabe)
+			throws IllegalArgumentException;
+
+	public Vector<Eigenschaft> findByBenutzer(int id) throws IllegalArgumentException;
 	/*
 	 * -------------------------------------------------------------------------
 	 * ------------------------- STELLENAUSSCHREIBUNG
@@ -53,8 +45,7 @@ public interface Administration extends RemoteService {
 
 	public void deleteStellenausschreibung(Stellenausschreibung stelle) throws IllegalArgumentException;
 
-	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid)
-			throws IllegalArgumentException;
+	public Vector<Stellenausschreibung> showStellenausschreibung(int benutzerid) throws IllegalArgumentException;
 
 	public Stellenausschreibung showStellenausschreibungByStellenId(int stellenId) throws IllegalArgumentException;
 
@@ -72,4 +63,18 @@ public interface Administration extends RemoteService {
 	public Vector<Stellenausschreibung> showBewerbungen(int id) throws IllegalArgumentException;
 
 	public void deleteBewerbung(int stellenid) throws IllegalArgumentException;
+
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- BENUZER
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+
+	public Benutzer getBenutzerById(int id) throws IllegalArgumentException;
+
+	public Benutzer createBenutzer(String mail, String vname, String nname) throws IllegalArgumentException;
+
+	public void deleteBenutzer(Benutzer b) throws IllegalArgumentException;
+
 }

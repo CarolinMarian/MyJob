@@ -97,7 +97,7 @@ public class HTMLReportWriter extends ReportWriter {
   }
 
 @Override
-public void process(AllInhalteOfProfilReport r) {
+public void process(AllInhalteOfBenutzerReport r) {
 
 	// Zun�chst l�schen wir das Ergebnis vorhergehender Prozessierungen.
     this.resetReportText();
@@ -157,7 +157,7 @@ public void process(AllInhalteOfProfilReport r) {
 }
 
 @Override
-public void process(AllInhalteOfAllProfileReport r) {
+public void process(AllInhalteOfAllBenutzerReport r) {
 	// TODO Auto-generated method stub
 	 // Zun�chst l�schen wir das Ergebnis vorhergehender Prozessierungen.
     this.resetReportText();
@@ -195,7 +195,7 @@ public void process(AllInhalteOfAllProfileReport r) {
        * Sollte dies in einer erweiterten Form des Projekts nicht mehr gelten,
        * so m�sste hier eine detailliertere Implementierung erfolgen.
        */
-      AllInhalteOfProfilReport subReport = (AllInhalteOfProfilReport) r
+      AllInhalteOfBenutzerReport subReport = (AllInhalteOfBenutzerReport) r
           .getSubReportAt(i);
 
       this.process(subReport);

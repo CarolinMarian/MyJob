@@ -19,7 +19,6 @@ import com.google.gwt.user.datepicker.client.DateBox;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public class CreateStellenausschreibung extends ShowDefinition {
@@ -80,6 +79,7 @@ public class CreateStellenausschreibung extends ShowDefinition {
 				AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 				verwaltung.createStellenausschreibung(valueBoxBezeichnung.getText(), valueBoxBeschreibung.getText(),
 						getFrist(), b, new CreateStelle());
+
 			}
 		});
 

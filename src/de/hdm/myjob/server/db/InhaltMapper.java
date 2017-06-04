@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
+import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Inhalt;
-import de.hdm.myjob.shared.bo.Profil;
 
 public class InhaltMapper {
 
@@ -35,9 +35,9 @@ public class InhaltMapper {
 	 * @param p
 	 * @return
 	 */
-	public Vector<Inhalt> findByProfil(Profil p) {
+	public Vector<Inhalt> findByBenutzer(Benutzer b) {
 		// TODO Auto-generated method stub
-		return findByProfil(p.getId());
+		return findByBenutzer(b.getId());
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class InhaltMapper {
 	 * @param id
 	 * @return
 	 */
-	private Vector<Inhalt> findByProfil(int id) {
+	private Vector<Inhalt> findByBenutzer(int id) {
 		
 		Connection con = DBConnection.connection();
 	    Vector<Inhalt> result = new Vector<Inhalt>();

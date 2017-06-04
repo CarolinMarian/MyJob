@@ -15,7 +15,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public class ShowOneStellenausschreibung extends ShowDefinition {

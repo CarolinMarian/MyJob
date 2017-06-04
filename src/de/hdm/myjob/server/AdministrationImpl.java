@@ -13,7 +13,6 @@ import de.hdm.myjob.shared.Administration;
 import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Eigenschaft;
 import de.hdm.myjob.shared.bo.Inhalt;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 @SuppressWarnings("serial")
@@ -38,28 +37,6 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 
 	/*
 	 * -------------------------------------------------------------------------
-	 * ------------------------- PROFIL
-	 * -------------------------------------------------------------------------
-	 * -------------------------
-	 */
-
-	
-
-
-
-	/**
-	 * Alle Inhalte eines Profils ausgeben
-	 */
-	public Vector<Inhalt> getInhaltFor(Profil p) throws IllegalArgumentException {
-
-		return this.inhaltMapper.findByProfil(p);
-
-	}
-
-	
-
-	/*
-	 * -------------------------------------------------------------------------
 	 * ------------------------- EIGENSCHAFT
 	 * -------------------------------------------------------------------------
 	 * -------------------------
@@ -73,27 +50,26 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		return this.eigenschaftMapper.findByKey(id);
 
 	}
-	
+
 	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException {
 		return this.eigenschaftMapper.getAllEigenschaften();
 	}
-	
+
 	@Override
-	public Eigenschaft anlegenEigenschaft(int referenzId, String bezeichnung, String type,
-			String angabe) throws IllegalArgumentException {
-		
+	public Eigenschaft anlegenEigenschaft(int referenzId, String bezeichnung, String type, String angabe)
+			throws IllegalArgumentException {
+
 		Eigenschaft eigenschaft = new Eigenschaft();
 		eigenschaft.setBezeichnung(bezeichnung);
 		eigenschaft.setAngabe(angabe);
 		eigenschaft.setType(type);
-		
+
 		return this.eigenschaftMapper.anlegenEigenschaft(eigenschaft, referenzId);
 	}
-	
+
 	public Vector<Eigenschaft> findByBenutzer(int id) throws IllegalArgumentException {
 		return this.eigenschaftMapper.findByBenutzer(id);
 	}
-	
 
 	/*
 	 * -------------------------------------------------------------------------
@@ -194,5 +170,43 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 		this.stellenausschreibungMapper.deleteBewerbung(stellenid);
 	}
 
-	
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- BENUTZER
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+
+	/**
+	 * Alle Inhalte eines Benutzers ausgeben
+	 */
+	public Vector<Inhalt> getInhaltFor(Benutzer b) throws IllegalArgumentException {
+
+		return this.inhaltMapper.findByBenutzer(b);
+
+	}
+
+	@Override
+	public Benutzer getBenutzerById(int id) throws IllegalArgumentException {
+
+		return this.benutzerMapper.findByKey(id);
+
+	}
+
+	public Benutzer createBenutzer(String mail, String vname, String nname) throws IllegalArgumentException {
+
+		Benutzer b = new Benutzer();
+		b.setEmail(mail);
+		b.setFirstName(vname);
+		;
+		b.setLastName(nname);
+
+		return this.benutzerMapper.insertBenutzer(b);
+
+	}
+
+	public void deleteBenutzer(Benutzer b) throws IllegalArgumentException {
+		this.benutzerMapper.delete(b);
+	}
+
 }

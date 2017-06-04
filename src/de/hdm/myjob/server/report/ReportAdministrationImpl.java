@@ -8,12 +8,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import de.hdm.myjob.server.AdministrationImpl;
 import de.hdm.myjob.shared.Administration;
 import de.hdm.myjob.shared.ReportAdministration;
-import de.hdm.myjob.shared.bo.Inhalt;
-import de.hdm.myjob.shared.bo.Profil;
-import de.hdm.myjob.shared.bo.Stellenausschreibung;
-import de.hdm.myjob.shared.report.AllInhalteOfAllProfileReport;
-import de.hdm.myjob.shared.report.AllInhalteOfProfilReport;
-import de.hdm.myjob.shared.report.AllInhalteOfStellenausschreibungReport;
+import de.hdm.myjob.shared.bo.Benutzer;
+import de.hdm.myjob.shared.bo.Eigenschaft;
+import de.hdm.myjob.shared.report.AllInhalteOfAllBenutzerReport;
+import de.hdm.myjob.shared.report.AllInhalteOfBenutzerReport;
 import de.hdm.myjob.shared.report.Column;
 import de.hdm.myjob.shared.report.CompositeParagraph;
 import de.hdm.myjob.shared.report.Row;
@@ -39,13 +37,10 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 	}
 
 	@Override
-	public AllInhalteOfProfilReport createAllInhalteOfProfilReport(Profil p) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+	public AllInhalteOfBenutzerReport createAllInhalteOfBenutzerReport(Benutzer b) throws IllegalArgumentException {
 		if (this.getVerwaltung() == null)
 			return null;
-
-		AllInhalteOfProfilReport report = new AllInhalteOfProfilReport();
-
+		AllInhalteOfBenutzerReport report = new AllInhalteOfBenutzerReport();
 		report.setTitle("Alle Ihalte Ihres Profils");
 
 		// ADD IMPRINT?
@@ -55,7 +50,9 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 		CompositeParagraph header = new CompositeParagraph();
 
 		// Kundennummer aufnehmen
-		header.addSubParagraph(new SimpleParagraph("Profil-ID.: " + p.getId()));
+		header.addSubParagraph(new SimpleParagraph("Benutzer ID: " + b.getId()));
+		header.addSubParagraph(new SimpleParagraph("Name: " + b.getFirstName() + " " + b.getLastName()));
+		header.addSubParagraph(new SimpleParagraph("Email: " + b.getEmail()));
 
 		// Hinzuf�gen der zusammengestellten Kopfdaten zu dem Report
 		report.setHeaderData(header);
@@ -67,7 +64,7 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 		/*
 		 * Zun�chst legen wir eine Kopfzeile f�r die Konto-Tabelle an.
 		 */
-		// Row headline = new Row();
+		Row headline = new Row();
 
 		/*
 		 * Wir wollen Zeilen mit 2 Spalten in der Tabelle erzeugen. In die erste
@@ -75,36 +72,31 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 		 * aktuellen Kontostand. In der Kopfzeile legen wir also entsprechende
 		 * �berschriften ab.
 		 */
-		/**
-		 * headline.addColumn(new Column("Eigenschaft")); headline.addColumn(new
-		 * Column("Angabe"));
-		 **/
+		headline.addColumn(new Column("Eigenschaft"));
+		headline.addColumn(new Column("Angabe"));
 
 		// Hinzuf�gen der Kopfzeile
-		// report.addRow(headline);
+		report.addRow(headline);
 
 		/*
 		 * Nun werden s�mtliche Konten des Kunden ausgelesen und deren Kto.-Nr.
 		 * und Kontostand sukzessive in die Tabelle eingetragen.
 		 */
-		// Vector<Inhalt> inhalte = this.administration.getInhaltFor(p);
+		Vector<Eigenschaft> eigenschaften = this.administration.findByBenutzer(b.getId());
 
-		/**
-		 * for (Inhalt i : inhalte) { // Eine leere Zeile anlegen. Row
-		 * inhalteRow = new Row();
-		 * 
-		 * // Erste Spalte: Eigenschaften inhalteRow.addColumn(new
-		 * Column(String.valueOf(i.getEigenschaftsId())));
-		 * 
-		 * // inhalteRow.addColumn(new Column(String.valueOf(this.administration
-		 * // .getBalanceOf(a))));
-		 * 
-		 * // Zweite Spalte: Angaben inhalteRow.addColumn(new
-		 * Column(i.getAngabe()));
-		 * 
-		 * // und schlie�lich die Zeile dem Report hinzuf�gen.
-		 * report.addRow(inhalteRow); }
-		 **/
+		for (Eigenschaft e : eigenschaften) {
+			// Eine leere Zeile anlegen.
+			Row eigenschaftenRow = new Row();
+
+			// Erste Spalte: Eigenschaften
+			eigenschaftenRow.addColumn(new Column(e.getBezeichnung()));
+
+			// Zweite Spalte: Angaben
+			eigenschaftenRow.addColumn(new Column(e.getAngabe()));
+
+			// und schlie�lich die Zeile dem Report hinzuf�gen.
+			report.addRow(eigenschaftenRow);
+		}
 
 		/*
 		 * Zum Schluss m�ssen wir noch den fertigen Report zur�ckgeben.
@@ -113,12 +105,11 @@ public class ReportAdministrationImpl extends RemoteServiceServlet implements Re
 
 	}
 
-	// @Override
-	// public AllInhalteOfAllProfileReport createAllInhalteOfAllProfileReport()
-	// throws IllegalArgumentException {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
+	@Override
+	public AllInhalteOfAllBenutzerReport createAllInhalteOfAllBenutzerReport() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	// @Override
 	// public Vector<AllInhalteOfStellenausschreibungReport>

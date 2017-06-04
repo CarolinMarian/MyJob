@@ -37,6 +37,16 @@ public abstract class ShowDefinition extends VerticalPanel {
 		content.setStylePrimaryName("myjob-simpletext"); 
 		this.add(content);
 	}
+	
+	/**
+	 * Hinzufügen von Text auf der Seite
+	 * @param text
+	 */
+	protected void appendHL(String text) {
+		HTML content = new HTML(text);
+		content.setStylePrimaryName("myjob-headline"); 
+		this.add(content);
+	}
 
 	/**
 	 * Wird in den Supklassen initialisiert

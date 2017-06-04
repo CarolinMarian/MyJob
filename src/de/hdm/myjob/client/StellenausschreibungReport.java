@@ -10,7 +10,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.myjob.client.ProfilReport.AllInhalteOfProfilReportCallback;
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.ReportAdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
@@ -70,14 +69,14 @@ public class StellenausschreibungReport extends ShowDefinition {
 		@Override
 		public void onSuccess(Vector<Stellenausschreibung> stelle) {
 			if (stelle != null) {
-				
+
 				for (Stellenausschreibung s : stelle) {
-				ReportAdministrationAsync reportVerwaltung = ClientsideSettings.getReportVerwaltung();
+					ReportAdministrationAsync reportVerwaltung = ClientsideSettings.getReportVerwaltung();
 
 					// reportVerwaltung.createAllInhalteOfStellenausschreibungReport(stelle,
 					// new
 					// AllInhalteOfStellenausschreibungReportCallback(this.showdef));
-			}
+				}
 			}
 		}
 	}

@@ -7,21 +7,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Eigenschaft;
-import de.hdm.myjob.shared.bo.Inhalt;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public interface AdministrationAsync {
 
 	void init(AsyncCallback<Void> callback);
-
-	/*
-	 * -------------------------------------------------------------------------
-	 * ------------------------- PROFIL
-	 * -------------------------------------------------------------------------
-	 * -------------------------
-	 */
-
 
 	/*
 	 * -------------------------------------------------------------------------
@@ -31,8 +21,12 @@ public interface AdministrationAsync {
 	 */
 
 	void getEigenschaftById(int id, AsyncCallback<Eigenschaft> callback);
+
 	void getAllEigenschaften(AsyncCallback<Vector<Eigenschaft>> callback);
-	void anlegenEigenschaft(int referenzId, String bezeichnung, String type, String angabe, AsyncCallback<Eigenschaft> callback);
+
+	void anlegenEigenschaft(int referenzId, String bezeichnung, String type, String angabe,
+			AsyncCallback<Eigenschaft> callback);
+
 	void findByBenutzer(int id, AsyncCallback<Vector<Eigenschaft>> callback);
 	/*
 	 * -------------------------------------------------------------------------
@@ -40,11 +34,12 @@ public interface AdministrationAsync {
 	 * -------------------------------------------------------------------------
 	 * -------------------------
 	 */
+
 	void createStellenausschreibung(String bezeichnung, String beschreibung, Date frist, Benutzer nutzerid,
 			AsyncCallback<Stellenausschreibung> callback);
 
-	void editStellenausschreibung(String bezeichnung, String beschreibung, Date frist, int nutzerid,
-			int stellenid, AsyncCallback<Stellenausschreibung> callback);
+	void editStellenausschreibung(String bezeichnung, String beschreibung, Date frist, int nutzerid, int stellenid,
+			AsyncCallback<Stellenausschreibung> callback);
 
 	void deleteStellenausschreibung(Stellenausschreibung stelle, AsyncCallback<Void> callback);
 
@@ -66,5 +61,18 @@ public interface AdministrationAsync {
 	void showBewerbungen(int id, AsyncCallback<Vector<Stellenausschreibung>> callback);
 
 	void deleteBewerbung(int stellenid, AsyncCallback<Void> callback);
+
+	/*
+	 * -------------------------------------------------------------------------
+	 * ------------------------- BENUTZER
+	 * -------------------------------------------------------------------------
+	 * -------------------------
+	 */
+
+	void getBenutzerById(int id, AsyncCallback<Benutzer> callback);
+
+	void createBenutzer(String mail, String vname, String nname, AsyncCallback<Benutzer> callback);
+
+	void deleteBenutzer(Benutzer b, AsyncCallback<Void> callback);
 
 }

@@ -16,7 +16,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.myjob.shared.AdministrationAsync;
 import de.hdm.myjob.shared.bo.Benutzer;
-import de.hdm.myjob.shared.bo.Profil;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 
 public class ShowAllStellenausschreibungenId extends ShowDefinition {
@@ -37,7 +36,7 @@ public class ShowAllStellenausschreibungenId extends ShowDefinition {
 	@Override
 	protected void run() {
 
-		//BenutzerId hardcoden
+		// BenutzerId hardcoden
 		benutzer.setId(1);
 
 		this.add(verPanel);
