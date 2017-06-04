@@ -36,6 +36,7 @@ public class CreateStellenausschreibung extends ShowDefinition {
 	private Label fristInhalt = new Label();
 	// Button definieren
 	private Button createStellenausschreibungButton = new Button("Stellenausschreibung anlegen");
+	private Button createEigenschaftenButton = new Button("Eigenschaften hinzufügen");
 	// Klasseninstanzen definieren
 	Benutzer b = new Benutzer();
 
@@ -73,18 +74,28 @@ public class CreateStellenausschreibung extends ShowDefinition {
 		// IDs Hardcoden bis Klassen vollständig
 		b.setId(1);
 
+		// createEigenschaftenButton.addClickHandler(new ClickHandler() {
+		// @Override
+		// public void onClick(ClickEvent event) {
+		// String typ = "s";
+		// CreateEigenschaft eigenschaft = new CreateEigenschaft(typ);
+		// RootPanel.get("Details").clear();
+		// RootPanel.get("Details").add(eigenschaft);
+		// }
+		// });
+
 		createStellenausschreibungButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				// Kommunikation mit der Datenbank
 				AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 				verwaltung.createStellenausschreibung(valueBoxBezeichnung.getText(), valueBoxBeschreibung.getText(),
 						getFrist(), b, new CreateStelle());
-
 			}
 		});
 
 		// verPanel.add(celltable);
 		horPanel.add(createStellenausschreibungButton);
+		// horPanel.add(createEigenschaftenButton);
 		verPanel.add(createStellenausschreibungFlexTable);
 		verPanel.add(horPanel);
 	}
@@ -99,9 +110,13 @@ public class CreateStellenausschreibung extends ShowDefinition {
 
 		@Override
 		public void onSuccess(Stellenausschreibung result) {
-			ShowDefinition stelle = new ShowAllStellenausschreibungenId();
+			String typ = "s";
+			CreateEigenschaft eigenschaft = new CreateEigenschaft(typ);
 			RootPanel.get("Details").clear();
-			RootPanel.get("Details").add(stelle);
+			RootPanel.get("Details").add(eigenschaft);
+			// ShowDefinition stelle = new ShowAllStellenausschreibungenId();
+			// RootPanel.get("Details").clear();
+			// RootPanel.get("Details").add(stelle);
 		}
 
 	}
