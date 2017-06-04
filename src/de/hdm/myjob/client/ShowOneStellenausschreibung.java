@@ -137,11 +137,8 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 			bewerbenButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
-					ShowDefinition bewerben = new CreateBewerbung(result.getStellenId());
-					// bewerbenButton.setVisible(false);
-					// visible = false;
-					RootPanel.get("Details").clear();
 					ShowDefinition bewerbunganzeigen = new ShowBewerbungen();
+					RootPanel.get("Details").clear();
 					RootPanel.get("Details").add(bewerbunganzeigen);
 
 				}

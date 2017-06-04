@@ -36,7 +36,8 @@ public class CreateStellenausschreibung extends ShowDefinition {
 	private Label fristInhalt = new Label();
 	// Button definieren
 	private Button createStellenausschreibungButton = new Button("Stellenausschreibung anlegen");
-	private Button createEigenschaftenButton = new Button("Eigenschaften hinzufügen");
+	// private Button createEigenschaftenButton = new Button("Eigenschaften
+	// hinzufügen");
 	// Klasseninstanzen definieren
 	Benutzer b = new Benutzer();
 
