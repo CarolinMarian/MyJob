@@ -36,7 +36,7 @@ public class ShowProfil extends ShowDefinition {
 
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
 
-		verwaltung.getBenutzerById(5, new BenutzerCallback(this));
+		verwaltung.getBenutzerById(3, new BenutzerCallback(this));
 
 	}
 
@@ -90,9 +90,12 @@ public class ShowProfil extends ShowDefinition {
 
 						@Override
 						public void onSuccess(Benutzer result) {
+							
 							ShowDefinition showdef = new ShowProfil();
 							RootPanel.get("Details").clear();
 							RootPanel.get("Details").add(showdef);
+							
+							
 							
 							
 						}

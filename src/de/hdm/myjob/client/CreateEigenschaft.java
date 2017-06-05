@@ -46,7 +46,7 @@ public class CreateEigenschaft  extends DialogBox{
 	Button abbrechenButton = new Button("Abbrechen");
 	
 
-	int referenzId = 2;
+	int referenzId = 3;
 	String type ="";
 	String angabe= "";
 	String bezeichnung = "";
@@ -162,37 +162,37 @@ public CreateEigenschaft(String type){
 		});
 	}
 	
+	
+	
 	public void speichern(){
 		
 		buttonPanel.add(speicherButton);
-		speicherButton.addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-				
-					
-					
-					bezeichnung = label.getText();
-					angabe = textBox.getText();
-								
-					anlegen();
-					
-				
-				
-
-				
-				}
-	
-				
+		speicherButton.addClickHandler(new SpeichernHandler (this))
 		
-				
+		;}
+	
+	class SpeichernHandler implements ClickHandler {
+		
+		private CreateEigenschaft c = null;
+		
+		public SpeichernHandler(CreateEigenschaft createEigenschaft) {
+			this.c = createEigenschaft;
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
 			
-				
+			bezeichnung = label.getText();
+			angabe = textBox.getText();
+						
+			anlegen();
 			
+			c.hide();
 			
-			
-			
-		});
+		}
+		
+	
+	
 	}
 	
 	public void anlegen(){
