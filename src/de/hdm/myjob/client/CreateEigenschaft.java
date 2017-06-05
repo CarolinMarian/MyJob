@@ -68,6 +68,8 @@ public CreateEigenschaft(String type){
 		
 		speichern();
 		
+		abbrechen();
+		
 		
 		
 	}
@@ -82,7 +84,8 @@ public CreateEigenschaft(String type){
 		      setGlassEnabled(true);
 		      
 		verPanel.add(listBox);	
-		listBox.addItem("Name");
+		listBox.addItem("Waehlen Sie ...");
+		listBox.addItem("Bildungsabschluss (z.B. Bachelor of ..)");
 		listBox.addItem("Wohnort");	
 		listBox.addItem("Geburtsdatum");
 		listBox.addItem("Berufserfahrung in Jahren");
@@ -153,7 +156,7 @@ public CreateEigenschaft(String type){
 					
 					label.setText("Berufserfahrung");
 					verPanel2.add(label);
-					verPanel.add(textBox);
+					verPanel2.add(textBox);
 				}
 				
 			}
@@ -171,6 +174,31 @@ public CreateEigenschaft(String type){
 		
 		;}
 	
+	public void abbrechen(){
+		
+		buttonPanel.add(abbrechenButton);
+		abbrechenButton.addClickHandler(new AbbrechenHandler(this));
+	}
+	
+	class AbbrechenHandler implements ClickHandler{
+		
+		private CreateEigenschaft c = null;
+		
+		public AbbrechenHandler (CreateEigenschaft createEigenschaft) {
+			this.c = createEigenschaft;
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			
+			c.hide();
+			  
+			
+		}
+		
+		
+	}
+	
 	class SpeichernHandler implements ClickHandler {
 		
 		private CreateEigenschaft c = null;
@@ -187,7 +215,16 @@ public CreateEigenschaft(String type){
 						
 			anlegen();
 			
+			
 			c.hide();
+			
+			ShowDefinition showEigenschaft = new ShowEigenschaften();
+			RootPanel.get("Details").clear();
+			RootPanel.get("Details").add(showEigenschaft);  
+			
+			
+			
+			
 			
 		}
 		
