@@ -86,7 +86,7 @@ public class EditStellenausschreibung extends ShowDefinition {
 		editStellenausschreibungFlexTable.setWidget(2, 2, dateBoxFrist);
 
 		// Stelle in UpdateFenster befüllen
-		verwaltung.showStellenausschreibungByStellenId(stelle.getStellenId(), new ShowStelle());
+		verwaltung.showStellenausschreibungByStellenId(stelle.getStellenId(), new ShowStelle(this));
 
 		// Button der auslöst, dass die Änderung in die DB geschrieben wird
 		editStellenausschreibungButton.addClickHandler(new ClickHandler() {
@@ -103,10 +103,15 @@ public class EditStellenausschreibung extends ShowDefinition {
 
 	class ShowStelle implements AsyncCallback<Stellenausschreibung> {
 
+		ShowDefinition showdef = null;
+		
+		public ShowStelle(ShowDefinition s){
+			this.showdef = s;
+		}
+		
 		@Override
 		public void onFailure(Throwable caught) {
-			Label failLabel = new Label("onFailure wurde betreten");
-			verPanel.add(failLabel);
+			this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
 		}
 
 		@Override
@@ -118,11 +123,9 @@ public class EditStellenausschreibung extends ShowDefinition {
 	}
 
 	class UpdateStelle implements AsyncCallback<Stellenausschreibung> {
-
+		
 		@Override
 		public void onFailure(Throwable caught) {
-			Label failLabel = new Label("onFailure wurde betreten");
-			verPanel.add(failLabel);
 		}
 
 		@Override

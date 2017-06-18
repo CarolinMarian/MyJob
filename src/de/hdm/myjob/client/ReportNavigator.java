@@ -16,11 +16,11 @@ public class ReportNavigator extends ShowDefinition {
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		
+
 		Button profilReport = new Button("Profil Report");
 		profilReport.setStylePrimaryName("myjob-menubutton");
 		this.add(profilReport);
-		
+
 		profilReport.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -33,11 +33,10 @@ public class ReportNavigator extends ShowDefinition {
 
 		});
 
-		
 		Button allProfileReport = new Button("Alle Profile Report");
 		allProfileReport.setStylePrimaryName("myjob-menubutton");
 		this.add(allProfileReport);
-		
+
 		allProfileReport.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -49,11 +48,11 @@ public class ReportNavigator extends ShowDefinition {
 			}
 
 		});
-		
+
 		Button stellenausschreibungReport = new Button("Alle Stellenausschreibung zu einem Benutzer Report");
 		stellenausschreibungReport.setStylePrimaryName("myjob-menubutton");
 		this.add(stellenausschreibungReport);
-		
+
 		stellenausschreibungReport.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -63,8 +62,25 @@ public class ReportNavigator extends ShowDefinition {
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(showdef);
 			}
-			
+
 		});
+
+		Button bewerbungReport = new Button("Alle Bewerbungen Report");
+		bewerbungReport.setStylePrimaryName("myjob-menubutton");
+		this.add(bewerbungReport);
+
+		bewerbungReport.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				ShowDefinition showdef = new BewerbungReport();
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(showdef);
+			}
+
+		});
+
 	}
 
 }

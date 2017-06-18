@@ -27,12 +27,12 @@ public abstract class BusinessObject implements Serializable {
 
 	  /**
 	   * Erzeugen einer einfachen textuellen Darstellung der jeweiligen Instanz.
-	   * Dies kann selbstverständlich in Subklassen überschrieben werden.
+	   * Dies kann selbstverstï¿½ndlich in Subklassen ï¿½berschrieben werden.
 	   */
 	  @Override
 	public String toString() {
 	    /*
-	     * Wir geben den Klassennamen gefolgt von der ID des Objekts zurück.
+	     * Wir geben den Klassennamen gefolgt von der ID des Objekts zurï¿½ck.
 	     */
 	    return this.getClass().getName() + " #" + this.id;
 	  }
@@ -41,18 +41,18 @@ public abstract class BusinessObject implements Serializable {
 	   * <p>
 	   * Feststellen der <em>inhaltlichen</em> Gleichheit zweier
 	   * <code>BusinessObject</code>-Objekte. Die Gleichheit wird in diesem Beispiel auf eine
-	   * identische ID beschränkt.
+	   * identische ID beschrï¿½nkt.
 	   * </p>
 	   * <p>
 	   * <b>ACHTUNG:</b> Die inhaltliche Gleichheit nicht mit dem Vergleich der
-	   * <em>Identität</em> eines Objekts mit einem anderen verwechseln!!! Dies
-	   * würde durch den Operator <code>==</code> bestimmt. Bei Unklarheit hierzu
-	   * können Sie nocheinmal in die Definition des Sprachkerns von Java schauen.
-	   * Die Methode <code>equals(...)</code> ist für jeden Referenzdatentyp
+	   * <em>Identitï¿½t</em> eines Objekts mit einem anderen verwechseln!!! Dies
+	   * wï¿½rde durch den Operator <code>==</code> bestimmt. Bei Unklarheit hierzu
+	   * kï¿½nnen Sie nocheinmal in die Definition des Sprachkerns von Java schauen.
+	   * Die Methode <code>equals(...)</code> ist fï¿½r jeden Referenzdatentyp
 	   * definiert, da sie bereits in der Klasse <code>Object</code> in einfachster
 	   * Form realisiert ist. Dort ist sie allerdings auf die simple Bestimmung der
-	   * Gleicheit der Java-internen Objekt-ID der verglichenen Objekte beschränkt.
-	   * In unseren eigenen Klassen können wir diese Methode überschreiben und ihr
+	   * Gleicheit der Java-internen Objekt-ID der verglichenen Objekte beschrï¿½nkt.
+	   * In unseren eigenen Klassen kï¿½nnen wir diese Methode ï¿½berschreiben und ihr
 	   * mehr Intelligenz verleihen.
 	   * </p>
 	   */
@@ -71,26 +71,26 @@ public abstract class BusinessObject implements Serializable {
 	      catch (IllegalArgumentException e) {
 	        /*
 	         * Wenn irgendetwas schief geht, dann geben wir sicherheitshalber false
-	         * zurück.
+	         * zurï¿½ck.
 	         */
 	        return false;
 	      }
 	    }
 	    /*
-	     * Wenn bislang keine Gleichheit bestimmt werden konnte, dann müssen
-	     * schließlich false zurückgeben.
+	     * Wenn bislang keine Gleichheit bestimmt werden konnte, dann mï¿½ssen
+	     * schlieï¿½lich false zurï¿½ckgeben.
 	     */
 	    return false;
 	  }
 	  
 	  /**
 	   * <p>
-	   * Erzeugen einer ganzen Zahl, die für das <code>BusinessObject</code> charakteristisch ist.
+	   * Erzeugen einer ganzen Zahl, die fï¿½r das <code>BusinessObject</code> charakteristisch ist.
 	   * </p>
 	   * <p>
 	   * Zusammen mit <code>equals</code> sollte diese Methode immer definiert werden. Manche Java-Klassen
 	   * verwendenden <code>hashCode</code>, um initial ein Objekt (z.B. in einer Hashtable) zu identifizieren. Erst danach
-	   * würde mit <code>equals</code> festgestellt, ob es sich tatsächlich um das gesuchte Objekt handelt.
+	   * wï¿½rde mit <code>equals</code> festgestellt, ob es sich tatsï¿½chlich um das gesuchte Objekt handelt.
 	   */
 	  @Override
 	public int hashCode() {

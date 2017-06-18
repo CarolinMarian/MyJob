@@ -29,10 +29,16 @@ public class DeleteStellenausschreibung extends ShowDefinition {
 	protected void run() {
 		// Kommunikation mit der Datenbank
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-		verwaltung.deleteStellenausschreibung(stelle, new DeleteStelle());
+		verwaltung.deleteStellenausschreibung(stelle, new DeleteStelle(this));
 	}
 
 	class DeleteStelle implements AsyncCallback<Void> {
+		
+		ShowDefinition showdef = null;
+		
+		public DeleteStelle(ShowDefinition s){
+			this.showdef = s;
+		}
 
 		@Override
 		public void onFailure(Throwable caught) {

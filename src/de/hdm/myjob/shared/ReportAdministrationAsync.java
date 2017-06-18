@@ -8,6 +8,7 @@ import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 import de.hdm.myjob.shared.report.AllInhalteOfAllBenutzerReport;
 import de.hdm.myjob.shared.report.AllInhalteOfBenutzerReport;
+import de.hdm.myjob.shared.report.AllInhalteOfBewerbungReport;
 import de.hdm.myjob.shared.report.AllInhalteOfStellenausschreibungReport;
 
 public interface ReportAdministrationAsync {
@@ -18,4 +19,7 @@ public interface ReportAdministrationAsync {
 
 	void createAllInhalteOfStellenausschreibungReport(Benutzer b, Vector<Stellenausschreibung> stelle,
 			AsyncCallback<AllInhalteOfStellenausschreibungReport> callbak);
+
+	void createAllInhalteOfBewerbungReport(Benutzer b, Vector<Stellenausschreibung> stelle,
+			AsyncCallback<AllInhalteOfBewerbungReport> callbak);
 }

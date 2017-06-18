@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public abstract class ShowDefinition extends VerticalPanel {
 	
 	/**
-	 * Methode die beim Aufrufen eines GWT-Widgets ausgeführt wird
+	 * Methode die beim Aufrufen eines GWT-Widgets ausgefï¿½hrt wird
 	 */
 	public void onLoad(){
 		
@@ -18,7 +18,7 @@ public abstract class ShowDefinition extends VerticalPanel {
 	}
 	
 	/**
-	 * Erzeugung einer Überschrift für die Seite
+	 * Erzeugung einer ï¿½berschrift fï¿½r die Seite
 	 * @param headlineText
 	 * @return
 	 */
@@ -29,7 +29,7 @@ public abstract class ShowDefinition extends VerticalPanel {
 	}
 	
 	/**
-	 * Hinzufügen von Text auf der Seite
+	 * Hinzufï¿½gen von Text auf der Seite
 	 * @param text
 	 */
 	protected void append(String text) {
@@ -39,7 +39,7 @@ public abstract class ShowDefinition extends VerticalPanel {
 	}
 	
 	/**
-	 * Hinzufügen von Text auf der Seite
+	 * Hinzufï¿½gen von Text auf der Seite
 	 * @param text
 	 */
 	protected void appendHL(String text) {

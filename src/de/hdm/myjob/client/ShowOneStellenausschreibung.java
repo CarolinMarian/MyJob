@@ -77,18 +77,22 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 
 		// Stellenausschreibung anhand der ID anzeigen
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-		verwaltung.showStellenausschreibungByStellenId(stelle.getStellenId(), new ShowStelle());
+		verwaltung.showStellenausschreibungByStellenId(stelle.getStellenId(), new ShowStelle(this));
 
 		verPanel.add(showOneStellenausschreibungFlexTable);
 		verPanel.add(horPanel);
 	}
 
 	class ShowStelle implements AsyncCallback<Stellenausschreibung> {
+		private ShowDefinition showdef = null;
+
+		public ShowStelle(ShowDefinition s){
+			this.showdef = s;
+		}
 
 		@Override
 		public void onFailure(Throwable caught) {
-			Label failLabel = new Label("onFailure wurde betreten");
-			verPanel.add(failLabel);
+			this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
 		}
 
 		@Override
@@ -137,10 +141,12 @@ public class ShowOneStellenausschreibung extends ShowDefinition {
 			bewerbenButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
-					ShowDefinition bewerbunganzeigen = new ShowBewerbungen();
+					ShowDefinition bewerben = new CreateBewerbung(result.getStellenId());
+					// bewerbenButton.setVisible(false);
+					// visible = false;
 					RootPanel.get("Details").clear();
+					ShowDefinition bewerbunganzeigen = new ShowBewerbungen();
 					RootPanel.get("Details").add(bewerbunganzeigen);
-
 				}
 			});
 		}

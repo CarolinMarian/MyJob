@@ -3,6 +3,7 @@ package de.hdm.myjob.server;
 import java.util.Date;
 import java.util.Vector;
 
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.myjob.server.db.BenutzerMapper;
@@ -112,6 +113,7 @@ public class AdministrationImpl extends RemoteServiceServlet implements Administ
 	 */
 	@Override
 	public void deleteStellenausschreibung(Stellenausschreibung stelle) throws IllegalArgumentException {
+		this.deleteBewerbung(stelle.getStellenId());
 		this.stellenausschreibungMapper.deleteStellenausschreibung(stelle);
 	}
 

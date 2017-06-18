@@ -34,10 +34,17 @@ public class CreateBewerbung extends ShowDefinition {
 
 		// Kommunikation mit der Datenbank
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-		verwaltung.createBewerbung(stelle.getStellenId(), nutzer.getId(), new ErstelleBewerbung());
+		verwaltung.createBewerbung(stelle.getStellenId(), nutzer.getId(), new ErstelleBewerbung(this));
 	}
 
 	class ErstelleBewerbung implements AsyncCallback<Void> {
+		
+		ShowDefinition showdef = null;
+		
+		public ErstelleBewerbung(ShowDefinition s){
+			this.showdef = s;
+		}
+		
 		@Override
 		public void onFailure(Throwable caught) {
 		}

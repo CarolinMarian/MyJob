@@ -29,10 +29,17 @@ public class DeleteBewerbung extends ShowDefinition {
 	protected void run() {
 		// Kommunikation mit der Datenbank
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-		verwaltung.deleteBewerbung(stelle.getStellenId(), new EntferneBewerbung());
+		verwaltung.deleteBewerbung(stelle.getStellenId(), new EntferneBewerbung(this));
 	}
 
 	class EntferneBewerbung implements AsyncCallback<Void> {
+		
+		ShowDefinition showdef = null;
+		
+		public EntferneBewerbung(ShowDefinition s){
+			this.showdef = s;
+		}
+		
 		@Override
 		public void onFailure(Throwable caught) {
 		}

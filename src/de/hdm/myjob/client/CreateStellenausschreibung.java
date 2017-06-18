@@ -111,13 +111,13 @@ public class CreateStellenausschreibung extends ShowDefinition {
 
 		@Override
 		public void onSuccess(Stellenausschreibung result) {
-			String typ = "s";
-			CreateEigenschaft eigenschaft = new CreateEigenschaft(typ);
+//			String typ = "s";
+//			CreateEigenschaft eigenschaft = new CreateEigenschaft(typ);
+//			RootPanel.get("Details").clear();
+//			RootPanel.get("Details").add(eigenschaft);
+			ShowDefinition stelle = new ShowAllStellenausschreibungenId();
 			RootPanel.get("Details").clear();
-			RootPanel.get("Details").add(eigenschaft);
-			// ShowDefinition stelle = new ShowAllStellenausschreibungenId();
-			// RootPanel.get("Details").clear();
-			// RootPanel.get("Details").add(stelle);
+			RootPanel.get("Details").add(stelle);
 		}
 
 	}

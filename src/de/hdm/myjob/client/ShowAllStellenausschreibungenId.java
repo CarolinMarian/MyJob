@@ -10,7 +10,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -43,7 +42,7 @@ public class ShowAllStellenausschreibungenId extends ShowDefinition {
 
 		// alle für den Nutzer vorhandenen Stellenausschreibungen ausgeben
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-		verwaltung.showStellenausschreibung(benutzer.getId(), new ShowStelle());
+		verwaltung.showStellenausschreibung(benutzer.getId(), new ShowStelle(this));
 
 		verPanel.add(showStellenausschreibungFlexTable);
 		verPanel.add(horPanel);
@@ -51,10 +50,15 @@ public class ShowAllStellenausschreibungenId extends ShowDefinition {
 
 	class ShowStelle implements AsyncCallback<Vector<Stellenausschreibung>> {
 
+		ShowDefinition showdef = null;
+		
+		public ShowStelle(ShowDefinition s){
+			this.showdef = s;
+		}
+		
 		@Override
 		public void onFailure(Throwable caught) {
-			Label failLabel = new Label("onFailure wurde betreten");
-			verPanel.add(failLabel);
+			this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
 		}
 
 		@Override

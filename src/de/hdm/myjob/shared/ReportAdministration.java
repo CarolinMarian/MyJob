@@ -8,6 +8,7 @@ import de.hdm.myjob.shared.bo.Benutzer;
 import de.hdm.myjob.shared.bo.Stellenausschreibung;
 import de.hdm.myjob.shared.report.AllInhalteOfAllBenutzerReport;
 import de.hdm.myjob.shared.report.AllInhalteOfBenutzerReport;
+import de.hdm.myjob.shared.report.AllInhalteOfBewerbungReport;
 import de.hdm.myjob.shared.report.AllInhalteOfStellenausschreibungReport;
 
 @RemoteServiceRelativePath("reportadmin")
@@ -19,5 +20,8 @@ public interface ReportAdministration extends RemoteService {
 	public abstract AllInhalteOfAllBenutzerReport createAllInhalteOfAllBenutzerReport() throws IllegalArgumentException;
 
 	public abstract AllInhalteOfStellenausschreibungReport createAllInhalteOfStellenausschreibungReport(Benutzer b,
+			Vector<Stellenausschreibung> stelle) throws IllegalArgumentException;
+
+	public abstract AllInhalteOfBewerbungReport createAllInhalteOfBewerbungReport(Benutzer b,
 			Vector<Stellenausschreibung> stelle) throws IllegalArgumentException;
 }

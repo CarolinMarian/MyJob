@@ -44,7 +44,7 @@ public class ShowBewerbungen extends ShowDefinition {
 		nutzer.setId(1);
 
 		AdministrationAsync verwaltung = ClientsideSettings.getVerwaltung();
-		verwaltung.showBewerbungen(nutzer.getId(), new AnzeigenBewerbung());
+		verwaltung.showBewerbungen(nutzer.getId(), new AnzeigenBewerbung(this));
 
 		verPanel.add(showBewerbungFlexTable);
 		verPanel.add(horPanel);
@@ -52,10 +52,14 @@ public class ShowBewerbungen extends ShowDefinition {
 
 	class AnzeigenBewerbung implements AsyncCallback<Vector<Stellenausschreibung>> {
 
+		ShowDefinition showdef = null;
+		
+		public AnzeigenBewerbung(ShowDefinition s) {
+			this.showdef = s;
+		}
 		@Override
 		public void onFailure(Throwable caught) {
-			Label failLabel = new Label("onFailure wurde betreten");
-			verPanel.add(failLabel);
+			this.showdef.append("Fehler bei der Abfrage " + caught.getMessage());
 		}
 
 		@Override
@@ -108,5 +112,4 @@ public class ShowBewerbungen extends ShowDefinition {
 		}
 
 	}
-
 }
